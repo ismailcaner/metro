@@ -1,0 +1,3018 @@
+{
+  "schemaVersion": "0.2.0",
+  "city": "İstanbul",
+  "generatedAt": "2026-10-26",
+  "description": "Metro İstanbul’un resmî İstanbul Raylı Sistemler Ağ Haritası (v.3 rev.20.1, Temmuz 2026) esas alınarak güncellenmiş Sıradaki Metro ağ verisi. İstasyon sıraları mevcut JSON’dan korunmuş; haritada açıkça görülen eksik hatlar eklenmiş ve aktarma kayıtları doğrulama durumlarıyla ayrılmıştır.",
+  "sources": [
+    {
+      "name": "Metro İstanbul – İstanbul Raylı Sistemler Ağ Haritası",
+      "url": "https://www.metro.istanbul/Content/assets/uploaded/%C4%B0stanbul%20Rayl%C4%B1%20Sistemler%20Haritas%C4%B1.pdf",
+      "version": "v.3 rev.20.1 (Temmuz 2026)",
+      "role": "Hat kapsamı, resmî hat adları ve haritada gösterilen bağlantılar için ana kaynak."
+    },
+    {
+      "name": "Metro İstanbul – Ağ Haritaları",
+      "url": "https://www.metro.istanbul/YolcuHizmetleri/AgHaritalari",
+      "role": "Resmî harita sayfası."
+    }
+  ],
+  "limitations": [
+    "Kaynak harita Metro İstanbul ağ haritası v.3 rev.20.1 (Temmuz 2026) sürümüdür; sefer saatleri ve anlık işletme durumu içermez.",
+    "Önceki JSON’daki hat istasyon dizileri genel olarak korunmuştur; her istasyon sırası ayrı ayrı resmî GTFS ile doğrulanmış değildir.",
+    "İsim benzerliğiyle bulunan aktarmalar yalnızca adaydır. Sadece status alanı resmî harita incelemesiyle eklenen kayıtları ayırmak için kullanılır; fiziksel yürüme yolu, ücretli alan içi/dışı geçiş ve aktarma süresi tanımlı değildir.",
+    "Mecidiyeköy için M2’deki “Şişli-Mecidiyeköy” ve M7/Metrobüs’teki “Mecidiyeköy” adları aynı harita düğümü altında eşleştirilmiştir; gerçek yaya güzergâhı verisi bulunmaz.",
+    "B2 ve F3 hatları resmî haritada işletmedeki hatlar olarak gösterildiği için eklendi. B2 ara istasyon dizisi haritada okunan etiketlerden türetilmiştir ve uygulama öncesi ayrıca doğrulanmalıdır.",
+    "Metrobüs dahildir; normal İETT otobüs hatları ve vapur hatları bu JSON kapsamına dahil değildir.",
+    "Yapımı devam eden M10, M12, M13, M14, T7 ve uzatma bölümleri çalışan hatlar gibi eklenmemiştir."
+  ],
+  "lines": [
+    {
+      "id": "M1A",
+      "name": "Yenikapı – Atatürk Havalimanı",
+      "mode": "metro",
+      "color": "#E31E24",
+      "stations": [
+        {
+          "id": "m1a-01",
+          "name": "Yenikapı",
+          "order": 1
+        },
+        {
+          "id": "m1a-02",
+          "name": "Aksaray",
+          "order": 2
+        },
+        {
+          "id": "m1a-03",
+          "name": "Emniyet-Fatih",
+          "order": 3
+        },
+        {
+          "id": "m1a-04",
+          "name": "Topkapı-Ulubatlı",
+          "order": 4
+        },
+        {
+          "id": "m1a-05",
+          "name": "Bayrampaşa-Maltepe",
+          "order": 5
+        },
+        {
+          "id": "m1a-06",
+          "name": "Sağmalcılar",
+          "order": 6
+        },
+        {
+          "id": "m1a-07",
+          "name": "Kocatepe",
+          "order": 7
+        },
+        {
+          "id": "m1a-08",
+          "name": "Otogar",
+          "order": 8
+        },
+        {
+          "id": "m1a-09",
+          "name": "Terazidere",
+          "order": 9
+        },
+        {
+          "id": "m1a-10",
+          "name": "Davutpaşa-YTÜ",
+          "order": 10
+        },
+        {
+          "id": "m1a-11",
+          "name": "Merter",
+          "order": 11
+        },
+        {
+          "id": "m1a-12",
+          "name": "Zeytinburnu",
+          "order": 12
+        },
+        {
+          "id": "m1a-13",
+          "name": "Bakırköy-İncirli",
+          "order": 13
+        },
+        {
+          "id": "m1a-14",
+          "name": "Bahçelievler",
+          "order": 14
+        },
+        {
+          "id": "m1a-15",
+          "name": "Ataköy-Şirinevler",
+          "order": 15
+        },
+        {
+          "id": "m1a-16",
+          "name": "Yenibosna",
+          "order": 16
+        },
+        {
+          "id": "m1a-17",
+          "name": "DTM-İstanbul Fuar Merkezi",
+          "order": 17
+        },
+        {
+          "id": "m1a-18",
+          "name": "Atatürk Havalimanı",
+          "order": 18
+        }
+      ]
+    },
+    {
+      "id": "M1B",
+      "name": "Yenikapı – Kirazlı",
+      "mode": "metro",
+      "color": "#E31E24",
+      "stations": [
+        {
+          "id": "m1b-01",
+          "name": "Yenikapı",
+          "order": 1
+        },
+        {
+          "id": "m1b-02",
+          "name": "Aksaray",
+          "order": 2
+        },
+        {
+          "id": "m1b-03",
+          "name": "Emniyet-Fatih",
+          "order": 3
+        },
+        {
+          "id": "m1b-04",
+          "name": "Topkapı-Ulubatlı",
+          "order": 4
+        },
+        {
+          "id": "m1b-05",
+          "name": "Bayrampaşa-Maltepe",
+          "order": 5
+        },
+        {
+          "id": "m1b-06",
+          "name": "Sağmalcılar",
+          "order": 6
+        },
+        {
+          "id": "m1b-07",
+          "name": "Kocatepe",
+          "order": 7
+        },
+        {
+          "id": "m1b-08",
+          "name": "Otogar",
+          "order": 8
+        },
+        {
+          "id": "m1b-09",
+          "name": "Esenler",
+          "order": 9
+        },
+        {
+          "id": "m1b-10",
+          "name": "Menderes",
+          "order": 10
+        },
+        {
+          "id": "m1b-11",
+          "name": "Üçyüzlü",
+          "order": 11
+        },
+        {
+          "id": "m1b-12",
+          "name": "Bağcılar Meydan",
+          "order": 12
+        },
+        {
+          "id": "m1b-13",
+          "name": "Kirazlı",
+          "order": 13
+        }
+      ]
+    },
+    {
+      "id": "M2",
+      "name": "Yenikapı – Hacıosman",
+      "mode": "metro",
+      "color": "#00A859",
+      "stations": [
+        {
+          "id": "m2-01",
+          "name": "Yenikapı",
+          "order": 1
+        },
+        {
+          "id": "m2-02",
+          "name": "Vezneciler-İstanbul Üniversitesi",
+          "order": 2
+        },
+        {
+          "id": "m2-03",
+          "name": "Haliç",
+          "order": 3
+        },
+        {
+          "id": "m2-04",
+          "name": "Şişhane",
+          "order": 4
+        },
+        {
+          "id": "m2-05",
+          "name": "Taksim",
+          "order": 5
+        },
+        {
+          "id": "m2-06",
+          "name": "Osmanbey",
+          "order": 6
+        },
+        {
+          "id": "m2-07",
+          "name": "Şişli-Mecidiyeköy",
+          "order": 7
+        },
+        {
+          "id": "m2-08",
+          "name": "Gayrettepe",
+          "order": 8
+        },
+        {
+          "id": "m2-09",
+          "name": "Levent",
+          "order": 9
+        },
+        {
+          "id": "m2-10",
+          "name": "4. Levent",
+          "order": 10
+        },
+        {
+          "id": "m2-11",
+          "name": "Sanayi Mahallesi",
+          "order": 11
+        },
+        {
+          "id": "m2-12",
+          "name": "İTÜ-Ayazağa",
+          "order": 12
+        },
+        {
+          "id": "m2-13",
+          "name": "Atatürk Oto Sanayi",
+          "order": 13
+        },
+        {
+          "id": "m2-14",
+          "name": "Darüşşafaka",
+          "order": 14
+        },
+        {
+          "id": "m2-15",
+          "name": "Hacıosman",
+          "order": 15
+        }
+      ]
+    },
+    {
+      "id": "M2A",
+      "name": "Sanayi Mahallesi – Seyrantepe",
+      "mode": "metro",
+      "color": "#00A859",
+      "stations": [
+        {
+          "id": "m2a-01",
+          "name": "Sanayi Mahallesi",
+          "order": 1
+        },
+        {
+          "id": "m2a-02",
+          "name": "Seyrantepe",
+          "order": 2
+        }
+      ]
+    },
+    {
+      "id": "M3",
+      "name": "Bakırköy Sahil – Kayaşehir Merkez",
+      "mode": "metro",
+      "color": "#F58220",
+      "stations": [
+        {
+          "id": "m3-01",
+          "name": "Bakırköy Sahil",
+          "order": 1
+        },
+        {
+          "id": "m3-02",
+          "name": "Özgürlük Meydanı",
+          "order": 2
+        },
+        {
+          "id": "m3-03",
+          "name": "İncirli",
+          "order": 3
+        },
+        {
+          "id": "m3-04",
+          "name": "Haznedar",
+          "order": 4
+        },
+        {
+          "id": "m3-05",
+          "name": "İlkyuva",
+          "order": 5
+        },
+        {
+          "id": "m3-06",
+          "name": "Yıldıztepe",
+          "order": 6
+        },
+        {
+          "id": "m3-07",
+          "name": "Molla Gürani",
+          "order": 7
+        },
+        {
+          "id": "m3-08",
+          "name": "Kirazlı",
+          "order": 8
+        },
+        {
+          "id": "m3-09",
+          "name": "Yenimahalle",
+          "order": 9
+        },
+        {
+          "id": "m3-10",
+          "name": "Mahmutbey",
+          "order": 10
+        },
+        {
+          "id": "m3-11",
+          "name": "İSTOÇ",
+          "order": 11
+        },
+        {
+          "id": "m3-12",
+          "name": "Başak Konutları",
+          "order": 12
+        },
+        {
+          "id": "m3-13",
+          "name": "Başakşehir-Metrokent",
+          "order": 13
+        },
+        {
+          "id": "m3-14",
+          "name": "Onurkent",
+          "order": 14
+        },
+        {
+          "id": "m3-15",
+          "name": "Şehir Hastanesi",
+          "order": 15
+        },
+        {
+          "id": "m3-16",
+          "name": "Toplu Konutlar",
+          "order": 16
+        },
+        {
+          "id": "m3-17",
+          "name": "Kayaşehir Merkez",
+          "order": 17
+        }
+      ]
+    },
+    {
+      "id": "M4",
+      "name": "Kadıköy – Sabiha Gökçen Havalimanı",
+      "mode": "metro",
+      "color": "#F58220",
+      "stations": [
+        {
+          "id": "m4-01",
+          "name": "Kadıköy",
+          "order": 1
+        },
+        {
+          "id": "m4-02",
+          "name": "Ayrılık Çeşmesi",
+          "order": 2
+        },
+        {
+          "id": "m4-03",
+          "name": "Acıbadem",
+          "order": 3
+        },
+        {
+          "id": "m4-04",
+          "name": "Ünalan",
+          "order": 4
+        },
+        {
+          "id": "m4-05",
+          "name": "Göztepe",
+          "order": 5
+        },
+        {
+          "id": "m4-06",
+          "name": "Yenisahra",
+          "order": 6
+        },
+        {
+          "id": "m4-07",
+          "name": "Kozyatağı",
+          "order": 7
+        },
+        {
+          "id": "m4-08",
+          "name": "Bostancı",
+          "order": 8
+        },
+        {
+          "id": "m4-09",
+          "name": "Küçükyalı",
+          "order": 9
+        },
+        {
+          "id": "m4-10",
+          "name": "Maltepe",
+          "order": 10
+        },
+        {
+          "id": "m4-11",
+          "name": "Huzurevi",
+          "order": 11
+        },
+        {
+          "id": "m4-12",
+          "name": "Gülsuyu",
+          "order": 12
+        },
+        {
+          "id": "m4-13",
+          "name": "Esenkent",
+          "order": 13
+        },
+        {
+          "id": "m4-14",
+          "name": "Hastane-Adliye",
+          "order": 14
+        },
+        {
+          "id": "m4-15",
+          "name": "Soğanlık",
+          "order": 15
+        },
+        {
+          "id": "m4-16",
+          "name": "Kartal",
+          "order": 16
+        },
+        {
+          "id": "m4-17",
+          "name": "Yakacık-Adnan Kahveci",
+          "order": 17
+        },
+        {
+          "id": "m4-18",
+          "name": "Pendik",
+          "order": 18
+        },
+        {
+          "id": "m4-19",
+          "name": "Tavşantepe",
+          "order": 19
+        },
+        {
+          "id": "m4-20",
+          "name": "Fevzi Çakmak-Hastane",
+          "order": 20
+        },
+        {
+          "id": "m4-21",
+          "name": "Yayalar-Şeyhli",
+          "order": 21
+        },
+        {
+          "id": "m4-22",
+          "name": "Kurtköy",
+          "order": 22
+        },
+        {
+          "id": "m4-23",
+          "name": "Sabiha Gökçen Havalimanı",
+          "order": 23
+        }
+      ]
+    },
+    {
+      "id": "M5",
+      "name": "Üsküdar – Sultanbeyli",
+      "mode": "metro",
+      "color": "#8B5AA8",
+      "stations": [
+        {
+          "id": "m5-01",
+          "name": "Üsküdar",
+          "order": 1
+        },
+        {
+          "id": "m5-02",
+          "name": "Fıstıkağacı",
+          "order": 2
+        },
+        {
+          "id": "m5-03",
+          "name": "Bağlarbaşı",
+          "order": 3
+        },
+        {
+          "id": "m5-04",
+          "name": "Altunizade",
+          "order": 4
+        },
+        {
+          "id": "m5-05",
+          "name": "Kısıklı",
+          "order": 5
+        },
+        {
+          "id": "m5-06",
+          "name": "Bulgurlu",
+          "order": 6
+        },
+        {
+          "id": "m5-07",
+          "name": "Ümraniye",
+          "order": 7
+        },
+        {
+          "id": "m5-08",
+          "name": "Çarşı",
+          "order": 8
+        },
+        {
+          "id": "m5-09",
+          "name": "Yamanevler",
+          "order": 9
+        },
+        {
+          "id": "m5-10",
+          "name": "Çakmak",
+          "order": 10
+        },
+        {
+          "id": "m5-11",
+          "name": "Ihlamurkuyu",
+          "order": 11
+        },
+        {
+          "id": "m5-12",
+          "name": "Altınşehir",
+          "order": 12
+        },
+        {
+          "id": "m5-13",
+          "name": "İmam Hatip Lisesi",
+          "order": 13
+        },
+        {
+          "id": "m5-14",
+          "name": "Dudullu",
+          "order": 14
+        },
+        {
+          "id": "m5-15",
+          "name": "Necip Fazıl",
+          "order": 15
+        },
+        {
+          "id": "m5-16",
+          "name": "Çekmeköy",
+          "order": 16
+        },
+        {
+          "id": "m5-17",
+          "name": "Meclis",
+          "order": 17
+        },
+        {
+          "id": "m5-18",
+          "name": "Sarıgazi",
+          "order": 18
+        },
+        {
+          "id": "m5-19",
+          "name": "Sancaktepe",
+          "order": 19
+        },
+        {
+          "id": "m5-20",
+          "name": "Samandıra Merkez",
+          "order": 20
+        },
+        {
+          "id": "m5-21",
+          "name": "Abdurrahmangazi",
+          "order": 21
+        },
+        {
+          "id": "m5-22",
+          "name": "Sultanbeyli",
+          "order": 22
+        }
+      ]
+    },
+    {
+      "id": "M6",
+      "name": "Levent – Boğaziçi Üniversitesi / Hisarüstü",
+      "mode": "metro",
+      "color": "#8B5AA8",
+      "stations": [
+        {
+          "id": "m6-01",
+          "name": "Levent",
+          "order": 1
+        },
+        {
+          "id": "m6-02",
+          "name": "Nispetiye",
+          "order": 2
+        },
+        {
+          "id": "m6-03",
+          "name": "Etiler",
+          "order": 3
+        },
+        {
+          "id": "m6-04",
+          "name": "Boğaziçi Üniversitesi-Hisarüstü",
+          "order": 4
+        }
+      ]
+    },
+    {
+      "id": "M7",
+      "name": "Yıldız – Mahmutbey",
+      "mode": "metro",
+      "color": "#E83E8C",
+      "stations": [
+        {
+          "id": "m7-01",
+          "name": "Yıldız",
+          "order": 1
+        },
+        {
+          "id": "m7-02",
+          "name": "Fulya",
+          "order": 2
+        },
+        {
+          "id": "m7-03",
+          "name": "Mecidiyeköy",
+          "order": 3
+        },
+        {
+          "id": "m7-04",
+          "name": "Çağlayan",
+          "order": 4
+        },
+        {
+          "id": "m7-05",
+          "name": "Kağıthane",
+          "order": 5
+        },
+        {
+          "id": "m7-06",
+          "name": "Nurtepe",
+          "order": 6
+        },
+        {
+          "id": "m7-07",
+          "name": "Alibeyköy",
+          "order": 7
+        },
+        {
+          "id": "m7-08",
+          "name": "Çırçır",
+          "order": 8
+        },
+        {
+          "id": "m7-09",
+          "name": "Veysel Karani-Akşemsettin",
+          "order": 9
+        },
+        {
+          "id": "m7-10",
+          "name": "Yeşilpınar",
+          "order": 10
+        },
+        {
+          "id": "m7-11",
+          "name": "Kazım Karabekir",
+          "order": 11
+        },
+        {
+          "id": "m7-12",
+          "name": "Yenimahalle",
+          "order": 12
+        },
+        {
+          "id": "m7-13",
+          "name": "Karadeniz Mahallesi",
+          "order": 13
+        },
+        {
+          "id": "m7-14",
+          "name": "Tekstilkent-Giyimkent",
+          "order": 14
+        },
+        {
+          "id": "m7-15",
+          "name": "Oruç Reis",
+          "order": 15
+        },
+        {
+          "id": "m7-16",
+          "name": "Göztepe Mahallesi",
+          "order": 16
+        },
+        {
+          "id": "m7-17",
+          "name": "Mahmutbey",
+          "order": 17
+        }
+      ]
+    },
+    {
+      "id": "M8",
+      "name": "Bostancı – Parseller",
+      "mode": "metro",
+      "color": "#00A6D6",
+      "stations": [
+        {
+          "id": "m8-01",
+          "name": "Bostancı",
+          "order": 1
+        },
+        {
+          "id": "m8-02",
+          "name": "Emin Ali Paşa",
+          "order": 2
+        },
+        {
+          "id": "m8-03",
+          "name": "Ayşekadın",
+          "order": 3
+        },
+        {
+          "id": "m8-04",
+          "name": "Kozyatağı",
+          "order": 4
+        },
+        {
+          "id": "m8-05",
+          "name": "Küçükbakkalköy",
+          "order": 5
+        },
+        {
+          "id": "m8-06",
+          "name": "İçerenköy",
+          "order": 6
+        },
+        {
+          "id": "m8-07",
+          "name": "Kayışdağı",
+          "order": 7
+        },
+        {
+          "id": "m8-08",
+          "name": "Mevlana",
+          "order": 8
+        },
+        {
+          "id": "m8-09",
+          "name": "İMES",
+          "order": 9
+        },
+        {
+          "id": "m8-10",
+          "name": "Modoko-Keyap",
+          "order": 10
+        },
+        {
+          "id": "m8-11",
+          "name": "Dudullu",
+          "order": 11
+        },
+        {
+          "id": "m8-12",
+          "name": "Huzur",
+          "order": 12
+        },
+        {
+          "id": "m8-13",
+          "name": "Parseller",
+          "order": 13
+        }
+      ]
+    },
+    {
+      "id": "M9",
+      "name": "Ataköy – Olimpiyat",
+      "mode": "metro",
+      "color": "#A7A9AC",
+      "stations": [
+        {
+          "id": "m9-01",
+          "name": "Ataköy",
+          "order": 1
+        },
+        {
+          "id": "m9-02",
+          "name": "Yenibosna",
+          "order": 2
+        },
+        {
+          "id": "m9-03",
+          "name": "Çobançeşme",
+          "order": 3
+        },
+        {
+          "id": "m9-04",
+          "name": "29 Ekim Cumhuriyet",
+          "order": 4
+        },
+        {
+          "id": "m9-05",
+          "name": "Doğu Sanayi",
+          "order": 5
+        },
+        {
+          "id": "m9-06",
+          "name": "Mimar Sinan",
+          "order": 6
+        },
+        {
+          "id": "m9-07",
+          "name": "15 Temmuz",
+          "order": 7
+        },
+        {
+          "id": "m9-08",
+          "name": "Halkalı Caddesi",
+          "order": 8
+        },
+        {
+          "id": "m9-09",
+          "name": "Meydan",
+          "order": 9
+        },
+        {
+          "id": "m9-10",
+          "name": "Ziya Gökalp Mahallesi",
+          "order": 10
+        },
+        {
+          "id": "m9-11",
+          "name": "İkitelli Sanayi",
+          "order": 11
+        },
+        {
+          "id": "m9-12",
+          "name": "Masko",
+          "order": 12
+        },
+        {
+          "id": "m9-13",
+          "name": "Bahariye",
+          "order": 13
+        },
+        {
+          "id": "m9-14",
+          "name": "Olimpiyat",
+          "order": 14
+        }
+      ]
+    },
+    {
+      "id": "M11",
+      "name": "Gayrettepe – İstanbul Havalimanı – Halkalı",
+      "mode": "metro",
+      "color": "#6C757D",
+      "stations": [
+        {
+          "id": "m11-01",
+          "name": "Gayrettepe",
+          "order": 1
+        },
+        {
+          "id": "m11-02",
+          "name": "Kağıthane",
+          "order": 2
+        },
+        {
+          "id": "m11-03",
+          "name": "Hasdal",
+          "order": 3
+        },
+        {
+          "id": "m11-04",
+          "name": "Kemerburgaz",
+          "order": 4
+        },
+        {
+          "id": "m11-05",
+          "name": "Göktürk",
+          "order": 5
+        },
+        {
+          "id": "m11-06",
+          "name": "İhsaniye",
+          "order": 6
+        },
+        {
+          "id": "m11-07",
+          "name": "İstanbul Havalimanı",
+          "order": 7
+        },
+        {
+          "id": "m11-08",
+          "name": "Kargo Terminali",
+          "order": 8
+        },
+        {
+          "id": "m11-09",
+          "name": "Taşoluk",
+          "order": 9
+        },
+        {
+          "id": "m11-10",
+          "name": "Arnavutköy Hastane",
+          "order": 10
+        },
+        {
+          "id": "m11-11",
+          "name": "Fenertepe",
+          "order": 11
+        },
+        {
+          "id": "m11-12",
+          "name": "Kayaşehir",
+          "order": 12
+        },
+        {
+          "id": "m11-13",
+          "name": "Halkalı",
+          "order": 13
+        }
+      ]
+    },
+    {
+      "id": "Marmaray",
+      "name": "Gebze – Halkalı",
+      "mode": "marmaray",
+      "color": "#00A6A6",
+      "stations": [
+        {
+          "id": "marmaray-01",
+          "name": "Gebze",
+          "order": 1
+        },
+        {
+          "id": "marmaray-02",
+          "name": "Darıca",
+          "order": 2
+        },
+        {
+          "id": "marmaray-03",
+          "name": "Osmangazi",
+          "order": 3
+        },
+        {
+          "id": "marmaray-04",
+          "name": "Çayırova",
+          "order": 4
+        },
+        {
+          "id": "marmaray-05",
+          "name": "Fatih",
+          "order": 5
+        },
+        {
+          "id": "marmaray-06",
+          "name": "Tuzla",
+          "order": 6
+        },
+        {
+          "id": "marmaray-07",
+          "name": "İçmeler",
+          "order": 7
+        },
+        {
+          "id": "marmaray-08",
+          "name": "Aydıntepe",
+          "order": 8
+        },
+        {
+          "id": "marmaray-09",
+          "name": "Güzelyalı",
+          "order": 9
+        },
+        {
+          "id": "marmaray-10",
+          "name": "Pendik",
+          "order": 10
+        },
+        {
+          "id": "marmaray-11",
+          "name": "Kaynarca",
+          "order": 11
+        },
+        {
+          "id": "marmaray-12",
+          "name": "Tersane",
+          "order": 12
+        },
+        {
+          "id": "marmaray-13",
+          "name": "Kartal",
+          "order": 13
+        },
+        {
+          "id": "marmaray-14",
+          "name": "Başak",
+          "order": 14
+        },
+        {
+          "id": "marmaray-15",
+          "name": "Maltepe",
+          "order": 15
+        },
+        {
+          "id": "marmaray-16",
+          "name": "Cevizli",
+          "order": 16
+        },
+        {
+          "id": "marmaray-17",
+          "name": "Atalar",
+          "order": 17
+        },
+        {
+          "id": "marmaray-18",
+          "name": "Küçükyalı",
+          "order": 18
+        },
+        {
+          "id": "marmaray-19",
+          "name": "İdealtepe",
+          "order": 19
+        },
+        {
+          "id": "marmaray-20",
+          "name": "Süreyya Plajı",
+          "order": 20
+        },
+        {
+          "id": "marmaray-21",
+          "name": "Bostancı",
+          "order": 21
+        },
+        {
+          "id": "marmaray-22",
+          "name": "Suadiye",
+          "order": 22
+        },
+        {
+          "id": "marmaray-23",
+          "name": "Erenköy",
+          "order": 23
+        },
+        {
+          "id": "marmaray-24",
+          "name": "Göztepe",
+          "order": 24
+        },
+        {
+          "id": "marmaray-25",
+          "name": "Feneryolu",
+          "order": 25
+        },
+        {
+          "id": "marmaray-26",
+          "name": "Ayrılık Çeşmesi",
+          "order": 26
+        },
+        {
+          "id": "marmaray-27",
+          "name": "Üsküdar",
+          "order": 27
+        },
+        {
+          "id": "marmaray-28",
+          "name": "Sirkeci",
+          "order": 28
+        },
+        {
+          "id": "marmaray-29",
+          "name": "Yenikapı",
+          "order": 29
+        },
+        {
+          "id": "marmaray-30",
+          "name": "Kazlıçeşme",
+          "order": 30
+        },
+        {
+          "id": "marmaray-31",
+          "name": "Zeytinburnu",
+          "order": 31
+        },
+        {
+          "id": "marmaray-32",
+          "name": "Yenimahalle",
+          "order": 32
+        },
+        {
+          "id": "marmaray-33",
+          "name": "Bakırköy",
+          "order": 33
+        },
+        {
+          "id": "marmaray-34",
+          "name": "Ataköy",
+          "order": 34
+        },
+        {
+          "id": "marmaray-35",
+          "name": "Yeşilyurt",
+          "order": 35
+        },
+        {
+          "id": "marmaray-36",
+          "name": "Yeşilköy",
+          "order": 36
+        },
+        {
+          "id": "marmaray-37",
+          "name": "Florya",
+          "order": 37
+        },
+        {
+          "id": "marmaray-38",
+          "name": "Küçükçekmece",
+          "order": 38
+        },
+        {
+          "id": "marmaray-39",
+          "name": "Halkalı",
+          "order": 39
+        }
+      ]
+    },
+    {
+      "id": "T1",
+      "name": "Kabataş – Bağcılar",
+      "mode": "tram",
+      "color": "#0066B3",
+      "stations": [
+        {
+          "id": "t1-01",
+          "name": "Kabataş",
+          "order": 1
+        },
+        {
+          "id": "t1-02",
+          "name": "Fındıklı-Mimar Sinan Üniversitesi",
+          "order": 2
+        },
+        {
+          "id": "t1-03",
+          "name": "Tophane",
+          "order": 3
+        },
+        {
+          "id": "t1-04",
+          "name": "Karaköy",
+          "order": 4
+        },
+        {
+          "id": "t1-05",
+          "name": "Eminönü",
+          "order": 5
+        },
+        {
+          "id": "t1-06",
+          "name": "Sirkeci",
+          "order": 6
+        },
+        {
+          "id": "t1-07",
+          "name": "Gülhane",
+          "order": 7
+        },
+        {
+          "id": "t1-08",
+          "name": "Sultanahmet",
+          "order": 8
+        },
+        {
+          "id": "t1-09",
+          "name": "Çemberlitaş",
+          "order": 9
+        },
+        {
+          "id": "t1-10",
+          "name": "Beyazıt-Kapalıçarşı",
+          "order": 10
+        },
+        {
+          "id": "t1-11",
+          "name": "Laleli-İstanbul Üniversitesi",
+          "order": 11
+        },
+        {
+          "id": "t1-12",
+          "name": "Aksaray",
+          "order": 12
+        },
+        {
+          "id": "t1-13",
+          "name": "Yusufpaşa",
+          "order": 13
+        },
+        {
+          "id": "t1-14",
+          "name": "Haseki",
+          "order": 14
+        },
+        {
+          "id": "t1-15",
+          "name": "Fındıkzade",
+          "order": 15
+        },
+        {
+          "id": "t1-16",
+          "name": "Çapa-Şehremini",
+          "order": 16
+        },
+        {
+          "id": "t1-17",
+          "name": "Topkapı",
+          "order": 17
+        },
+        {
+          "id": "t1-18",
+          "name": "Cevizlibağ-AÖY",
+          "order": 18
+        },
+        {
+          "id": "t1-19",
+          "name": "Merkez Efendi",
+          "order": 19
+        },
+        {
+          "id": "t1-20",
+          "name": "Akşemsettin",
+          "order": 20
+        },
+        {
+          "id": "t1-21",
+          "name": "Mithatpaşa",
+          "order": 21
+        },
+        {
+          "id": "t1-22",
+          "name": "Zeytinburnu",
+          "order": 22
+        },
+        {
+          "id": "t1-23",
+          "name": "Mehmet Akif",
+          "order": 23
+        },
+        {
+          "id": "t1-24",
+          "name": "Merter Tekstil Merkezi",
+          "order": 24
+        },
+        {
+          "id": "t1-25",
+          "name": "Güngören",
+          "order": 25
+        },
+        {
+          "id": "t1-26",
+          "name": "Akıncılar",
+          "order": 26
+        },
+        {
+          "id": "t1-27",
+          "name": "Soğanlı",
+          "order": 27
+        },
+        {
+          "id": "t1-28",
+          "name": "Yavuz Selim",
+          "order": 28
+        },
+        {
+          "id": "t1-29",
+          "name": "Güneştepe",
+          "order": 29
+        },
+        {
+          "id": "t1-30",
+          "name": "Bağcılar",
+          "order": 30
+        }
+      ]
+    },
+    {
+      "id": "T2",
+      "name": "Taksim – Tünel",
+      "mode": "tram",
+      "color": "#8B5AA8",
+      "stations": [
+        {
+          "id": "t2-01",
+          "name": "Taksim",
+          "order": 1
+        },
+        {
+          "id": "t2-02",
+          "name": "Odakule",
+          "order": 2
+        },
+        {
+          "id": "t2-03",
+          "name": "Galatasaray",
+          "order": 3
+        },
+        {
+          "id": "t2-04",
+          "name": "Ağa Camii",
+          "order": 4
+        },
+        {
+          "id": "t2-05",
+          "name": "Tünel",
+          "order": 5
+        }
+      ]
+    },
+    {
+      "id": "T3",
+      "name": "Kadıköy – Moda",
+      "mode": "tram",
+      "color": "#B56A31",
+      "stations": [
+        {
+          "id": "t3-01",
+          "name": "Kadıköy-İDO",
+          "order": 1
+        },
+        {
+          "id": "t3-02",
+          "name": "İskele Camii",
+          "order": 2
+        },
+        {
+          "id": "t3-03",
+          "name": "Çarşı",
+          "order": 3
+        },
+        {
+          "id": "t3-04",
+          "name": "Altıyol",
+          "order": 4
+        },
+        {
+          "id": "t3-05",
+          "name": "Bahariye",
+          "order": 5
+        },
+        {
+          "id": "t3-06",
+          "name": "Moda İlkokulu",
+          "order": 6
+        },
+        {
+          "id": "t3-07",
+          "name": "Moda Caddesi",
+          "order": 7
+        },
+        {
+          "id": "t3-08",
+          "name": "Moda",
+          "order": 8
+        },
+        {
+          "id": "t3-09",
+          "name": "Mühürdar",
+          "order": 9
+        }
+      ]
+    },
+    {
+      "id": "T4",
+      "name": "Topkapı – Mescid-i Selam",
+      "mode": "tram",
+      "color": "#A51C30",
+      "stations": [
+        {
+          "id": "t4-01",
+          "name": "Topkapı",
+          "order": 1
+        },
+        {
+          "id": "t4-02",
+          "name": "Şehitlik",
+          "order": 2
+        },
+        {
+          "id": "t4-03",
+          "name": "Edirnekapı",
+          "order": 3
+        },
+        {
+          "id": "t4-04",
+          "name": "Vatan",
+          "order": 4
+        },
+        {
+          "id": "t4-05",
+          "name": "Fetihkapı",
+          "order": 5
+        },
+        {
+          "id": "t4-06",
+          "name": "Topkapı-Mescid-i Selam",
+          "order": 6
+        },
+        {
+          "id": "t4-07",
+          "name": "Demirkapı",
+          "order": 7
+        },
+        {
+          "id": "t4-08",
+          "name": "Rami",
+          "order": 8
+        },
+        {
+          "id": "t4-09",
+          "name": "Uluyol-Bereç",
+          "order": 9
+        },
+        {
+          "id": "t4-10",
+          "name": "Sağmalcılar",
+          "order": 10
+        },
+        {
+          "id": "t4-11",
+          "name": "Bosna-Çukurçeşme",
+          "order": 11
+        },
+        {
+          "id": "t4-12",
+          "name": "Ali Fuat Başgil",
+          "order": 12
+        },
+        {
+          "id": "t4-13",
+          "name": "Taşköprü",
+          "order": 13
+        },
+        {
+          "id": "t4-14",
+          "name": "Karadeniz Mahallesi",
+          "order": 14
+        },
+        {
+          "id": "t4-15",
+          "name": "Mescid-i Selam",
+          "order": 15
+        }
+      ]
+    },
+    {
+      "id": "T5",
+      "name": "Eminönü – Alibeyköy Cep Otogarı",
+      "mode": "tram",
+      "color": "#00A6A6",
+      "stations": [
+        {
+          "id": "t5-01",
+          "name": "Eminönü",
+          "order": 1
+        },
+        {
+          "id": "t5-02",
+          "name": "Küçükpazar",
+          "order": 2
+        },
+        {
+          "id": "t5-03",
+          "name": "Cibali",
+          "order": 3
+        },
+        {
+          "id": "t5-04",
+          "name": "Fener",
+          "order": 4
+        },
+        {
+          "id": "t5-05",
+          "name": "Balat",
+          "order": 5
+        },
+        {
+          "id": "t5-06",
+          "name": "Ayvansaray",
+          "order": 6
+        },
+        {
+          "id": "t5-07",
+          "name": "Eyüpsultan Teleferik",
+          "order": 7
+        },
+        {
+          "id": "t5-08",
+          "name": "Eyüpsultan Devlet Hastanesi",
+          "order": 8
+        },
+        {
+          "id": "t5-09",
+          "name": "Silahtarağa Mahallesi",
+          "order": 9
+        },
+        {
+          "id": "t5-10",
+          "name": "Üniversite",
+          "order": 10
+        },
+        {
+          "id": "t5-11",
+          "name": "Alibeyköy Merkez",
+          "order": 11
+        },
+        {
+          "id": "t5-12",
+          "name": "Alibeyköy Metro",
+          "order": 12
+        },
+        {
+          "id": "t5-13",
+          "name": "Alibeyköy Cep Otogarı",
+          "order": 13
+        }
+      ]
+    },
+    {
+      "id": "T6",
+      "name": "Sirkeci – Kazlıçeşme",
+      "mode": "tram",
+      "color": "#808080",
+      "stations": [
+        {
+          "id": "t6-01",
+          "name": "Sirkeci",
+          "order": 1
+        },
+        {
+          "id": "t6-02",
+          "name": "Cankurtaran",
+          "order": 2
+        },
+        {
+          "id": "t6-03",
+          "name": "Kumkapı",
+          "order": 3
+        },
+        {
+          "id": "t6-04",
+          "name": "Yenikapı",
+          "order": 4
+        },
+        {
+          "id": "t6-05",
+          "name": "Cerrahpaşa",
+          "order": 5
+        },
+        {
+          "id": "t6-06",
+          "name": "Kocamustafapaşa",
+          "order": 6
+        },
+        {
+          "id": "t6-07",
+          "name": "Yedikule",
+          "order": 7
+        },
+        {
+          "id": "t6-08",
+          "name": "Kazlıçeşme",
+          "order": 8
+        }
+      ]
+    },
+    {
+      "id": "F1",
+      "name": "Taksim – Kabataş",
+      "mode": "funicular",
+      "color": "#6C757D",
+      "stations": [
+        {
+          "id": "f1-01",
+          "name": "Taksim",
+          "order": 1
+        },
+        {
+          "id": "f1-02",
+          "name": "Kabataş",
+          "order": 2
+        }
+      ]
+    },
+    {
+      "id": "F2",
+      "name": "Karaköy – Beyoğlu Tünel",
+      "mode": "funicular",
+      "color": "#6C757D",
+      "stations": [
+        {
+          "id": "f2-01",
+          "name": "Karaköy",
+          "order": 1
+        },
+        {
+          "id": "f2-02",
+          "name": "Beyoğlu",
+          "order": 2
+        }
+      ]
+    },
+    {
+      "id": "F4",
+      "name": "Boğaziçi Üniversitesi – Aşiyan",
+      "mode": "funicular",
+      "color": "#6C757D",
+      "stations": [
+        {
+          "id": "f4-01",
+          "name": "Boğaziçi Üniversitesi-Hisarüstü",
+          "order": 1
+        },
+        {
+          "id": "f4-02",
+          "name": "Aşiyan",
+          "order": 2
+        }
+      ]
+    },
+    {
+      "id": "TF1",
+      "name": "Maçka – Taşkışla",
+      "mode": "cable_car",
+      "color": "#6C757D",
+      "stations": [
+        {
+          "id": "tf1-01",
+          "name": "Maçka",
+          "order": 1
+        },
+        {
+          "id": "tf1-02",
+          "name": "Taşkışla",
+          "order": 2
+        }
+      ]
+    },
+    {
+      "id": "TF2",
+      "name": "Eyüp – Piyer Loti",
+      "mode": "cable_car",
+      "color": "#6C757D",
+      "stations": [
+        {
+          "id": "tf2-01",
+          "name": "Eyüp",
+          "order": 1
+        },
+        {
+          "id": "tf2-02",
+          "name": "Piyer Loti",
+          "order": 2
+        }
+      ]
+    },
+    {
+      "id": "Metrobüs",
+      "name": "Beylikdüzü – Söğütlüçeşme",
+      "mode": "metrobus",
+      "color": "#F5A623",
+      "stations": [
+        {
+          "id": "metrobus-01",
+          "name": "Beylikdüzü Sondurak",
+          "order": 1
+        },
+        {
+          "id": "metrobus-02",
+          "name": "Beykent",
+          "order": 2
+        },
+        {
+          "id": "metrobus-03",
+          "name": "Cumhuriyet Mahallesi",
+          "order": 3
+        },
+        {
+          "id": "metrobus-04",
+          "name": "Hadımköy",
+          "order": 4
+        },
+        {
+          "id": "metrobus-05",
+          "name": "Tüyap",
+          "order": 5
+        },
+        {
+          "id": "metrobus-06",
+          "name": "Haramidere",
+          "order": 6
+        },
+        {
+          "id": "metrobus-07",
+          "name": "Haramidere Sanayi",
+          "order": 7
+        },
+        {
+          "id": "metrobus-08",
+          "name": "Saadetdere Mahallesi",
+          "order": 8
+        },
+        {
+          "id": "metrobus-09",
+          "name": "Mustafa Kemal Paşa",
+          "order": 9
+        },
+        {
+          "id": "metrobus-10",
+          "name": "Cihangir-Üniversite Mahallesi",
+          "order": 10
+        },
+        {
+          "id": "metrobus-11",
+          "name": "Avcılar Merkez Üniversite Kampüsü",
+          "order": 11
+        },
+        {
+          "id": "metrobus-12",
+          "name": "Şükrübey",
+          "order": 12
+        },
+        {
+          "id": "metrobus-13",
+          "name": "İBB Sosyal Tesisleri",
+          "order": 13
+        },
+        {
+          "id": "metrobus-14",
+          "name": "Küçükçekmece",
+          "order": 14
+        },
+        {
+          "id": "metrobus-15",
+          "name": "Cennet Mahallesi",
+          "order": 15
+        },
+        {
+          "id": "metrobus-16",
+          "name": "Florya",
+          "order": 16
+        },
+        {
+          "id": "metrobus-17",
+          "name": "Beşyol",
+          "order": 17
+        },
+        {
+          "id": "metrobus-18",
+          "name": "Sefaköy",
+          "order": 18
+        },
+        {
+          "id": "metrobus-19",
+          "name": "Yenibosna",
+          "order": 19
+        },
+        {
+          "id": "metrobus-20",
+          "name": "Şirinevler",
+          "order": 20
+        },
+        {
+          "id": "metrobus-21",
+          "name": "Bahçelievler",
+          "order": 21
+        },
+        {
+          "id": "metrobus-22",
+          "name": "İncirli",
+          "order": 22
+        },
+        {
+          "id": "metrobus-23",
+          "name": "Zeytinburnu",
+          "order": 23
+        },
+        {
+          "id": "metrobus-24",
+          "name": "Merter",
+          "order": 24
+        },
+        {
+          "id": "metrobus-25",
+          "name": "Cevizlibağ",
+          "order": 25
+        },
+        {
+          "id": "metrobus-26",
+          "name": "Topkapı",
+          "order": 26
+        },
+        {
+          "id": "metrobus-27",
+          "name": "Bayrampaşa-Maltepe",
+          "order": 27
+        },
+        {
+          "id": "metrobus-28",
+          "name": "Edirnekapı",
+          "order": 28
+        },
+        {
+          "id": "metrobus-29",
+          "name": "Ayvansaray-Eyüpsultan",
+          "order": 29
+        },
+        {
+          "id": "metrobus-30",
+          "name": "Halıcıoğlu",
+          "order": 30
+        },
+        {
+          "id": "metrobus-31",
+          "name": "Okmeydanı",
+          "order": 31
+        },
+        {
+          "id": "metrobus-32",
+          "name": "Darülaceze-Perpa",
+          "order": 32
+        },
+        {
+          "id": "metrobus-33",
+          "name": "Okmeydanı Hastane",
+          "order": 33
+        },
+        {
+          "id": "metrobus-34",
+          "name": "Çağlayan",
+          "order": 34
+        },
+        {
+          "id": "metrobus-35",
+          "name": "Mecidiyeköy",
+          "order": 35
+        },
+        {
+          "id": "metrobus-36",
+          "name": "Zincirlikuyu",
+          "order": 36
+        },
+        {
+          "id": "metrobus-37",
+          "name": "15 Temmuz Şehitler Köprüsü",
+          "order": 37
+        },
+        {
+          "id": "metrobus-38",
+          "name": "Burhaniye",
+          "order": 38
+        },
+        {
+          "id": "metrobus-39",
+          "name": "Altunizade",
+          "order": 39
+        },
+        {
+          "id": "metrobus-40",
+          "name": "Acıbadem",
+          "order": 40
+        },
+        {
+          "id": "metrobus-41",
+          "name": "Uzunçayır",
+          "order": 41
+        },
+        {
+          "id": "metrobus-42",
+          "name": "Fikirtepe",
+          "order": 42
+        },
+        {
+          "id": "metrobus-43",
+          "name": "Söğütlüçeşme",
+          "order": 43
+        }
+      ]
+    },
+    {
+      "id": "B2",
+      "name": "Halkalı – Bahçeşehir Banliyö Hattı",
+      "mode": "commuter_rail",
+      "color": null,
+      "stations": [
+        {
+          "id": "b2-01",
+          "name": "Halkalı",
+          "order": 1
+        },
+        {
+          "id": "b2-02",
+          "name": "Atakent Mahallesi",
+          "order": 2
+        },
+        {
+          "id": "b2-03",
+          "name": "Ispartakule",
+          "order": 3
+        },
+        {
+          "id": "b2-04",
+          "name": "Bahçeşehir",
+          "order": 4
+        }
+      ]
+    },
+    {
+      "id": "F3",
+      "name": "Seyrantepe – Vadistanbul Füniküler Hattı",
+      "mode": "funicular",
+      "color": null,
+      "stations": [
+        {
+          "id": "f3-01",
+          "name": "Seyrantepe",
+          "order": 1
+        },
+        {
+          "id": "f3-02",
+          "name": "Vadistanbul",
+          "order": 2
+        }
+      ]
+    }
+  ],
+  "transferCandidates": [
+    {
+      "stationName": "yenikapı",
+      "lines": [
+        "M1A",
+        "M1B",
+        "M2",
+        "Marmaray",
+        "T6"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "M1A",
+          "stationId": "m1a-01"
+        },
+        {
+          "lineId": "M1B",
+          "stationId": "m1b-01"
+        },
+        {
+          "lineId": "M2",
+          "stationId": "m2-01"
+        },
+        {
+          "lineId": "Marmaray",
+          "stationId": "marmaray-29"
+        },
+        {
+          "lineId": "T6",
+          "stationId": "t6-04"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "aksaray",
+      "lines": [
+        "M1A",
+        "M1B",
+        "T1"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "M1A",
+          "stationId": "m1a-02"
+        },
+        {
+          "lineId": "M1B",
+          "stationId": "m1b-02"
+        },
+        {
+          "lineId": "T1",
+          "stationId": "t1-12"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "emniyet-fatih",
+      "lines": [
+        "M1A",
+        "M1B"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "M1A",
+          "stationId": "m1a-03"
+        },
+        {
+          "lineId": "M1B",
+          "stationId": "m1b-03"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "topkapı-ulubatlı",
+      "lines": [
+        "M1A",
+        "M1B"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "M1A",
+          "stationId": "m1a-04"
+        },
+        {
+          "lineId": "M1B",
+          "stationId": "m1b-04"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "bayrampaşa-maltepe",
+      "lines": [
+        "M1A",
+        "M1B",
+        "Metrobüs"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "M1A",
+          "stationId": "m1a-05"
+        },
+        {
+          "lineId": "M1B",
+          "stationId": "m1b-05"
+        },
+        {
+          "lineId": "Metrobüs",
+          "stationId": "metrobus-27"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "sağmalcılar",
+      "lines": [
+        "M1A",
+        "M1B",
+        "T4"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "M1A",
+          "stationId": "m1a-06"
+        },
+        {
+          "lineId": "M1B",
+          "stationId": "m1b-06"
+        },
+        {
+          "lineId": "T4",
+          "stationId": "t4-10"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "kocatepe",
+      "lines": [
+        "M1A",
+        "M1B"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "M1A",
+          "stationId": "m1a-07"
+        },
+        {
+          "lineId": "M1B",
+          "stationId": "m1b-07"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "otogar",
+      "lines": [
+        "M1A",
+        "M1B"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "M1A",
+          "stationId": "m1a-08"
+        },
+        {
+          "lineId": "M1B",
+          "stationId": "m1b-08"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "merter",
+      "lines": [
+        "M1A",
+        "Metrobüs"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "M1A",
+          "stationId": "m1a-11"
+        },
+        {
+          "lineId": "Metrobüs",
+          "stationId": "metrobus-24"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "zeytinburnu",
+      "lines": [
+        "M1A",
+        "Marmaray",
+        "Metrobüs",
+        "T1"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "M1A",
+          "stationId": "m1a-12"
+        },
+        {
+          "lineId": "Marmaray",
+          "stationId": "marmaray-31"
+        },
+        {
+          "lineId": "T1",
+          "stationId": "t1-22"
+        },
+        {
+          "lineId": "Metrobüs",
+          "stationId": "metrobus-23"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "bahçelievler",
+      "lines": [
+        "M1A",
+        "Metrobüs"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "M1A",
+          "stationId": "m1a-14"
+        },
+        {
+          "lineId": "Metrobüs",
+          "stationId": "metrobus-21"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "yenibosna",
+      "lines": [
+        "M1A",
+        "M9",
+        "Metrobüs"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "M1A",
+          "stationId": "m1a-16"
+        },
+        {
+          "lineId": "M9",
+          "stationId": "m9-02"
+        },
+        {
+          "lineId": "Metrobüs",
+          "stationId": "metrobus-19"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "kirazlı",
+      "lines": [
+        "M1B",
+        "M3"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "M1B",
+          "stationId": "m1b-13"
+        },
+        {
+          "lineId": "M3",
+          "stationId": "m3-08"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "taksim",
+      "lines": [
+        "F1",
+        "M2",
+        "T2"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "M2",
+          "stationId": "m2-05"
+        },
+        {
+          "lineId": "T2",
+          "stationId": "t2-01"
+        },
+        {
+          "lineId": "F1",
+          "stationId": "f1-01"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "gayrettepe",
+      "lines": [
+        "M11",
+        "M2"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "M2",
+          "stationId": "m2-08"
+        },
+        {
+          "lineId": "M11",
+          "stationId": "m11-01"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "levent",
+      "lines": [
+        "M2",
+        "M6"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "M2",
+          "stationId": "m2-09"
+        },
+        {
+          "lineId": "M6",
+          "stationId": "m6-01"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "sanayi mahallesi",
+      "lines": [
+        "M2",
+        "M2A"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "M2",
+          "stationId": "m2-11"
+        },
+        {
+          "lineId": "M2A",
+          "stationId": "m2a-01"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "i̇ncirli",
+      "lines": [
+        "M3",
+        "Metrobüs"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "M3",
+          "stationId": "m3-03"
+        },
+        {
+          "lineId": "Metrobüs",
+          "stationId": "metrobus-22"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "yenimahalle",
+      "lines": [
+        "M3",
+        "M7",
+        "Marmaray"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "M3",
+          "stationId": "m3-09"
+        },
+        {
+          "lineId": "M7",
+          "stationId": "m7-12"
+        },
+        {
+          "lineId": "Marmaray",
+          "stationId": "marmaray-32"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "mahmutbey",
+      "lines": [
+        "M3",
+        "M7"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "M3",
+          "stationId": "m3-10"
+        },
+        {
+          "lineId": "M7",
+          "stationId": "m7-17"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "ayrılık çeşmesi",
+      "lines": [
+        "M4",
+        "Marmaray"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "M4",
+          "stationId": "m4-02"
+        },
+        {
+          "lineId": "Marmaray",
+          "stationId": "marmaray-26"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "acıbadem",
+      "lines": [
+        "M4",
+        "Metrobüs"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "M4",
+          "stationId": "m4-03"
+        },
+        {
+          "lineId": "Metrobüs",
+          "stationId": "metrobus-40"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "göztepe",
+      "lines": [
+        "M4",
+        "Marmaray"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "M4",
+          "stationId": "m4-05"
+        },
+        {
+          "lineId": "Marmaray",
+          "stationId": "marmaray-24"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "kozyatağı",
+      "lines": [
+        "M4",
+        "M8"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "M4",
+          "stationId": "m4-07"
+        },
+        {
+          "lineId": "M8",
+          "stationId": "m8-04"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "bostancı",
+      "lines": [
+        "M4",
+        "M8",
+        "Marmaray"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "M4",
+          "stationId": "m4-08"
+        },
+        {
+          "lineId": "M8",
+          "stationId": "m8-01"
+        },
+        {
+          "lineId": "Marmaray",
+          "stationId": "marmaray-21"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "küçükyalı",
+      "lines": [
+        "M4",
+        "Marmaray"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "M4",
+          "stationId": "m4-09"
+        },
+        {
+          "lineId": "Marmaray",
+          "stationId": "marmaray-18"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "maltepe",
+      "lines": [
+        "M4",
+        "Marmaray"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "M4",
+          "stationId": "m4-10"
+        },
+        {
+          "lineId": "Marmaray",
+          "stationId": "marmaray-15"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "kartal",
+      "lines": [
+        "M4",
+        "Marmaray"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "M4",
+          "stationId": "m4-16"
+        },
+        {
+          "lineId": "Marmaray",
+          "stationId": "marmaray-13"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "pendik",
+      "lines": [
+        "M4",
+        "Marmaray"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "M4",
+          "stationId": "m4-18"
+        },
+        {
+          "lineId": "Marmaray",
+          "stationId": "marmaray-10"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "üsküdar",
+      "lines": [
+        "M5",
+        "Marmaray"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "M5",
+          "stationId": "m5-01"
+        },
+        {
+          "lineId": "Marmaray",
+          "stationId": "marmaray-27"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "altunizade",
+      "lines": [
+        "M5",
+        "Metrobüs"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "M5",
+          "stationId": "m5-04"
+        },
+        {
+          "lineId": "Metrobüs",
+          "stationId": "metrobus-39"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "çarşı",
+      "lines": [
+        "M5",
+        "T3"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "M5",
+          "stationId": "m5-08"
+        },
+        {
+          "lineId": "T3",
+          "stationId": "t3-03"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "dudullu",
+      "lines": [
+        "M5",
+        "M8"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "M5",
+          "stationId": "m5-14"
+        },
+        {
+          "lineId": "M8",
+          "stationId": "m8-11"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "boğaziçi üniversitesi-hisarüstü",
+      "lines": [
+        "F4",
+        "M6"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "M6",
+          "stationId": "m6-04"
+        },
+        {
+          "lineId": "F4",
+          "stationId": "f4-01"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "mecidiyeköy",
+      "lines": [
+        "M2",
+        "M7",
+        "Metrobüs"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "M2",
+          "stationId": "m2-07"
+        },
+        {
+          "lineId": "M7",
+          "stationId": "m7-03"
+        },
+        {
+          "lineId": "Metrobüs",
+          "stationId": "metrobus-35"
+        }
+      ],
+      "status": "official_map_transfer_candidate",
+      "note": "Haritadaki Şişli-Mecidiyeköy/Mecidiyeköy düğümü esas alınarak birleştirildi; yürüme/ücretli alan ayrıntısı bu veride kodlanmamıştır."
+    },
+    {
+      "stationName": "çağlayan",
+      "lines": [
+        "M7",
+        "Metrobüs"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "M7",
+          "stationId": "m7-04"
+        },
+        {
+          "lineId": "Metrobüs",
+          "stationId": "metrobus-34"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "kağıthane",
+      "lines": [
+        "M11",
+        "M7"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "M7",
+          "stationId": "m7-05"
+        },
+        {
+          "lineId": "M11",
+          "stationId": "m11-02"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "karadeniz mahallesi",
+      "lines": [
+        "M7",
+        "T4"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "M7",
+          "stationId": "m7-13"
+        },
+        {
+          "lineId": "T4",
+          "stationId": "t4-14"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "ataköy",
+      "lines": [
+        "M9",
+        "Marmaray"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "M9",
+          "stationId": "m9-01"
+        },
+        {
+          "lineId": "Marmaray",
+          "stationId": "marmaray-34"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "bahariye",
+      "lines": [
+        "M9",
+        "T3"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "M9",
+          "stationId": "m9-13"
+        },
+        {
+          "lineId": "T3",
+          "stationId": "t3-05"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "halkalı",
+      "lines": [
+        "M11",
+        "Marmaray"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "M11",
+          "stationId": "m11-13"
+        },
+        {
+          "lineId": "Marmaray",
+          "stationId": "marmaray-39"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "sirkeci",
+      "lines": [
+        "Marmaray",
+        "T1",
+        "T6"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "Marmaray",
+          "stationId": "marmaray-28"
+        },
+        {
+          "lineId": "T1",
+          "stationId": "t1-06"
+        },
+        {
+          "lineId": "T6",
+          "stationId": "t6-01"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "kazlıçeşme",
+      "lines": [
+        "Marmaray",
+        "T6"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "Marmaray",
+          "stationId": "marmaray-30"
+        },
+        {
+          "lineId": "T6",
+          "stationId": "t6-08"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "florya",
+      "lines": [
+        "Marmaray",
+        "Metrobüs"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "Marmaray",
+          "stationId": "marmaray-37"
+        },
+        {
+          "lineId": "Metrobüs",
+          "stationId": "metrobus-16"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "küçükçekmece",
+      "lines": [
+        "Marmaray",
+        "Metrobüs"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "Marmaray",
+          "stationId": "marmaray-38"
+        },
+        {
+          "lineId": "Metrobüs",
+          "stationId": "metrobus-14"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "kabataş",
+      "lines": [
+        "F1",
+        "T1"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "T1",
+          "stationId": "t1-01"
+        },
+        {
+          "lineId": "F1",
+          "stationId": "f1-02"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "karaköy",
+      "lines": [
+        "F2",
+        "T1"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "T1",
+          "stationId": "t1-04"
+        },
+        {
+          "lineId": "F2",
+          "stationId": "f2-01"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "eminönü",
+      "lines": [
+        "T1",
+        "T5"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "T1",
+          "stationId": "t1-05"
+        },
+        {
+          "lineId": "T5",
+          "stationId": "t5-01"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "topkapı",
+      "lines": [
+        "Metrobüs",
+        "T1",
+        "T4"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "T1",
+          "stationId": "t1-17"
+        },
+        {
+          "lineId": "T4",
+          "stationId": "t4-01"
+        },
+        {
+          "lineId": "Metrobüs",
+          "stationId": "metrobus-26"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    },
+    {
+      "stationName": "edirnekapı",
+      "lines": [
+        "Metrobüs",
+        "T4"
+      ],
+      "stationRefs": [
+        {
+          "lineId": "T4",
+          "stationId": "t4-03"
+        },
+        {
+          "lineId": "Metrobüs",
+          "stationId": "metrobus-28"
+        }
+      ],
+      "status": "name_match_unverified",
+      "note": "İstasyon adı eşleşmesinden üretilmiştir; resmî haritada aktarma olarak doğrulanmış kabul edilmemelidir."
+    }
+  ]
+}

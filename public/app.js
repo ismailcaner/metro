@@ -1,6 +1,5 @@
 /* İstanbul Ulaşım — uygulama mantığı (çerçevesiz, modüler vanilla JS) */
 
-const API = "/api/metro";
 const FAV_KEY = "sm.favorites";
 const BUS_FAV_KEY = "sm.busFavs";
 const RECENTS_KEY = "sm.recents";
@@ -36,7 +35,9 @@ document.addEventListener(
 /* ---------------- state ---------------- */
 const state = {
   lines: new Map(),        // code -> {code,name,color,first,last}
-  stations: [],            // resmî API istasyon listesi (lat/lng dahil)
+  stations: [],            // yerel ağ kataloğu; varsa paketli istasyon koordinatlarıyla zenginleştirilir
+  railNetwork: null,       // resmî ağ haritasından derlenen ek hat/istasyon kataloğu
+  railStationLineIndex: new Map(), // normalize istasyon adı -> ağ kataloğundaki hat kodları
   stationIndex: new Map(), // normalize ad -> {key,name,entries:[{code,api,ttId,dirs}]}
   statuses: new Map(),     // code -> {active,desc,updated}
   timetable: null,
@@ -95,7 +96,6 @@ const state = {
   },
   journeyParent: null,
   settingsParent: null,
-  lastLive: null,
   location: null,          // {lat,lng}
   route: { name: "home" },
 };
@@ -320,6 +320,7 @@ function nearestMetroLines(limit = METRO_NEARBY_LINE_LIMIT) {
   const byLine = new Map();
   for (const station of state.stations) {
     if (station.lat == null || station.lng == null || !station.code) continue;
+    if (state.lines.get(station.code)?.mode === "metrobus") continue;
     const distance = haversine(state.location, { lat: station.lat, lng: station.lng });
     const current = byLine.get(station.code);
     if (!current || distance < current.distance) {
@@ -469,43 +470,71 @@ function parseColor(c) {
   return mm && mm.length >= 3 ? `rgb(${mm[0]},${mm[1]},${mm[2]})` : null;
 }
 
-function normalizeApiLines(data) {
-  return data.map((x) => ({
-    id: Number(x.Id),
-    code: x.Name,
-    name: x.LongDescription || x.Name,
-    short: x.ShortDescription,
-    color: parseColor(x.Color),
-    first: x.FirstTime,
-    last: x.LastTime,
-  }));
-}
-
-function normalizeApiStations(data) {
-  return data.map((s) => ({
-    id: Number(s.Id),
-    code: s.LineName, // hat kodu (M4, T1…)
-    name: s.Description,
-    line: s.LineName,
-    order: s.Order,
-    lat: s.DetailInfo?.Latitude ? Number(s.DetailInfo.Latitude) : null,
-    lng: s.DetailInfo?.Longitude ? Number(s.DetailInfo.Longitude) : null,
-    info: s.DetailInfo || null,
-  }));
-}
-
 async function loadBase() {
-  try {
-    const [lines, stations] = await Promise.all([fetchJson(`${API}/GetLines`), fetchJson(`${API}/GetStations`)]);
-    if (!lines.Success || !stations.Success) throw new Error("API Success=false");
-    setLines(normalizeApiLines(lines.Data));
-    state.stations = normalizeApiStations(stations.Data);
-    state.lastLive = new Date();
-  } catch (e) {
-    console.warn("Canlı API alınamadı, paketli veri kullanılıyor:", e);
-    const [lines, stations] = await Promise.all([fetchJson("data/lines.json"), fetchJson("data/stations.json")]);
-    setLines(lines.lines.map((l) => ({ ...l, color: parseColor(l.color) })));
-    state.stations = stations.stations; // paketli dosya uygulama biçiminde saklanır
+  const [network, stationFile, lineFile] = await Promise.all([
+    fetchJson("data/rail-network.json"),
+    fetchJson("data/stations.json"),
+    fetchJson("data/lines.json"),
+  ]);
+  if (!Array.isArray(network?.lines)) throw new Error("Raylı sistem ağı verisi geçersiz");
+
+  state.railNetwork = network;
+  buildRailStationLineIndex();
+  const lineMetadata = new Map((lineFile.lines || []).map((line) => [line.code, line]));
+  setLines(network.lines.map((line) => ({
+    id: line.id,
+    code: line.id,
+    name: line.name,
+    short: line.id,
+    color: line.color || parseColor(lineMetadata.get(line.id)?.color) || "#7c8593",
+    mode: line.mode,
+    first: lineMetadata.get(line.id)?.first || "",
+    last: lineMetadata.get(line.id)?.last || "",
+  })));
+
+  const coordByCodeAndName = new Map();
+  const coordByName = new Map();
+  for (const station of stationFile.stations || []) {
+    const nameKey = norm(station.name);
+    const point = { id: station.id, lat: station.lat, lng: station.lng, info: station.info || null };
+    coordByCodeAndName.set(`${station.code}:${nameKey}`, point);
+    if (!coordByName.has(nameKey)) coordByName.set(nameKey, point);
+  }
+
+  const networkStations = new Map();
+  state.stations = network.lines.flatMap((line) => (line.stations || []).map((station) => {
+    const nameKey = norm(station.name);
+    const point = coordByCodeAndName.get(`${line.id}:${nameKey}`) || coordByName.get(nameKey) || {};
+    const item = {
+      id: point.id ?? station.id,
+      networkId: station.id,
+      code: line.id,
+      line: line.id,
+      name: station.name,
+      order: station.order,
+      lat: point.lat ?? null,
+      lng: point.lng ?? null,
+      info: point.info || null,
+    };
+    networkStations.set(station.id, item);
+    return item;
+  }));
+
+  // Resmî harita adayı olarak işaretlenen aktarma düğümünde, koordinatı olan
+  // istasyonun noktasını aynı düğümdeki diğer hat kayıtlarına taşı.
+  for (const candidate of network.transferCandidates || []) {
+    if (candidate.status !== "official_map_transfer_candidate") continue;
+    const refs = (candidate.stationRefs || []).map((ref) => networkStations.get(ref.stationId)).filter(Boolean);
+    const located = refs.find((station) => Number.isFinite(station.lat) && Number.isFinite(station.lng));
+    if (located) {
+      for (const station of refs) {
+        if (!Number.isFinite(station.lat) || !Number.isFinite(station.lng)) {
+          station.lat = located.lat;
+          station.lng = located.lng;
+          station.info = located.info;
+        }
+      }
+    }
   }
 }
 
@@ -514,24 +543,41 @@ function setLines(list) {
   for (const l of list) state.lines.set(l.code, l);
 }
 
+function buildRailStationLineIndex() {
+  const index = new Map();
+  const stationsById = new Map();
+  const add = (name, codes) => {
+    const key = norm(name);
+    if (!key) return;
+    if (!index.has(key)) index.set(key, new Set());
+    for (const code of codes || []) if (code) index.get(key).add(String(code));
+  };
+
+  for (const line of state.railNetwork?.lines || []) {
+    for (const station of line.stations || []) {
+      stationsById.set(station.id, station);
+      add(station.name, [line.id]);
+    }
+  }
+
+  // Yalnızca kaynak dosyada resmî harita üzerinden aday olarak işaretlenen
+  // aktarma düğümlerini birleştir; isim benzerliği kayıtlarını kullanma.
+  for (const candidate of state.railNetwork?.transferCandidates || []) {
+    if (candidate.status !== "official_map_transfer_candidate") continue;
+    const codes = candidate.lines || [];
+    for (const ref of candidate.stationRefs || []) {
+      const station = stationsById.get(ref.stationId);
+      if (station) add(station.name, codes);
+    }
+  }
+
+  state.railStationLineIndex = index;
+}
+
 async function loadTimetable() {
   const j = await fetchJson("data/timetable.json", { timeout: 15000 });
   state.timetable = j.lines;
   state.generatedAt = j.generatedAt;
-}
-
-async function loadStatuses() {
-  try {
-    const j = await fetchJson(`${API}/GetServiceStatuses`);
-    if (!j.Success) throw new Error("status");
-    state.statuses.clear();
-    for (const s of j.Data) {
-      state.statuses.set(s.LineName, { active: !!s.IsActive, desc: s.Description || "", updated: s.UpdateDate });
-    }
-    state.lastLive = new Date();
-  } catch (e) {
-    console.warn("Hat durumu alınamadı:", e);
-  }
 }
 
 /** İETT hat ve durak kataloğunu (arama için) yükler */
@@ -1083,10 +1129,7 @@ function metroAnnouncementCard(items) {
       body: s.desc || t("Aksama bildirildi.", "Service disruption reported."),
     };
   });
-  return announcementCard(t("Metro Uyarıları", "Metro alerts"), announcements, {
-    id: "homeStatus",
-    footer: state.lastLive ? `${t("Son güncelleme", "Last updated")}: ${fmtDate(state.lastLive)}` : "",
-  });
+  return announcementCard(t("Metro Uyarıları", "Metro alerts"), announcements, { id: "homeStatus" });
 }
 
 function stopAnnouncementsBanner(announcements) {
@@ -1185,7 +1228,7 @@ function renderHome() {
           <div class="station-row" data-line="${esc(l.code)}" role="button" tabindex="0">
             <div class="badges">${badge(l.code)}</div>
             <div class="grow"><div class="name" style="font-weight:500">${esc(l.name)}</div>
-              <div class="meta">${esc(l.first || "")}${l.last ? " – " + esc(l.last) : ""} ${statusDot(l.code)}</div>
+              <div class="meta">${l.first || l.last ? `${esc(l.first || "")} ${l.last ? `– ${esc(l.last)}` : ""}` : t("Ağ haritası · tarife yok", "Network map · no timetable")} ${statusDot(l.code)}</div>
             </div><div class="go">›</div>
           </div>`
           )
@@ -2134,14 +2177,18 @@ function localJourneyPlaces(query) {
   const stations = new Map();
   for (const station of state.stations) {
     const name = norm(station.name);
-    const rank = rankName(name, `${name} metro ${station.code || ""}`);
+    const networkCodes = state.railStationLineIndex.get(name) || new Set();
+    const lineCodes = [...new Set([station.code, ...networkCodes].filter(Boolean))];
+    const rank = rankName(name, `${name} metro ${lineCodes.join(" ")}`);
     const lat = Number(station.lat);
     const lng = Number(station.lng);
     if (rank === Infinity || !Number.isFinite(lat) || !Number.isFinite(lng)) continue;
     const key = `${name}:${lat.toFixed(5)}:${lng.toFixed(5)}`;
     const existing = stations.get(key);
     if (existing) {
-      if (station.code && !existing.place.lineCodes.includes(station.code)) existing.place.lineCodes.push(station.code);
+      for (const code of lineCodes) {
+        if (!existing.place.lineCodes.includes(code)) existing.place.lineCodes.push(code);
+      }
       continue;
     }
     stations.set(key, {
@@ -2152,7 +2199,7 @@ function localJourneyPlaces(query) {
         point: [lat, lng],
         type: "metro",
         kind: "stop",
-        lineCodes: station.code ? [station.code] : [],
+        lineCodes,
       },
     });
   }
@@ -2743,11 +2790,66 @@ function renderStation(key, lineCode) {
 }
 
 /* --- hat görünümü --- */
+function timetableStationTarget(name, lineCode) {
+  const stationKey = (value) => norm(value).replace(/\b(universitesi|u)\b/g, " ").replace(/\s+/g, " ").trim();
+  const query = stationKey(name);
+  const all = [...state.stationIndex.values()];
+  const onLine = all.filter((station) => station.entries.some((entry) => entry.code === lineCode));
+  const candidates = onLine.length ? onLine : all;
+  const match = candidates
+    .map((station) => {
+      const value = stationKey(station.name);
+      if (!query || !value) return { station, score: Infinity };
+      if (value === query) return { station, score: 0 };
+      if (value.includes(query) || query.includes(value)) return { station, score: 1 + Math.abs(value.length - query.length) };
+      return { station, score: Infinity };
+    })
+    .filter((item) => Number.isFinite(item.score))
+    .sort((a, b) => a.score - b.score)[0]?.station;
+  if (!match) return null;
+  const entry = match.entries.find((item) => item.code === lineCode) || match.entries[0];
+  return { key: match.key, code: entry.code };
+}
+
 function renderLine(code) {
   const line = state.lines.get(code);
   const entry = state.timetable?.[code];
-  if (!line || !entry) return renderNotFound();
+  if (!line) return renderNotFound();
   const stations = state.stations.filter((s) => s.code === code).sort((a, b) => (a.order || 0) - (b.order || 0));
+  if (!entry) {
+    const direction = state.metroLineDirections[code] ? 1 : 0;
+    const displayedStations = direction ? [...stations].reverse() : stations;
+    const directionFrom = displayedStations[0]?.name || "";
+    const directionTo = displayedStations.at(-1)?.name || "";
+    view.innerHTML = `
+      <div class="card">
+        <div class="row"><div class="badges">${badge(code)}</div><div class="grow"><h2>${esc(line.name)}</h2>
+          <p class="muted">${t("Ağ haritası verisi", "Network map data")}</p></div></div>
+        <p class="muted" style="margin-top:8px">${t("Bu hat için uygulamada sefer tarifesi bulunmuyor.", "A timetable for this line is not available in the app.")}</p>
+      </div>
+      ${stations.length > 1 ? `<button type="button" class="schedule-direction-toggle metro-line-direction-toggle" id="metroLineDirection" aria-label="${t("Hat yönünü değiştir", "Reverse line direction")}">
+        <span class="schedule-direction-current">${esc(directionFrom)} → ${esc(directionTo)}</span>
+        <span class="schedule-direction-action" aria-hidden="true">↔ ${t("Yönü değiştir", "Reverse direction")}</span>
+      </button>` : ""}
+      <div class="card" id="lineStations">
+        ${lineLocationPrompt()}
+        ${displayedStations.map((station) => {
+          const target = timetableStationTarget(station.name, code);
+          return `<div class="station-row${target ? "" : " static-network-station"}"${target ? ` data-station="${esc(target.key)}" data-line="${esc(target.code)}" role="button" tabindex="0"` : ""}>
+            <div class="grow"><div class="name">${esc(station.name)}</div></div>${target ? '<div class="go">›</div>' : ""}
+          </div>`;
+        }).join("")}
+      </div>`;
+    bindLineLocationPrompt();
+    $("#metroLineDirection")?.addEventListener("click", () => {
+      state.metroLineDirections[code] = direction ? 0 : 1;
+      renderLine(code);
+    });
+    view.querySelectorAll("[data-station]").forEach((el) =>
+      el.addEventListener("click", () => go(`#/istasyon/${el.dataset.station}?hat=${el.dataset.line}`))
+    );
+    return;
+  }
   const direction = state.metroLineDirections[code] ? 1 : 0;
   const displayedStations = direction ? [...stations].reverse() : stations;
   const directionFrom = displayedStations[0]?.name || "";
@@ -2782,10 +2884,13 @@ function renderLine(code) {
       ${lineLocationPrompt()}
       ${displayedStations
         .map(
-          (s, i) => `
-        <div class="station-row${i === displayedNearestIndex ? " nearest-stop" : ""}" data-station="${esc(norm(s.name))}" role="button" tabindex="0">
-          <div class="grow"><div class="name">${esc(s.name)}${i === displayedNearestIndex ? ` ${nearestStopLabel(near)}` : ""}</div></div><div class="go">›</div>
-        </div>`
+          (s, i) => {
+            const target = timetableStationTarget(s.name, code);
+            return `
+        <div class="station-row${i === displayedNearestIndex ? " nearest-stop" : ""}"${target ? ` data-station="${esc(target.key)}" data-line="${esc(target.code)}" role="button" tabindex="0"` : ""}>
+          <div class="grow"><div class="name">${esc(s.name)}${i === displayedNearestIndex ? ` ${nearestStopLabel(near)}` : ""}</div></div>${target ? '<div class="go">›</div>' : ""}
+        </div>`;
+          }
         )
         .join("")}
     </div>`;
@@ -2796,7 +2901,7 @@ function renderLine(code) {
     renderLine(code);
   });
   view.querySelectorAll("[data-station]").forEach((el) =>
-    el.addEventListener("click", () => go(`#/istasyon/${el.dataset.station}?hat=${code}`))
+    el.addEventListener("click", () => go(`#/istasyon/${el.dataset.station}?hat=${el.dataset.line}`))
   );
 }
 
@@ -4202,7 +4307,7 @@ async function boot() {
   // ikisi de hazır olduktan sonra kurulmalı; aksi halde yarış koşulu oluşur.
   buildStationIndex();
   render();
-  Promise.allSettled([loadStatuses(), loadBusAnnouncements()]).then(() => {
+  loadBusAnnouncements().then(() => {
     if (!hasActiveSearch() && state.route.name !== "journey") render();
   });
   setInterval(() => {
@@ -4216,11 +4321,6 @@ async function boot() {
       refreshBusLineVehicles(state.route.code, { silent: true, force: true });
     }
   }, 20000);
-  setInterval(() => {
-    loadStatuses().then(() => {
-      if (!hasActiveSearch() && state.route.name !== "journey") render();
-    });
-  }, 120000);
   setInterval(() => {
     loadBusAnnouncements().then(() => {
       if (!hasActiveSearch() && ["home", "bus", "metrobus"].includes(state.route.name)) render();

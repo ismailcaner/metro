@@ -26,7 +26,6 @@
       "maxDuration": 15,
       "regions": ["fra1"],
       "includeFiles": "data/osm/turkey-places.json.gz"
-    },
-    "api/metro/[...path].mjs": { "maxDuration": 15, "regions": ["fra1"] }
+    }
   }
 }
