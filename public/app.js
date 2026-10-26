@@ -2587,7 +2587,7 @@ function renderJourneyResults() {
         body: item.desc,
       })), { className: "journey-alert" }) : ""}
       <ol class="journey-timeline">${renderJourneyTimeline(route)}</ol>
-      <p class="journey-note">${t("Saatler İETT Nasıl Giderim’in planlanan tarifesine dayanır; canlı araç konumu değildir. Trafik, sefer ve işletme değişiklikleriyle farklılık gösterebilir.", "Times are based on İETT Nasıl Giderim's scheduled timetable; they are not live vehicle positions. They may vary with traffic, service and operational changes.")}${
+      <p class="journey-note">${route.source === "local-json" ? t("Yerel JSON ağından hesaplandı. Süreler tahminidir; yürüme mesafesi düz çizgi yaklaşımıdır ve gerçek yürüme rotası ya da aktarma erişilebilirliği garanti edilmez.", "Calculated from the local JSON network. Durations are estimates; walking distance is a straight-line approximation and actual walking paths or transfer accessibility are not guaranteed.") : t("Saatler İETT Nasıl Giderim’in planlanan tarifesine dayanır; canlı araç konumu değildir. Trafik, sefer ve işletme değişiklikleriyle farklılık gösterebilir.", "Times are based on the IETT Nasıl Giderim scheduled timetable; they are not live vehicle positions and may vary.")}${
         planned.time ? ` ${t("Sorgu saati", "Query time")}: ${esc(planned.time)}${planned.date ? ` · ${esc(planned.date)}` : ""}.` : ""
       }${meta.stale ? ` ${t("Son önbellek gösteriliyor.", "Showing the last cached result.")}` : ""}</p>
     </div>
