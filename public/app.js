@@ -2535,19 +2535,20 @@ function renderJourneyResults() {
     box.innerHTML = "";
     return;
   }
-  if (j.routesMeta?.engine === "iett-nasilgiderim") {
-    const officialUrl = "https://nasilgiderim.iett.gov.tr/mobile.html?from=null&to=null";
+  if (j.routesMeta?.engine === "ibb-tubs") {
     box.innerHTML = `<div class="card journey-result-card">
       <div class="journey-result-head">
         <div class="grow">
-          <span class="journey-plan-tag">${t("Resmî İETT rota planlayıcısı", "Official IETT journey planner")}</span>
-          <h2>${t("Rotanı Nasıl Giderim ile planla", "Plan your trip with Nasıl Giderim")}</h2>
+          <span class="journey-plan-tag">${t("İBB Toplu Ulaşım Bilgi Sistemi", "IMM Public Transit Information System")}</span>
+          <h2>${t("Toplu taşıma rotası", "Public transit route")}</h2>
           <p class="muted">${esc(j.origin.name)} → ${esc(j.destination.name)}</p>
         </div>
       </div>
-      <p class="journey-note">${t("Google rota servisi kaldırıldı. İETT'nin resmî planlayıcısı; en kısa süre, en az yürüme, en az aktarma ve metro tercihli seçenekler sunar. Açılan sayfada başlangıç ve varış noktalarını yeniden seç.", "Google routing has been removed. IETT's official planner offers fastest, least walking, fewest transfers and metro-preferred options. Select your origin and destination again on the page that opens.")}</p>
-      <a class="dirchip" href="${officialUrl}" target="_blank" rel="noopener noreferrer">${t("İETT Nasıl Giderim'i aç ↗", "Open IETT Nasıl Giderim ↗")}</a>
+      <p class="journey-note">${t("Rota İBB Şehir Haritası üzerinde gösterilir. TUBS API rota adımlarını uygulamaya JSON olarak döndürmediği için harita ve güzergâh İBB bileşeninde görüntülenir.", "The route is displayed on the IMM City Map. TUBS does not return route steps as JSON to this app, so the map and directions are shown in the IMM component.")}</p>
+      <div id="ibbJourneyMapStatus" class="muted">${t("İBB haritası yükleniyor…", "Loading IMM map…")}</div>
+      <div class="ibb-journey-map-wrap"><iframe id="ibbJourneyMapFrame" title="${t("İBB toplu taşıma rotası", "IMM public transit route")}" src="https://sehirharitasiapi.ibb.gov.tr/" loading="lazy" allow="geolocation *"></iframe></div>
     </div>`;
+    renderIbbJourneyMap();
     return;
   }
   if (j.routesLoading) {
@@ -2660,17 +2661,72 @@ async function planJourney({ force = false } = {}) {
     renderJourneyResults();
     return;
   }
-
-  // Use İETT's official Nasıl Giderim journey planner as the only route source.
-  // Its public page owns route calculation; this app does not call Google APIs.
   j.planSeq += 1;
   j.lastPlanKey = journeyPairKey();
   j.routesLoading = false;
   j.routesError = null;
   j.routes = [];
-  j.routesMeta = { engine: "iett-nasilgiderim" };
+  j.routesMeta = { engine: "ibb-tubs" };
   j.selected = 0;
   renderJourneyResults();
+}
+
+async function renderIbbJourneyMap() {
+  const status = $("#ibbJourneyMapStatus");
+  const frame = $("#ibbJourneyMapFrame");
+  const j = state.journey;
+  if (!status || !frame || !j.origin || !j.destination) return;
+  const pointOf = (place) => {
+    const lat = Number(place?.point?.[0] ?? place?.lat);
+    const lon = Number(place?.point?.[1] ?? place?.lng);
+    return Number.isFinite(lat) && Number.isFinite(lon) ? { lat, lon } : null;
+  };
+  const start = pointOf(j.origin);
+  const finish = pointOf(j.destination);
+  if (!start || !finish) {
+    status.textContent = t("Başlangıç ve varış için koordinat bulunamadı.", "Could not find coordinates for the origin and destination.");
+    return;
+  }
+  const key = j.planSeq;
+  try {
+    const config = await fetchJson("/api/ibb-map-config", { timeout: 8000, cache: "no-store" });
+    if (key !== j.planSeq || !$("#ibbJourneyMapFrame")) return;
+    if (typeof window.SehirHaritasiAPI !== "function") {
+      throw new Error(t("İBB harita kütüphanesi yüklenemedi. Sayfayı yenileyin.", "The IMM map library did not load. Refresh the page."));
+    }
+    const selectedTypes = [];
+    const modeSet = new Set(j.allowedModes);
+    if (modeSet.has("BUS")) selectedTypes.push("BUS");
+    if (modeSet.has("SUBWAY")) selectedTypes.push("SUBWAY");
+    if (modeSet.has("TRAIN")) selectedTypes.push("RAIL");
+    if (modeSet.has("LIGHT_RAIL")) selectedTypes.push("TRAM", "FUNICULAR");
+    selectedTypes.push("WALK");
+    const time = j.timeMode === "depart" && /^\\d{2}:\\d{2}$/.test(j.departTime)
+      ? j.departTime
+      : journeyIstanbulParts(new Date()).time;
+    const date = journeyIstanbulParts(new Date()).date;
+    const map = new window.SehirHaritasiAPI(
+      { mapFrame: "ibbJourneyMapFrame", apiKey: config.apiKey },
+      function () {
+        if (key !== j.planSeq) return;
+        try {
+          map.RouteAnalysis.TUBS({
+            start: { lat: start.lat, lon: start.lon },
+            finish: { lat: finish.lat, lon: finish.lon },
+            type: [...new Set(selectedTypes)].join(","),
+            time,
+            date,
+          });
+          if (status.isConnected) status.textContent = t("İBB haritasında rota isteği gönderildi. Ayrıntılar harita içinde görüntülenir.", "Route requested on the IMM map. Details are shown inside the map.");
+        } catch (error) {
+          status.textContent = error?.message || t("İBB TUBS rota isteği başarısız oldu.", "The IMM TUBS route request failed.");
+        }
+      }
+    );
+  } catch (error) {
+    if (key !== j.planSeq || !status.isConnected) return;
+    status.textContent = error?.message || t("İBB haritası açılamadı.", "Could not load the IMM map.");
+  }
 }
 
 function askLocation({ onSuccess, onError } = {}) {
