@@ -2675,26 +2675,51 @@ async function planJourney({ force = false } = {}) {
     const departureTime = planned
       ? new Date(`${planned.date}T${planned.time}:00+03:00`).toISOString()
       : undefined;
-    const googleResponse = await fetch("/api/google-routes", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        origin: { lat: originPoint.lat, lng: originPoint.lng },
-        destination: { lat: destinationPoint.lat, lng: destinationPoint.lng },
-        departureTime,
-        allowedTravelModes: j.allowedModes,
-        routingPreference:
-          j.routeSort === "least-walking"
-            ? "LESS_WALKING"
-            : j.routeSort === "fewest-transfers"
-              ? "FEWER_TRANSFERS"
-              : undefined,
-      }),
-    });
-    const apiData = await googleResponse.json().catch(() => ({}));
-    if (!googleResponse.ok) {
-      const detail = apiData.error || "Google Maps rota servisi yanıt vermedi.";
-      throw new Error(`${detail}${apiData.status ? ` (${apiData.status})` : ""}`);
+    const requestBody = {
+      origin: { lat: originPoint.lat, lng: originPoint.lng },
+      destination: { lat: destinationPoint.lat, lng: destinationPoint.lng },
+      departureTime,
+      allowedTravelModes: j.allowedModes,
+      routingPreference:
+        j.routeSort === "least-walking"
+          ? "LESS_WALKING"
+          : j.routeSort === "fewest-transfers"
+            ? "FEWER_TRANSFERS"
+            : undefined,
+    };
+    const cacheKey = `sm.googleRoutesCache.${JSON.stringify(requestBody)}`;
+    const cacheTtlMs = 5 * 60 * 1000;
+    let apiData = null;
+    try {
+      const cached = JSON.parse(localStorage.getItem(cacheKey) || "null");
+      if (cached?.savedAt && Date.now() - cached.savedAt < cacheTtlMs && cached.data) {
+        apiData = cached.data;
+      }
+    } catch {}
+    if (!apiData) {
+      const googleResponse = await fetch("/api/google-routes", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(requestBody),
+      });
+      apiData = await googleResponse.json().catch(() => ({}));
+      if (!googleResponse.ok) {
+        const rawError = String(apiData.error || "");
+        const quotaExceeded =
+          apiData.status === "RESOURCE_EXHAUSTED" ||
+          /quota exceeded|daily limit|RESOURCE_EXHAUSTED/i.test(rawError);
+        if (quotaExceeded) {
+          throw new Error(t(
+            "Google Routes API günlük kotası dolmuş. Google Cloud Console → Google Maps Platform → Quotas bölümünde Routes API kotasını ve faturalandırmayı kontrol edin. Daha önce kaydedilmiş rota yoksa kota yenilenene kadar yeni rota hesaplanamaz.",
+            "Google Routes API daily quota is exhausted. Check the Routes API quota and billing in Google Cloud Console → Google Maps Platform → Quotas. New routes cannot be calculated until quota is restored unless a previously cached route is available."
+          ));
+        }
+        const detail = apiData.error || "Google Maps rota servisi yanıt vermedi.";
+        throw new Error(`${detail}${apiData.status ? ` (${apiData.status})` : ""}`);
+      }
+      try {
+        localStorage.setItem(cacheKey, JSON.stringify({ savedAt: Date.now(), data: apiData }));
+      } catch {}
     }
     if (seq !== j.planSeq) return;
     const allowedModes = new Set(j.allowedModes);
