@@ -2019,18 +2019,12 @@ function renderJourney() {
         </div>
       </div>
       ${journeyPlaceAttribution([j.origin, j.destination])}
-      <details class="journey-route-settings">
-        <summary>${t("Rota seçenekleri", "Route options")}</summary>
-        <div class="journey-route-settings-grid">
-          <fieldset>
-            <legend>${t("Tercih", "Preferences")}</legend>
-            ${[["BUS","Otobüs","Bus"],["SUBWAY","Metro","Metro"],["TRAIN","Tren","Train"],["LIGHT_RAIL","Tramvay ve hafif raylı sistem","Tram and light rail"]].map(([value,trLabel,enLabel]) => `<label class="journey-filter-option"><input type="checkbox" data-journey-vehicle="${value}" ${j.allowedModes.includes(value) ? "checked" : ""}> <span>${t(trLabel,enLabel)}</span></label>`).join("")}
-            <label class="journey-filter-option journey-filter-disabled"><input type="checkbox" disabled> <span>${t("Tekerlekli sandalyeye uygun","Wheelchair accessible")}</span></label>
-            <p class="journey-filter-note">${t("İETT planlayıcısında bu uygulama içi erişilebilirlik filtresi desteklenmiyor.","This in-app accessibility filter is not supported by the IETT planner.")}</p>
-          </fieldset>
-          <p class="journey-filter-note">${t("Rota seçenekleri ve güzergâh ayrıntıları İBB haritasının kendi TUBS panelinde sunulur.", "Route preferences and directions are provided by the map's built-in TUBS panel.")}</p>
+      <div class="journey-mode-picker">
+        <div class="setting-title">${t("Rota tercihi?", "Route preference")}</div>
+        <div class="journey-mode-options" role="group" aria-label="${t("Rota tercihi", "Route preference")}">
+          ${JOURNEY_MODE_OPTIONS.map(([value, trLabel, enLabel]) => `<button type="button" class="journey-mode-option ${j.mode === value ? "active" : ""}" data-journey-mode="${value}" aria-pressed="${j.mode === value}">${t(trLabel, enLabel)}</button>`).join("")}
         </div>
-      </details>
+      </div>
       <div class="journey-mode-picker">
         <div class="setting-title">${t("Kalkış zamanı", "Departure time")}</div>
         <div class="journey-mode-options" role="group" aria-label="${t("Kalkış zamanı", "Departure time")}">
@@ -2057,23 +2051,6 @@ function renderJourney() {
       const mode = button.dataset.journeyMode;
       if (mode === state.journey.mode) return;
       state.journey.mode = mode;
-      resetJourneyRoutes();
-      renderJourney();
-    })
-  );
-  view.querySelectorAll("[data-journey-vehicle]").forEach((input) =>
-    input.addEventListener("change", () => {
-      const value = input.dataset.journeyVehicle;
-      const selected = new Set(state.journey.allowedModes);
-      if (input.checked) selected.add(value); else selected.delete(value);
-      state.journey.allowedModes = [...selected];
-      resetJourneyRoutes();
-      renderJourney();
-    })
-  );
-  view.querySelectorAll("[data-journey-sort]").forEach((input) =>
-    input.addEventListener("change", () => {
-      state.journey.routeSort = input.dataset.journeySort;
       resetJourneyRoutes();
       renderJourney();
     })
@@ -2658,71 +2635,44 @@ async function planJourney({ force = false } = {}) {
     renderJourneyResults();
     return;
   }
+  const key = journeyPairKey();
+  if (!force && (j.routesLoading || (j.lastPlanKey === key && (j.routes.length || j.routesError)))) return;
+
   j.planSeq += 1;
-  j.lastPlanKey = journeyPairKey();
-  j.routesLoading = false;
+  const seq = j.planSeq;
+  j.lastPlanKey = key;
+  j.routesLoading = true;
   j.routesError = null;
   j.routes = [];
-  j.routesMeta = { engine: "ibb-tubs" };
+  j.routesMeta = null;
   j.selected = 0;
   renderJourneyResults();
-}
 
-async function renderIbbJourneyMap() {
-  const status = $("#ibbJourneyMapStatus");
-  const frame = $("#ibbJourneyMapFrame");
-  const j = state.journey;
-  if (!status || !frame || !j.origin || !j.destination) return;
-  const pointOf = (place) => {
-    const lat = Number(place?.point?.[0] ?? place?.lat);
-    const lon = Number(place?.point?.[1] ?? place?.lng);
-    return Number.isFinite(lat) && Number.isFinite(lon) ? { lat, lon } : null;
-  };
-  const start = pointOf(j.origin);
-  const finish = pointOf(j.destination);
-  if (!start || !finish) {
-    status.textContent = t("Başlangıç ve varış için koordinat bulunamadı.", "Could not find coordinates for the origin and destination.");
-    return;
-  }
-  const key = j.planSeq;
   try {
-    const config = await fetchJson("/api/ibb-map-config", { timeout: 8000, cache: "no-store" });
-    if (key !== j.planSeq || !$("#ibbJourneyMapFrame")) return;
-    if (typeof window.SehirHaritasiAPI !== "function") {
-      throw new Error(t("İBB harita kütüphanesi yüklenemedi. Sayfayı yenileyin.", "The IMM map library did not load. Refresh the page."));
+    const params = {
+      type: "journey",
+      from: journeyPointParam(j.origin),
+      to: journeyPointParam(j.destination),
+    };
+    const planned = journeyPlannedFor();
+    if (planned) {
+      params.date = planned.date;
+      params.time = planned.time;
     }
-    const selectedTypes = [];
-    const modeSet = new Set(j.allowedModes);
-    if (modeSet.has("BUS")) selectedTypes.push("BUS");
-    if (modeSet.has("SUBWAY")) selectedTypes.push("SUBWAY");
-    if (modeSet.has("TRAIN")) selectedTypes.push("RAIL");
-    if (modeSet.has("LIGHT_RAIL")) selectedTypes.push("TRAM", "FUNICULAR");
-    selectedTypes.push("WALK");
-    const time = j.timeMode === "depart" && /^\\d{2}:\\d{2}$/.test(j.departTime)
-      ? j.departTime
-      : journeyIstanbulParts(new Date()).time;
-    const date = journeyIstanbulParts(new Date()).date;
-    const map = new window.SehirHaritasiAPI(
-      { mapFrame: "ibbJourneyMapFrame", apiKey: config.apiKey },
-      function () {
-        if (key !== j.planSeq) return;
-        try {
-          map.RouteAnalysis.TUBS({
-            start: { lat: start.lat, lon: start.lon },
-            finish: { lat: finish.lat, lon: finish.lon },
-            type: [...new Set(selectedTypes)].join(","),
-            time,
-            date,
-          });
-          if (status.isConnected) status.textContent = t("İBB haritasında rota isteği gönderildi. Ayrıntılar harita içinde görüntülenir.", "Route requested on the IMM map. Details are shown inside the map.");
-        } catch (error) {
-          status.textContent = error?.message || t("İBB TUBS rota isteği başarısız oldu.", "The IMM TUBS route request failed.");
-        }
-      }
-    );
-  } catch (error) {
-    if (key !== j.planSeq || !status.isConnected) return;
-    status.textContent = error?.message || t("İBB haritası açılamadı.", "Could not load the IMM map.");
+    const data = await fetchBusApi(params, { timeout: 14000 });
+    if (seq !== j.planSeq) return;
+    j.routes = (Array.isArray(data.routes) ? data.routes : []).filter((route) => journeyRouteMatchesMode(route));
+    if (j.mode === "fastest") j.routes.sort((a, b) => journeyRouteDuration(a) - journeyRouteDuration(b));
+    j.routesMeta = data;
+  } catch {
+    if (seq !== j.planSeq) return;
+    j.routes = [];
+    j.routesError = t("İETT yolculuk servisi yanıt vermedi. Tarife dosyası yüklenemedi. Bağlantıyı kontrol edip tekrar deneyin.", "The İETT trip service did not respond. The timetable file could not be loaded. Check your connection and try again.");
+  } finally {
+    if (seq === j.planSeq) {
+      j.routesLoading = false;
+      renderJourneyResults();
+    }
   }
 }
 
