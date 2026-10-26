@@ -2524,6 +2524,19 @@ function journeyRailFacilities(route) {
   return stations;
 }
 
+function journeyMetroAlertLink(route) {
+  const codes = [...new Set((route?.legs || [])
+    .filter((leg) => leg?.kind === "transit")
+    .map((leg) => String(leg.lineId || leg.line?.id || leg.routeId || "").toLocaleUpperCase("tr"))
+    .filter((code) => state.lines.has(code) && /^(M|T|F|TF|B2|B1)/.test(code)))];
+  if (!codes.length) return "";
+  return `<div class="card journey-metro-alert-link">
+    <strong>⚠️ ${t("Raylı sistem işletme uyarıları", "Rail service alerts")}</strong>
+    <p class="muted">${t("Rotandaki hatlar", "Lines on your route")}: ${codes.map((code) => esc(code)).join(", ")}. ${t("Güncel sefer aksaması ve istasyon ekipmanı uyarılarını resmî kaynaktan kontrol et.", "Check current service disruptions and station equipment alerts at the official source.")}</p>
+    <a class="dirchip journey-alert-source" href="https://www.metro.istanbul/SeferDurumlari/Ariza/1" target="_blank" rel="noopener noreferrer">${t("Resmî uyarıları aç ↗", "Open official alerts ↗")}</a>
+  </div>`;
+}
+
 function journeyRailFacilitiesCard(route) {
   const stations = journeyRailFacilities(route);
   if (!stations.length) return "";
@@ -2646,7 +2659,7 @@ function renderJourneyResults() {
         title: shortText(item.desc, 150),
         body: item.desc,
       })), { className: "journey-alert" }) : ""}
-      ${journeyRailFacilitiesCard(route)}\n      <ol class="journey-timeline">${renderJourneyTimeline(route)}</ol>
+      ${journeyMetroAlertLink(route)}\n      ${journeyRailFacilitiesCard(route)}\n      <ol class="journey-timeline">${renderJourneyTimeline(route)}</ol>
       <p class="journey-note">${route.source === "local-json" ? t("Yerel JSON ağından hesaplandı. Süreler tahminidir; yürüme mesafesi düz çizgi yaklaşımıdır ve gerçek yürüme rotası ya da aktarma erişilebilirliği garanti edilmez.", "Calculated from the local JSON network. Durations are estimates; walking distance is a straight-line approximation and actual walking paths or transfer accessibility are not guaranteed.") : t("Saatler İETT Nasıl Giderim’in planlanan tarifesine dayanır; canlı araç konumu değildir. Trafik, sefer ve işletme değişiklikleriyle farklılık gösterebilir.", "Times are based on the IETT Nasıl Giderim scheduled timetable; they are not live vehicle positions and may vary.")}${
         planned.time ? ` ${t("Sorgu saati", "Query time")}: ${esc(planned.time)}${planned.date ? ` · ${esc(planned.date)}` : ""}.` : ""
       }${meta.stale ? ` ${t("Son önbellek gösteriliyor.", "Showing the last cached result.")}` : ""}</p>
