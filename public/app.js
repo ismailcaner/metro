@@ -2632,8 +2632,13 @@ async function planJourney({ force = false } = {}) {
   try {
     // Use the İETT journey planner as the sole route source. The custom local
     // graph engine is intentionally disabled to avoid inferred transfer paths.
-    const originPoint = pointOf(j.origin);
-    const destinationPoint = pointOf(j.destination);
+    const coordinateOf = (place) => {
+      const lat = Number(place?.point?.[0] ?? place?.lat);
+      const lng = Number(place?.point?.[1] ?? place?.lng);
+      return Number.isFinite(lat) && Number.isFinite(lng) ? { lat, lng } : null;
+    };
+    const originPoint = coordinateOf(j.origin);
+    const destinationPoint = coordinateOf(j.destination);
     if (!originPoint || !destinationPoint) {
       throw new Error("Google Maps requires coordinates for both places.");
     }
