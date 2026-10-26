@@ -148,15 +148,14 @@ function shortest(graph, starts, ends, strategy = "balanced") {
 
 function nearestNodes(graph, point, maxDistance = 1800) {
   if (!point) return [];
-  const found = [...graph.nodes.values()]
+  // Keep every station in range. The closest station on a line is not always
+  // the best destination: another nearby station may yield much less walking
+  // or a substantially better interchange. Stable station IDs keep nodes distinct.
+  return [...graph.nodes.values()]
     .filter((node) => node.point)
     .map((node) => ({ ...node, accessMeters: haversine(point, node.point) }))
     .filter((node) => node.accessMeters <= maxDistance)
     .sort((a, b) => a.accessMeters - b.accessMeters);
-  // Keep the nearest node per line to allow a sensible starting line choice.
-  const perLine = new Map();
-  for (const node of found) if (!perLine.has(node.lineId)) perLine.set(node.lineId, node);
-  return [...perLine.values()].sort((a, b) => a.accessMeters - b.accessMeters).slice(0, 6);
 }
 
 function makeRoute(path, origin, destination, index) {
