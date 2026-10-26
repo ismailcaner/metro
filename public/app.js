@@ -2632,11 +2632,26 @@ async function planJourney({ force = false } = {}) {
   try {
     // Use the İETT journey planner as the sole route source. The custom local
     // graph engine is intentionally disabled to avoid inferred transfer paths.
-    const params = { type: "journey", from: journeyPointParam(j.origin), to: journeyPointParam(j.destination) };
+    const originPoint = pointOf(j.origin);
+    const destinationPoint = pointOf(j.destination);
+    if (!originPoint || !destinationPoint) {
+      throw new Error("Google Maps requires coordinates for both places.");
+    }
     const planned = journeyPlannedFor();
-    if (planned) { params.date = planned.date; params.time = planned.time; }
-
-    const apiData = await fetchBusApi(params, { timeout: 14000 });
+    const departureTime = planned
+      ? new Date(`${planned.date}T${planned.time}:00+03:00`).toISOString()
+      : undefined;
+    const googleResponse = await fetch("/api/google-routes", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        origin: { lat: originPoint.lat, lng: originPoint.lng },
+        destination: { lat: destinationPoint.lat, lng: destinationPoint.lng },
+        departureTime,
+      }),
+    });
+    const apiData = await googleResponse.json().catch(() => ({}));
+    if (!googleResponse.ok) throw new Error(apiData.error || "Google Maps rota servisi yanıt vermedi.");
     if (seq !== j.planSeq) return;
     j.routes = (Array.isArray(apiData.routes) ? apiData.routes : [])
       .filter((route) => journeyRouteMatchesMode(route));
@@ -2648,14 +2663,14 @@ async function planJourney({ force = false } = {}) {
     );
     j.routes = j.routes.slice(0, 5);
     j.routesMeta = {
-      engine: "iett",
-      disclaimer: apiData?.disclaimer || "",
+      engine: "google-routes",
+      disclaimer: apiData?.disclaimer || "Google Maps Routes API",
       generatedAt: apiData?.generatedAt || null,
     };
   } catch {
     if (seq !== j.planSeq) return;
     j.routes = [];
-    j.routesError = t("İETT yolculuk servisi yanıt vermedi. Bağlantıyı kontrol edip tekrar deneyin.", "The İETT journey service did not respond. Check your connection and try again.");
+    j.routesError = t("Google Maps rota servisi yanıt vermedi. GOOGLE_MAPS_API_KEY ayarını ve API etkinleştirmelerini kontrol edin.", "The Google Maps routing service did not respond. Check GOOGLE_MAPS_API_KEY and enabled APIs.");
   } finally {
     if (seq === j.planSeq) {
       j.routesLoading = false;
