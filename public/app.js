@@ -2535,9 +2535,24 @@ function renderJourneyResults() {
     box.innerHTML = "";
     return;
   }
+  if (j.routesMeta?.engine === "iett-nasilgiderim") {
+    const officialUrl = "https://nasilgiderim.iett.gov.tr/mobile.html?from=null&to=null";
+    box.innerHTML = `<div class="card journey-result-card">
+      <div class="journey-result-head">
+        <div class="grow">
+          <span class="journey-plan-tag">${t("Resmî İETT rota planlayıcısı", "Official IETT journey planner")}</span>
+          <h2>${t("Rotanı Nasıl Giderim ile planla", "Plan your trip with Nasıl Giderim")}</h2>
+          <p class="muted">${esc(j.origin.name)} → ${esc(j.destination.name)}</p>
+        </div>
+      </div>
+      <p class="journey-note">${t("Google rota servisi kaldırıldı. İETT'nin resmî planlayıcısı; en kısa süre, en az yürüme, en az aktarma ve metro tercihli seçenekler sunar. Açılan sayfada başlangıç ve varış noktalarını yeniden seç.", "Google routing has been removed. IETT's official planner offers fastest, least walking, fewest transfers and metro-preferred options. Select your origin and destination again on the page that opens.")}</p>
+      <a class="dirchip" href="${officialUrl}" target="_blank" rel="noopener noreferrer">${t("İETT Nasıl Giderim'i aç ↗", "Open IETT Nasıl Giderim ↗")}</a>
+    </div>`;
+    return;
+  }
   if (j.routesLoading) {
     box.innerHTML = `<div class="card journey-loading">
-      <div class="live-head"><div><strong>${t("Yolculuk planlanıyor", "Planning your trip")}</strong><p class="muted">${t("Yerel ulaşım ağında rota aranıyor…", "Searching the local transit network…")}</p></div><span class="pulse"></span></div>
+      <div class="live-head"><div><strong>${t("Yolculuk planlanıyor", "Planning your trip")}</strong><p class="muted">${t("Resmî İETT rota planlayıcısı hazırlanıyor…", "Preparing the official IETT journey planner…")}</p></div><span class="pulse"></span></div>
       <div class="skeleton" style="height:50px;margin-top:14px"></div>
       <div class="skeleton" style="height:80px;margin-top:8px"></div>
     </div>`;
@@ -2645,126 +2660,17 @@ async function planJourney({ force = false } = {}) {
     renderJourneyResults();
     return;
   }
-  const key = journeyPairKey();
-  if (!force && (j.routesLoading || (j.lastPlanKey === key && (j.routes.length || j.routesError)))) return;
 
+  // Use İETT's official Nasıl Giderim journey planner as the only route source.
+  // Its public page owns route calculation; this app does not call Google APIs.
   j.planSeq += 1;
-  const seq = j.planSeq;
-  j.lastPlanKey = key;
-  j.routesLoading = true;
+  j.lastPlanKey = journeyPairKey();
+  j.routesLoading = false;
   j.routesError = null;
   j.routes = [];
-  j.routesMeta = null;
+  j.routesMeta = { engine: "iett-nasilgiderim" };
   j.selected = 0;
   renderJourneyResults();
-
-  try {
-    // Use the İETT journey planner as the sole route source. The custom local
-    // graph engine is intentionally disabled to avoid inferred transfer paths.
-    const coordinateOf = (place) => {
-      const lat = Number(place?.point?.[0] ?? place?.lat);
-      const lng = Number(place?.point?.[1] ?? place?.lng);
-      return Number.isFinite(lat) && Number.isFinite(lng) ? { lat, lng } : null;
-    };
-    const originPoint = coordinateOf(j.origin);
-    const destinationPoint = coordinateOf(j.destination);
-    if (!originPoint || !destinationPoint) {
-      throw new Error("Google Maps requires coordinates for both places.");
-    }
-    const planned = journeyPlannedFor();
-    const departureTime = planned
-      ? new Date(`${planned.date}T${planned.time}:00+03:00`).toISOString()
-      : undefined;
-    const requestBody = {
-      origin: { lat: originPoint.lat, lng: originPoint.lng },
-      destination: { lat: destinationPoint.lat, lng: destinationPoint.lng },
-      departureTime,
-      allowedTravelModes: j.allowedModes,
-      routingPreference:
-        j.routeSort === "least-walking"
-          ? "LESS_WALKING"
-          : j.routeSort === "fewest-transfers"
-            ? "FEWER_TRANSFERS"
-            : undefined,
-    };
-    const cacheKey = `sm.googleRoutesCache.${JSON.stringify(requestBody)}`;
-    const cacheTtlMs = 5 * 60 * 1000;
-    let apiData = null;
-    try {
-      const cached = JSON.parse(localStorage.getItem(cacheKey) || "null");
-      if (cached?.savedAt && Date.now() - cached.savedAt < cacheTtlMs && cached.data) {
-        apiData = cached.data;
-      }
-    } catch {}
-    if (!apiData) {
-      const googleResponse = await fetch("/api/google-routes", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(requestBody),
-      });
-      apiData = await googleResponse.json().catch(() => ({}));
-      if (!googleResponse.ok) {
-        const rawError = String(apiData.error || "");
-        const quotaExceeded =
-          apiData.status === "RESOURCE_EXHAUSTED" ||
-          /quota exceeded|daily limit|RESOURCE_EXHAUSTED/i.test(rawError);
-        if (quotaExceeded) {
-          throw new Error(t(
-            "Google Routes API günlük kotası dolmuş. Google Cloud Console → Google Maps Platform → Quotas bölümünde Routes API kotasını ve faturalandırmayı kontrol edin. Daha önce kaydedilmiş rota yoksa kota yenilenene kadar yeni rota hesaplanamaz.",
-            "Google Routes API daily quota is exhausted. Check the Routes API quota and billing in Google Cloud Console → Google Maps Platform → Quotas. New routes cannot be calculated until quota is restored unless a previously cached route is available."
-          ));
-        }
-        const detail = apiData.error || "Google Maps rota servisi yanıt vermedi.";
-        throw new Error(`${detail}${apiData.status ? ` (${apiData.status})` : ""}`);
-      }
-      try {
-        localStorage.setItem(cacheKey, JSON.stringify({ savedAt: Date.now(), data: apiData }));
-      } catch {}
-    }
-    if (seq !== j.planSeq) return;
-    const allowedModes = new Set(j.allowedModes);
-    const modeMap = (mode) => {
-      const key = String(mode || "").toUpperCase();
-      if (["BUS", "BUS_RAPID_TRANSIT"].includes(key)) return "BUS";
-      if (["SUBWAY", "METRO_RAIL"].includes(key)) return "SUBWAY";
-      if (["TRAIN", "HEAVY_RAIL", "COMMUTER_TRAIN"].includes(key)) return "TRAIN";
-      if (["LIGHT_RAIL", "TRAM", "MONORAIL"].includes(key)) return "LIGHT_RAIL";
-      if (["FERRY", "CABLE_CAR", "GONDOLA", "FUNICULAR", "OTHER"].includes(key)) return "OTHER";
-      return "OTHER";
-    };
-    j.routes = (Array.isArray(apiData.routes) ? apiData.routes : [])
-      .filter((route) => journeyRouteMatchesMode(route))
-      .filter((route) => (route.legs || []).filter((leg) => leg.kind === "transit")
-        .every((leg) => allowedModes.has(modeMap(leg.mode))));
-    if (j.routeSort === "fastest") j.routes.sort((a, b) => journeyRouteDuration(a) - journeyRouteDuration(b));
-    if (j.routeSort === "least-walking") j.routes.sort((a, b) =>
-      (Number(a.walkDistance) || 0) - (Number(b.walkDistance) || 0)
-      || (Number(a.transfers) || 0) - (Number(b.transfers) || 0)
-      || journeyRouteDuration(a) - journeyRouteDuration(b)
-    );
-    if (j.routeSort === "fewest-transfers") j.routes.sort((a, b) =>
-      (Number(a.transfers) || 0) - (Number(b.transfers) || 0)
-      || journeyRouteDuration(a) - journeyRouteDuration(b)
-    );
-    j.routes = j.routes.slice(0, 5);
-    j.routesMeta = {
-      engine: "google-routes",
-      disclaimer: apiData?.disclaimer || "Google Maps Routes API",
-      generatedAt: apiData?.generatedAt || null,
-    };
-  } catch (error) {
-    if (seq !== j.planSeq) return;
-    j.routes = [];
-    j.routesError = error?.message || t(
-      "Google Maps rota servisi yanıt vermedi. GOOGLE_MAPS_API_KEY ayarını ve API etkinleştirmelerini kontrol edin.",
-      "The Google Maps routing service did not respond. Check GOOGLE_MAPS_API_KEY and enabled APIs."
-    );
-  } finally {
-    if (seq === j.planSeq) {
-      j.routesLoading = false;
-      renderJourneyResults();
-    }
-  }
 }
 
 function askLocation({ onSuccess, onError } = {}) {
