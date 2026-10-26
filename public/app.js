@@ -2653,10 +2653,19 @@ async function planJourney({ force = false } = {}) {
         origin: { lat: originPoint.lat, lng: originPoint.lng },
         destination: { lat: destinationPoint.lat, lng: destinationPoint.lng },
         departureTime,
+        routingPreference:
+          j.mode === "least-walking"
+            ? "LESS_WALKING"
+            : j.mode === "direct"
+              ? "FEWER_TRANSFERS"
+              : undefined,
       }),
     });
     const apiData = await googleResponse.json().catch(() => ({}));
-    if (!googleResponse.ok) throw new Error(apiData.error || "Google Maps rota servisi yanıt vermedi.");
+    if (!googleResponse.ok) {
+      const detail = apiData.error || "Google Maps rota servisi yanıt vermedi.";
+      throw new Error(`${detail}${apiData.status ? ` (${apiData.status})` : ""}`);
+    }
     if (seq !== j.planSeq) return;
     j.routes = (Array.isArray(apiData.routes) ? apiData.routes : [])
       .filter((route) => journeyRouteMatchesMode(route));
@@ -2672,10 +2681,13 @@ async function planJourney({ force = false } = {}) {
       disclaimer: apiData?.disclaimer || "Google Maps Routes API",
       generatedAt: apiData?.generatedAt || null,
     };
-  } catch {
+  } catch (error) {
     if (seq !== j.planSeq) return;
     j.routes = [];
-    j.routesError = t("Google Maps rota servisi yanıt vermedi. GOOGLE_MAPS_API_KEY ayarını ve API etkinleştirmelerini kontrol edin.", "The Google Maps routing service did not respond. Check GOOGLE_MAPS_API_KEY and enabled APIs.");
+    j.routesError = error?.message || t(
+      "Google Maps rota servisi yanıt vermedi. GOOGLE_MAPS_API_KEY ayarını ve API etkinleştirmelerini kontrol edin.",
+      "The Google Maps routing service did not respond. Check GOOGLE_MAPS_API_KEY and enabled APIs."
+    );
   } finally {
     if (seq === j.planSeq) {
       j.routesLoading = false;
