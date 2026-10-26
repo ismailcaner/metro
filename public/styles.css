@@ -766,3 +766,9 @@ body { overscroll-behavior-x: none; }
   border: 0;
 }
 #ibbJourneyMapStatus { margin-top: 10px; }
+
+
+/* Facility and accessibility information inside the trip planner */
+.journey-facilities { margin: 10px 0; }
+.journey-facilities .ann-head-title { white-space: normal; }
+.journey-facilities .ann-foot { line-height: 1.45; margin-top: 10px; }
