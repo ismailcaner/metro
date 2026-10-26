@@ -26,6 +26,10 @@
       "maxDuration": 15,
       "regions": ["fra1"],
       "includeFiles": "data/osm/turkey-places.json.gz"
+    },
+    "api/google-routes.mjs": {
+      "maxDuration": 15,
+      "regions": ["fra1"]
     }
   }
 }
