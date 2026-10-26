@@ -1684,6 +1684,7 @@ function journeyModeKey(mode) {
 
 const JOURNEY_MODE_OPTIONS = [
   ["fastest", "En hızlı", "Fastest"],
+  ["least-walking", "Az yürüme", "Least walking"],
   ["direct", "Aktarmasız", "Direct"],
   ["mixed", "Karışık", "Mixed"],
 ];
@@ -2661,6 +2662,11 @@ async function planJourney({ force = false } = {}) {
       return true;
     });
     if (j.mode === "fastest") j.routes.sort((a, b) => journeyRouteDuration(a) - journeyRouteDuration(b));
+    if (j.mode === "least-walking") j.routes.sort((a, b) =>
+      (Number(a.walkDistance) || 0) - (Number(b.walkDistance) || 0)
+      || (Number(a.transfers) || 0) - (Number(b.transfers) || 0)
+      || journeyRouteDuration(a) - journeyRouteDuration(b)
+    );
     j.routes = j.routes.slice(0, 5);
     j.routesMeta = {
       engine: apiRoutes.length ? "local-json+iett" : "local-json",
