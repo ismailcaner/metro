@@ -1,0 +1,4470 @@
+{
+ "generatedAt": "2026-10-19T16:43:11.875Z",
+ "source": "https://api.ibb.gov.tr/MetroIstanbul/api/MetroMobile/V2/GetStations",
+ "stations": [
+  {
+   "id": 20,
+   "code": "M2",
+   "name": "Yenikapı",
+   "line": "M2",
+   "order": 1,
+   "lat": 41.0055971704,
+   "lng": 28.9513306172,
+   "info": {
+    "Escolator": 14,
+    "Lift": 4,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "41.0055971704",
+    "Longitude": "28.9513306172"
+   }
+  },
+  {
+   "id": 21,
+   "code": "M2",
+   "name": "Vezneciler-İstanbul Ü.",
+   "line": "M2",
+   "order": 2,
+   "lat": 41.011475,
+   "lng": 28.960705,
+   "info": {
+    "Escolator": 19,
+    "Lift": 10,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "41.011475",
+    "Longitude": "28.960705"
+   }
+  },
+  {
+   "id": 22,
+   "code": "M2",
+   "name": "Haliç",
+   "line": "M2",
+   "order": 3,
+   "lat": 41.0224366195,
+   "lng": 28.9664183343,
+   "info": {
+    "Escolator": 8,
+    "Lift": 6,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0224366195",
+    "Longitude": "28.9664183343"
+   }
+  },
+  {
+   "id": 23,
+   "code": "M2",
+   "name": "Şişhane",
+   "line": "M2",
+   "order": 4,
+   "lat": 41.028298,
+   "lng": 28.97285,
+   "info": {
+    "Escolator": 32,
+    "Lift": 5,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.028298",
+    "Longitude": "28.97285"
+   }
+  },
+  {
+   "id": 24,
+   "code": "M2",
+   "name": "Taksim",
+   "line": "M2",
+   "order": 5,
+   "lat": 41.038496,
+   "lng": 28.985783,
+   "info": {
+    "Escolator": 34,
+    "Lift": 7,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "41.038496",
+    "Longitude": "28.985783"
+   }
+  },
+  {
+   "id": 25,
+   "code": "M2",
+   "name": "Osmanbey",
+   "line": "M2",
+   "order": 6,
+   "lat": 41.052955,
+   "lng": 28.987375,
+   "info": {
+    "Escolator": 15,
+    "Lift": 2,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "41.052955",
+    "Longitude": "28.987375"
+   }
+  },
+  {
+   "id": 26,
+   "code": "M2",
+   "name": "Şişli-Mecidiyeköy",
+   "line": "M2",
+   "order": 7,
+   "lat": 41.0645069127,
+   "lng": 28.9926697578,
+   "info": {
+    "Escolator": 25,
+    "Lift": 4,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0645069127",
+    "Longitude": "28.9926697578"
+   }
+  },
+  {
+   "id": 27,
+   "code": "M2",
+   "name": "Gayrettepe",
+   "line": "M2",
+   "order": 8,
+   "lat": 41.0690012375,
+   "lng": 29.0109200808,
+   "info": {
+    "Escolator": 18,
+    "Lift": 9,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": true,
+    "Latitude": "41.0690012375",
+    "Longitude": "29.0109200808"
+   }
+  },
+  {
+   "id": 28,
+   "code": "M2",
+   "name": "Levent",
+   "line": "M2",
+   "order": 9,
+   "lat": 41.0767734293,
+   "lng": 29.0136876237,
+   "info": {
+    "Escolator": 22,
+    "Lift": 2,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "41.0767734293",
+    "Longitude": "29.0136876237"
+   }
+  },
+  {
+   "id": 29,
+   "code": "M2",
+   "name": "4.Levent",
+   "line": "M2",
+   "order": 10,
+   "lat": 41.0860080659,
+   "lng": 29.0070897722,
+   "info": {
+    "Escolator": 20,
+    "Lift": 5,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "41.0860080659",
+    "Longitude": "29.0070897722"
+   }
+  },
+  {
+   "id": 30,
+   "code": "M2",
+   "name": "Sanayi Mahallesi",
+   "line": "M2",
+   "order": 11,
+   "lat": 41.0943240181,
+   "lng": 29.0053380126,
+   "info": {
+    "Escolator": 26,
+    "Lift": 4,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0943240181",
+    "Longitude": "29.0053380126"
+   }
+  },
+  {
+   "id": 31,
+   "code": "M2",
+   "name": "Seyrantepe",
+   "line": "M2",
+   "order": 12,
+   "lat": 41.100906,
+   "lng": 28.997775,
+   "info": {
+    "Escolator": 18,
+    "Lift": 5,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.100906",
+    "Longitude": "28.997775"
+   }
+  },
+  {
+   "id": 32,
+   "code": "M2",
+   "name": "İTÜ-Ayazağa",
+   "line": "M2",
+   "order": 13,
+   "lat": 41.108094796,
+   "lng": 29.0207947235,
+   "info": {
+    "Escolator": 20,
+    "Lift": 4,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.108094796",
+    "Longitude": "29.0207947235"
+   }
+  },
+  {
+   "id": 33,
+   "code": "M2",
+   "name": "Atatürk Oto Sanayi",
+   "line": "M2",
+   "order": 14,
+   "lat": 41.1182574386,
+   "lng": 29.0241897659,
+   "info": {
+    "Escolator": 15,
+    "Lift": 1,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.1182574386",
+    "Longitude": "29.0241897659"
+   }
+  },
+  {
+   "id": 34,
+   "code": "M2",
+   "name": "Darüşşafaka",
+   "line": "M2",
+   "order": 15,
+   "lat": 41.1295823098,
+   "lng": 29.0251244919,
+   "info": {
+    "Escolator": 24,
+    "Lift": 4,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.1295823098",
+    "Longitude": "29.0251244919"
+   }
+  },
+  {
+   "id": 35,
+   "code": "M2",
+   "name": "Hacıosman",
+   "line": "M2",
+   "order": 16,
+   "lat": 41.1397745691,
+   "lng": 29.0304324362,
+   "info": {
+    "Escolator": 37,
+    "Lift": 6,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "41.1397745691",
+    "Longitude": "29.0304324362"
+   }
+  },
+  {
+   "id": 36,
+   "code": "M3",
+   "name": "Başakşehir-Metrokent",
+   "line": "M3",
+   "order": 16,
+   "lat": 41.1075899254,
+   "lng": 28.8014768347,
+   "info": {
+    "Escolator": 20,
+    "Lift": 2,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": true,
+    "Latitude": "41.1075899254",
+    "Longitude": "28.8014768347"
+   }
+  },
+  {
+   "id": 37,
+   "code": "M3",
+   "name": "Başak Konutları",
+   "line": "M3",
+   "order": 15,
+   "lat": 41.0976705948,
+   "lng": 28.7912824671,
+   "info": {
+    "Escolator": 13,
+    "Lift": 2,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "41.0976705948",
+    "Longitude": "28.7912824671"
+   }
+  },
+  {
+   "id": 38,
+   "code": "M3",
+   "name": "Siteler",
+   "line": "M3",
+   "order": 14,
+   "lat": 41.0882027223,
+   "lng": 28.7965104065,
+   "info": {
+    "Escolator": 14,
+    "Lift": 2,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "41.0882027223",
+    "Longitude": "28.7965104065"
+   }
+  },
+  {
+   "id": 39,
+   "code": "M3",
+   "name": "Turgut Özal",
+   "line": "M3",
+   "order": 13,
+   "lat": 41.0811852568,
+   "lng": 28.7974049311,
+   "info": {
+    "Escolator": 13,
+    "Lift": 2,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "41.0811852568",
+    "Longitude": "28.7974049311"
+   }
+  },
+  {
+   "id": 40,
+   "code": "M3",
+   "name": "İkitelli Sanayi",
+   "line": "M3",
+   "order": 12,
+   "lat": 41.0724333906,
+   "lng": 28.8023285305,
+   "info": {
+    "Escolator": 22,
+    "Lift": 4,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "41.0724333906",
+    "Longitude": "28.8023285305"
+   }
+  },
+  {
+   "id": 41,
+   "code": "M3",
+   "name": "İSTOÇ",
+   "line": "M3",
+   "order": 11,
+   "lat": 41.0649996532,
+   "lng": 28.8259591715,
+   "info": {
+    "Escolator": 20,
+    "Lift": 2,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "41.0649996532",
+    "Longitude": "28.8259591715"
+   }
+  },
+  {
+   "id": 42,
+   "code": "M3",
+   "name": "Mahmutbey",
+   "line": "M3",
+   "order": 10,
+   "lat": 41.0548448863,
+   "lng": 28.8305244805,
+   "info": {
+    "Escolator": 38,
+    "Lift": 3,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "41.0548448863",
+    "Longitude": "28.8305244805"
+   }
+  },
+  {
+   "id": 43,
+   "code": "M3",
+   "name": "Yenimahalle",
+   "line": "M3",
+   "order": 9,
+   "lat": 41.0403571945,
+   "lng": 28.8359378583,
+   "info": {
+    "Escolator": 18,
+    "Lift": 2,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "41.0403571945",
+    "Longitude": "28.8359378583"
+   }
+  },
+  {
+   "id": 44,
+   "code": "M3",
+   "name": "Kirazlı-Bağcılar",
+   "line": "M3",
+   "order": 8,
+   "lat": 41.0322960516,
+   "lng": 28.8427689525,
+   "info": {
+    "Escolator": 16,
+    "Lift": 4,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "41.0322960516",
+    "Longitude": "28.8427689525"
+   }
+  },
+  {
+   "id": 237,
+   "code": "M3",
+   "name": "Onurkent",
+   "line": "M3",
+   "order": 19,
+   "lat": 41.11350955222164,
+   "lng": 28.79034835203765,
+   "info": {
+    "Escolator": 9,
+    "Lift": 4,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.11350955222164",
+    "Longitude": "28.79034835203765"
+   }
+  },
+  {
+   "id": 238,
+   "code": "M3",
+   "name": "Şehir Hastanesi",
+   "line": "M3",
+   "order": 20,
+   "lat": 41.103457237940475,
+   "lng": 28.777855352037243,
+   "info": {
+    "Escolator": 18,
+    "Lift": 8,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.103457237940475",
+    "Longitude": "28.777855352037243"
+   }
+  },
+  {
+   "id": 239,
+   "code": "M3",
+   "name": "Toplu Konutlar",
+   "line": "M3",
+   "order": 21,
+   "lat": 41.1076043981571,
+   "lng": 28.76788272505376,
+   "info": {
+    "Escolator": 6,
+    "Lift": 6,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.1076043981571",
+    "Longitude": "28.76788272505376"
+   }
+  },
+  {
+   "id": 240,
+   "code": "M3",
+   "name": "Kayaşehir Merkez",
+   "line": "M3",
+   "order": 22,
+   "lat": 41.12006437207407,
+   "lng": 28.766642996218255,
+   "info": {
+    "Escolator": 12,
+    "Lift": 6,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.12006437207407",
+    "Longitude": "28.766642996218255"
+   }
+  },
+  {
+   "id": 246,
+   "code": "M3",
+   "name": "Molla Gürani",
+   "line": "M3",
+   "order": 7,
+   "lat": 41.02551147580674,
+   "lng": 28.848112725049546,
+   "info": {
+    "Escolator": 8,
+    "Lift": 2,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.02551147580674",
+    "Longitude": "28.848112725049546"
+   }
+  },
+  {
+   "id": 247,
+   "code": "M3",
+   "name": "Yıldıztepe",
+   "line": "M3",
+   "order": 6,
+   "lat": 41.01977477131699,
+   "lng": 28.856716911557328,
+   "info": {
+    "Escolator": 20,
+    "Lift": 4,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.01977477131699",
+    "Longitude": "28.856716911557328"
+   }
+  },
+  {
+   "id": 248,
+   "code": "M3",
+   "name": "İlkyuva",
+   "line": "M3",
+   "order": 5,
+   "lat": 41.0117525985906,
+   "lng": 28.865987182720854,
+   "info": {
+    "Escolator": 12,
+    "Lift": 2,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0117525985906",
+    "Longitude": "28.865987182720854"
+   }
+  },
+  {
+   "id": 249,
+   "code": "M3",
+   "name": "Haznedar",
+   "line": "M3",
+   "order": 4,
+   "lat": 41.006429380800306,
+   "lng": 28.870525623196162,
+   "info": {
+    "Escolator": 12,
+    "Lift": 2,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.006429380800306",
+    "Longitude": "28.870525623196162"
+   }
+  },
+  {
+   "id": 250,
+   "code": "M3",
+   "name": "İncirli",
+   "line": "M3",
+   "order": 3,
+   "lat": 40.99749718083783,
+   "lng": 28.875149165334438,
+   "info": {
+    "Escolator": 12,
+    "Lift": 6,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "40.99749718083783",
+    "Longitude": "28.875149165334438"
+   }
+  },
+  {
+   "id": 251,
+   "code": "M3",
+   "name": "Özgürlük Meydanı",
+   "line": "M3",
+   "order": 2,
+   "lat": 40.98184836284361,
+   "lng": 28.873888809703004,
+   "info": {
+    "Escolator": 16,
+    "Lift": 4,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "40.98184836284361",
+    "Longitude": "28.873888809703004"
+   }
+  },
+  {
+   "id": 252,
+   "code": "M3",
+   "name": "Bakırköy Sahil",
+   "line": "M3",
+   "order": 1,
+   "lat": 40.97380907939043,
+   "lng": 28.86808953853861,
+   "info": {
+    "Escolator": 8,
+    "Lift": 2,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "40.97380907939043",
+    "Longitude": "28.86808953853861"
+   }
+  },
+  {
+   "id": 221,
+   "code": "M4",
+   "name": "Fevzi Çakmak-Hastane",
+   "line": "M4",
+   "order": 20,
+   "lat": 40.888913773148275,
+   "lng": 29.262377999300135,
+   "info": {
+    "Escolator": 16,
+    "Lift": 13,
+    "BabyRoom": true,
+    "WC": true,
+    "Masjid": true,
+    "Latitude": "40.888913773148275",
+    "Longitude": "29.262377999300135"
+   }
+  },
+  {
+   "id": 222,
+   "code": "M4",
+   "name": "Yayalar-Şeyhli",
+   "line": "M4",
+   "order": 21,
+   "lat": 40.90415466320274,
+   "lng": 29.275928959686205,
+   "info": {
+    "Escolator": 12,
+    "Lift": 3,
+    "BabyRoom": true,
+    "WC": true,
+    "Masjid": true,
+    "Latitude": "40.90415466320274",
+    "Longitude": "29.275928959686205"
+   }
+  },
+  {
+   "id": 223,
+   "code": "M4",
+   "name": "Kurtköy",
+   "line": "M4",
+   "order": 22,
+   "lat": 40.91061969898158,
+   "lng": 29.297057446459206,
+   "info": {
+    "Escolator": 12,
+    "Lift": 3,
+    "BabyRoom": true,
+    "WC": true,
+    "Masjid": true,
+    "Latitude": "40.91061969898158",
+    "Longitude": "29.297057446459206"
+   }
+  },
+  {
+   "id": 224,
+   "code": "M4",
+   "name": "Sabiha Gökçen Havalimanı",
+   "line": "M4",
+   "order": 23,
+   "lat": 40.90597411173135,
+   "lng": 29.310554150804887,
+   "info": {
+    "Escolator": 14,
+    "Lift": 4,
+    "BabyRoom": true,
+    "WC": true,
+    "Masjid": true,
+    "Latitude": "40.90597411173135",
+    "Longitude": "29.310554150804887"
+   }
+  },
+  {
+   "id": 1,
+   "code": "M4",
+   "name": "Kadıköy",
+   "line": "M4",
+   "order": 1,
+   "lat": 40.990663811475805,
+   "lng": 29.02200761747134,
+   "info": {
+    "Escolator": 16,
+    "Lift": 6,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": true,
+    "Latitude": "40.990663811475805",
+    "Longitude": "29.02200761747134"
+   }
+  },
+  {
+   "id": 2,
+   "code": "M4",
+   "name": "Ayrılık Çeşmesi",
+   "line": "M4",
+   "order": 2,
+   "lat": 41.00020434433358,
+   "lng": 29.030153258203203,
+   "info": {
+    "Escolator": 18,
+    "Lift": 3,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "41.00020434433358",
+    "Longitude": "29.030153258203203"
+   }
+  },
+  {
+   "id": 3,
+   "code": "M4",
+   "name": "Acıbadem",
+   "line": "M4",
+   "order": 3,
+   "lat": 41.002331976173814,
+   "lng": 29.044498290084867,
+   "info": {
+    "Escolator": 10,
+    "Lift": 4,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "41.002331976173814",
+    "Longitude": "29.044498290084867"
+   }
+  },
+  {
+   "id": 4,
+   "code": "M4",
+   "name": "Ünalan",
+   "line": "M4",
+   "order": 4,
+   "lat": 40.997886812202864,
+   "lng": 29.061370874184917,
+   "info": {
+    "Escolator": 27,
+    "Lift": 7,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": true,
+    "Latitude": "40.997886812202864",
+    "Longitude": "29.061370874184917"
+   }
+  },
+  {
+   "id": 5,
+   "code": "M4",
+   "name": "Göztepe",
+   "line": "M4",
+   "order": 5,
+   "lat": 40.9939284023244,
+   "lng": 29.070446236116393,
+   "info": {
+    "Escolator": 12,
+    "Lift": 3,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "40.9939284023244",
+    "Longitude": "29.070446236116393"
+   }
+  },
+  {
+   "id": 6,
+   "code": "M4",
+   "name": "Yenisahra",
+   "line": "M4",
+   "order": 6,
+   "lat": 40.984973265772204,
+   "lng": 29.090125340335963,
+   "info": {
+    "Escolator": 12,
+    "Lift": 3,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "40.984973265772204",
+    "Longitude": "29.090125340335963"
+   }
+  },
+  {
+   "id": 7,
+   "code": "M4",
+   "name": "Kozyatağı",
+   "line": "M4",
+   "order": 7,
+   "lat": 40.9748528607554,
+   "lng": 29.099330474424526,
+   "info": {
+    "Escolator": 18,
+    "Lift": 5,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "40.9748528607554",
+    "Longitude": "29.099330474424526"
+   }
+  },
+  {
+   "id": 8,
+   "code": "M4",
+   "name": "Bostancı",
+   "line": "M4",
+   "order": 8,
+   "lat": 40.96483843441404,
+   "lng": 29.104601888800143,
+   "info": {
+    "Escolator": 22,
+    "Lift": 9,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "40.96483843441404",
+    "Longitude": "29.104601888800143"
+   }
+  },
+  {
+   "id": 9,
+   "code": "M4",
+   "name": "Küçükyalı",
+   "line": "M4",
+   "order": 9,
+   "lat": 40.94848177811069,
+   "lng": 29.123705678871918,
+   "info": {
+    "Escolator": 10,
+    "Lift": 3,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "40.94848177811069",
+    "Longitude": "29.123705678871918"
+   }
+  },
+  {
+   "id": 10,
+   "code": "M4",
+   "name": "Maltepe",
+   "line": "M4",
+   "order": 10,
+   "lat": 40.93649417481334,
+   "lng": 29.13681462729192,
+   "info": {
+    "Escolator": 28,
+    "Lift": 8,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "40.93649417481334",
+    "Longitude": "29.13681462729192"
+   }
+  },
+  {
+   "id": 11,
+   "code": "M4",
+   "name": "Huzurevi",
+   "line": "M4",
+   "order": 11,
+   "lat": 40.92996421985499,
+   "lng": 29.1469453905599,
+   "info": {
+    "Escolator": 9,
+    "Lift": 4,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "40.92996421985499",
+    "Longitude": "29.1469453905599"
+   }
+  },
+  {
+   "id": 12,
+   "code": "M4",
+   "name": "Gülsuyu",
+   "line": "M4",
+   "order": 12,
+   "lat": 40.92389300760361,
+   "lng": 29.156546529079005,
+   "info": {
+    "Escolator": 16,
+    "Lift": 3,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "40.92389300760361",
+    "Longitude": "29.156546529079005"
+   }
+  },
+  {
+   "id": 13,
+   "code": "M4",
+   "name": "Esenkent",
+   "line": "M4",
+   "order": 13,
+   "lat": 40.920594425063584,
+   "lng": 29.166297696250616,
+   "info": {
+    "Escolator": 15,
+    "Lift": 2,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "40.920594425063584",
+    "Longitude": "29.166297696250616"
+   }
+  },
+  {
+   "id": 14,
+   "code": "M4",
+   "name": "Hastane-Adliye",
+   "line": "M4",
+   "order": 14,
+   "lat": 40.916312335081564,
+   "lng": 29.178430843993343,
+   "info": {
+    "Escolator": 30,
+    "Lift": 7,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "40.916312335081564",
+    "Longitude": "29.178430843993343"
+   }
+  },
+  {
+   "id": 15,
+   "code": "M4",
+   "name": "Soğanlık",
+   "line": "M4",
+   "order": 15,
+   "lat": 40.912789206970004,
+   "lng": 29.192839855288547,
+   "info": {
+    "Escolator": 18,
+    "Lift": 3,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "40.912789206970004",
+    "Longitude": "29.192839855288547"
+   }
+  },
+  {
+   "id": 16,
+   "code": "M4",
+   "name": "Kartal",
+   "line": "M4",
+   "order": 16,
+   "lat": 40.90681782551962,
+   "lng": 29.211026353862238,
+   "info": {
+    "Escolator": 20,
+    "Lift": 5,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": true,
+    "Latitude": "40.90681782551962",
+    "Longitude": "29.211026353862238"
+   }
+  },
+  {
+   "id": 17,
+   "code": "M4",
+   "name": "Yakacık-Adnan Kahveci",
+   "line": "M4",
+   "order": 17,
+   "lat": 40.896729838850625,
+   "lng": 29.226960280320945,
+   "info": {
+    "Escolator": 18,
+    "Lift": 5,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "40.896729838850625",
+    "Longitude": "29.226960280320945"
+   }
+  },
+  {
+   "id": 18,
+   "code": "M4",
+   "name": "Pendik",
+   "line": "M4",
+   "order": 18,
+   "lat": 40.888385865460556,
+   "lng": 29.23816910887322,
+   "info": {
+    "Escolator": 26,
+    "Lift": 9,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": true,
+    "Latitude": "40.888385865460556",
+    "Longitude": "29.23816910887322"
+   }
+  },
+  {
+   "id": 19,
+   "code": "M4",
+   "name": "Tavşantepe",
+   "line": "M4",
+   "order": 19,
+   "lat": 40.88225595122738,
+   "lng": 29.248573155917992,
+   "info": {
+    "Escolator": 18,
+    "Lift": 4,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": true,
+    "Latitude": "40.88225595122738",
+    "Longitude": "29.248573155917992"
+   }
+  },
+  {
+   "id": 187,
+   "code": "F1",
+   "name": "Kabataş",
+   "line": "F1",
+   "order": 2,
+   "lat": 41.0338745666,
+   "lng": 28.9922350785,
+   "info": {
+    "Escolator": 4,
+    "Lift": 4,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0338745666",
+    "Longitude": "28.9922350785"
+   }
+  },
+  {
+   "id": 188,
+   "code": "F1",
+   "name": "Taksim",
+   "line": "F1",
+   "order": 1,
+   "lat": 41.0366994647,
+   "lng": 28.9868190279,
+   "info": {
+    "Escolator": 0,
+    "Lift": 1,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0366994647",
+    "Longitude": "28.9868190279"
+   }
+  },
+  {
+   "id": 253,
+   "code": "M5",
+   "name": "Veysel Karani",
+   "line": "M5",
+   "order": 22,
+   "lat": 0,
+   "lng": 0,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": true,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": null,
+    "Longitude": null
+   }
+  },
+  {
+   "id": 254,
+   "code": "M5",
+   "name": "Hasanpaşa",
+   "line": "M5",
+   "order": 23,
+   "lat": 0,
+   "lng": 0,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": true,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": null,
+    "Longitude": null
+   }
+  },
+  {
+   "id": 255,
+   "code": "M5",
+   "name": "Sultanbeyli",
+   "line": "M5",
+   "order": 24,
+   "lat": 0,
+   "lng": 0,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": true,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": null,
+    "Longitude": null
+   }
+  },
+  {
+   "id": 241,
+   "code": "M5",
+   "name": "Meclis",
+   "line": "M5",
+   "order": 17,
+   "lat": 41.0097339184714,
+   "lng": 29.198827223504292,
+   "info": {
+    "Escolator": 6,
+    "Lift": 3,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0097339184714",
+    "Longitude": "29.198827223504292"
+   }
+  },
+  {
+   "id": 242,
+   "code": "M5",
+   "name": "Sarıgazi",
+   "line": "M5",
+   "order": 18,
+   "lat": 41.01031088932276,
+   "lng": 29.212121182720836,
+   "info": {
+    "Escolator": 10,
+    "Lift": 6,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.01031088932276",
+    "Longitude": "29.212121182720836"
+   }
+  },
+  {
+   "id": 243,
+   "code": "M5",
+   "name": "Sancaktepe Şehir Hastanesi",
+   "line": "M5",
+   "order": 19,
+   "lat": 41.00227180504451,
+   "lng": 29.216814933507717,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": true,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "41.00227180504451",
+    "Longitude": "29.216814933507717"
+   }
+  },
+  {
+   "id": 244,
+   "code": "M5",
+   "name": "Sancaktepe",
+   "line": "M5",
+   "order": 20,
+   "lat": 40.99133734652666,
+   "lng": 29.22925491155591,
+   "info": {
+    "Escolator": 6,
+    "Lift": 4,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "40.99133734652666",
+    "Longitude": "29.22925491155591"
+   }
+  },
+  {
+   "id": 245,
+   "code": "M5",
+   "name": "Samandıra Merkez",
+   "line": "M5",
+   "order": 21,
+   "lat": 40.983897557616025,
+   "lng": 29.231410725047297,
+   "info": {
+    "Escolator": 6,
+    "Lift": 3,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "40.983897557616025",
+    "Longitude": "29.231410725047297"
+   }
+  },
+  {
+   "id": 122,
+   "code": "M5",
+   "name": "Üsküdar",
+   "line": "M5",
+   "order": 1,
+   "lat": 41.025618259645256,
+   "lng": 29.015061927581854,
+   "info": {
+    "Escolator": 14,
+    "Lift": 4,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": true,
+    "Latitude": "41.025618259645256",
+    "Longitude": "29.015061927581854"
+   }
+  },
+  {
+   "id": 123,
+   "code": "M5",
+   "name": "Fıstıkağacı",
+   "line": "M5",
+   "order": 2,
+   "lat": 41.028174185609586,
+   "lng": 29.028549998040898,
+   "info": {
+    "Escolator": 8,
+    "Lift": 4,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "41.028174185609586",
+    "Longitude": "29.028549998040898"
+   }
+  },
+  {
+   "id": 124,
+   "code": "M5",
+   "name": "Bağlarbaşı",
+   "line": "M5",
+   "order": 3,
+   "lat": 41.02148576285262,
+   "lng": 29.035391369205474,
+   "info": {
+    "Escolator": 18,
+    "Lift": 4,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "41.02148576285262",
+    "Longitude": "29.035391369205474"
+   }
+  },
+  {
+   "id": 125,
+   "code": "M5",
+   "name": "Altunizade",
+   "line": "M5",
+   "order": 4,
+   "lat": 41.02256927368503,
+   "lng": 29.045163182699945,
+   "info": {
+    "Escolator": 31,
+    "Lift": 9,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": true,
+    "Latitude": "41.02256927368503",
+    "Longitude": "29.045163182699945"
+   }
+  },
+  {
+   "id": 126,
+   "code": "M5",
+   "name": "Kısıklı",
+   "line": "M5",
+   "order": 5,
+   "lat": 41.02223769603908,
+   "lng": 29.062589925029574,
+   "info": {
+    "Escolator": 4,
+    "Lift": 10,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.02223769603908",
+    "Longitude": "29.062589925029574"
+   }
+  },
+  {
+   "id": 127,
+   "code": "M5",
+   "name": "Bulgurlu",
+   "line": "M5",
+   "order": 6,
+   "lat": 41.016382220485276,
+   "lng": 29.07613191178137,
+   "info": {
+    "Escolator": 12,
+    "Lift": 3,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.016382220485276",
+    "Longitude": "29.07613191178137"
+   }
+  },
+  {
+   "id": 128,
+   "code": "M5",
+   "name": "Ümraniye",
+   "line": "M5",
+   "order": 7,
+   "lat": 41.02475044117759,
+   "lng": 29.084914619850238,
+   "info": {
+    "Escolator": 8,
+    "Lift": 2,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "41.02475044117759",
+    "Longitude": "29.084914619850238"
+   }
+  },
+  {
+   "id": 129,
+   "code": "M5",
+   "name": "Çarşı",
+   "line": "M5",
+   "order": 8,
+   "lat": 41.025898812622515,
+   "lng": 29.097186268407956,
+   "info": {
+    "Escolator": 19,
+    "Lift": 2,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "41.025898812622515",
+    "Longitude": "29.097186268407956"
+   }
+  },
+  {
+   "id": 130,
+   "code": "M5",
+   "name": "Yamanevler",
+   "line": "M5",
+   "order": 9,
+   "lat": 41.02436045931574,
+   "lng": 29.10893285940382,
+   "info": {
+    "Escolator": 8,
+    "Lift": 2,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.02436045931574",
+    "Longitude": "29.10893285940382"
+   }
+  },
+  {
+   "id": 131,
+   "code": "M5",
+   "name": "Çakmak",
+   "line": "M5",
+   "order": 10,
+   "lat": 41.021651794492854,
+   "lng": 29.11831687527492,
+   "info": {
+    "Escolator": 8,
+    "Lift": 3,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.021651794492854",
+    "Longitude": "29.11831687527492"
+   }
+  },
+  {
+   "id": 132,
+   "code": "M5",
+   "name": "Ihlamurkuyu",
+   "line": "M5",
+   "order": 11,
+   "lat": 41.0193938740756,
+   "lng": 29.13128274037028,
+   "info": {
+    "Escolator": 8,
+    "Lift": 2,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "41.0193938740756",
+    "Longitude": "29.13128274037028"
+   }
+  },
+  {
+   "id": 133,
+   "code": "M5",
+   "name": "Altınşehir",
+   "line": "M5",
+   "order": 12,
+   "lat": 41.01682949821649,
+   "lng": 29.138624552588546,
+   "info": {
+    "Escolator": 13,
+    "Lift": 3,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "41.01682949821649",
+    "Longitude": "29.138624552588546"
+   }
+  },
+  {
+   "id": 134,
+   "code": "M5",
+   "name": "İmam Hatip Lisesi",
+   "line": "M5",
+   "order": 13,
+   "lat": 41.016188074469916,
+   "lng": 29.15243635386462,
+   "info": {
+    "Escolator": 9,
+    "Lift": 2,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "41.016188074469916",
+    "Longitude": "29.15243635386462"
+   }
+  },
+  {
+   "id": 135,
+   "code": "M5",
+   "name": "Dudullu",
+   "line": "M5",
+   "order": 14,
+   "lat": 41.01544045560607,
+   "lng": 29.16244635386456,
+   "info": {
+    "Escolator": 18,
+    "Lift": 3,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "41.01544045560607",
+    "Longitude": "29.16244635386456"
+   }
+  },
+  {
+   "id": 136,
+   "code": "M5",
+   "name": "Necip Fazıl",
+   "line": "M5",
+   "order": 15,
+   "lat": 41.01620878613601,
+   "lng": 29.17929437105173,
+   "info": {
+    "Escolator": 10,
+    "Lift": 4,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "41.01620878613601",
+    "Longitude": "29.17929437105173"
+   }
+  },
+  {
+   "id": 137,
+   "code": "M5",
+   "name": "Çekmeköy",
+   "line": "M5",
+   "order": 16,
+   "lat": 41.01456617003643,
+   "lng": 29.189447811535,
+   "info": {
+    "Escolator": 12,
+    "Lift": 6,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "41.01456617003643",
+    "Longitude": "29.189447811535"
+   }
+  },
+  {
+   "id": 138,
+   "code": "M6",
+   "name": "Levent",
+   "line": "M6",
+   "order": 1,
+   "lat": 41.075888,
+   "lng": 29.014142,
+   "info": {
+    "Escolator": 8,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.075888",
+    "Longitude": "29.014142"
+   }
+  },
+  {
+   "id": 139,
+   "code": "M6",
+   "name": "Nispetiye",
+   "line": "M6",
+   "order": 2,
+   "lat": 41.077692,
+   "lng": 29.022356,
+   "info": {
+    "Escolator": 4,
+    "Lift": 3,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.077692",
+    "Longitude": "29.022356"
+   }
+  },
+  {
+   "id": 140,
+   "code": "M6",
+   "name": "Etiler",
+   "line": "M6",
+   "order": 3,
+   "lat": 41.082395,
+   "lng": 29.037593,
+   "info": {
+    "Escolator": 1,
+    "Lift": 5,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.082395",
+    "Longitude": "29.037593"
+   }
+  },
+  {
+   "id": 141,
+   "code": "M6",
+   "name": "Boğaziçi Ü.-Hisarüstü",
+   "line": "M6",
+   "order": 4,
+   "lat": 41.085278,
+   "lng": 29.045519,
+   "info": {
+    "Escolator": 3,
+    "Lift": 3,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.085278",
+    "Longitude": "29.045519"
+   }
+  },
+  {
+   "id": 144,
+   "code": "M7",
+   "name": "Yıldız",
+   "line": "M7",
+   "order": 3,
+   "lat": 41.055457368403594,
+   "lng": 29.009803051316943,
+   "info": {
+    "Escolator": 24,
+    "Lift": 9,
+    "BabyRoom": true,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "41.055457368403594",
+    "Longitude": "29.009803051316943"
+   }
+  },
+  {
+   "id": 145,
+   "code": "M7",
+   "name": "Fulya",
+   "line": "M7",
+   "order": 4,
+   "lat": 41.0619540753492,
+   "lng": 29.007236307110315,
+   "info": {
+    "Escolator": 15,
+    "Lift": 7,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0619540753492",
+    "Longitude": "29.007236307110315"
+   }
+  },
+  {
+   "id": 146,
+   "code": "M7",
+   "name": "Mecidiyeköy",
+   "line": "M7",
+   "order": 5,
+   "lat": 41.0661411,
+   "lng": 28.9945802,
+   "info": {
+    "Escolator": 29,
+    "Lift": 11,
+    "BabyRoom": true,
+    "WC": true,
+    "Masjid": true,
+    "Latitude": "41.0661411",
+    "Longitude": "28.9945802"
+   }
+  },
+  {
+   "id": 147,
+   "code": "M7",
+   "name": "Çağlayan",
+   "line": "M7",
+   "order": 6,
+   "lat": 41.07124,
+   "lng": 28.9797905,
+   "info": {
+    "Escolator": 16,
+    "Lift": 15,
+    "BabyRoom": true,
+    "WC": true,
+    "Masjid": true,
+    "Latitude": "41.07124",
+    "Longitude": "28.9797905"
+   }
+  },
+  {
+   "id": 148,
+   "code": "M7",
+   "name": "Kağıthane",
+   "line": "M7",
+   "order": 7,
+   "lat": 41.0799698,
+   "lng": 28.9722495,
+   "info": {
+    "Escolator": 8,
+    "Lift": 4,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "41.0799698",
+    "Longitude": "28.9722495"
+   }
+  },
+  {
+   "id": 149,
+   "code": "M7",
+   "name": "Nurtepe",
+   "line": "M7",
+   "order": 8,
+   "lat": 41.0796403,
+   "lng": 28.9629489,
+   "info": {
+    "Escolator": 14,
+    "Lift": 9,
+    "BabyRoom": true,
+    "WC": true,
+    "Masjid": true,
+    "Latitude": "41.0796403",
+    "Longitude": "28.9629489"
+   }
+  },
+  {
+   "id": 150,
+   "code": "M7",
+   "name": "Alibeyköy",
+   "line": "M7",
+   "order": 9,
+   "lat": 41.0791702,
+   "lng": 28.9493602,
+   "info": {
+    "Escolator": 8,
+    "Lift": 4,
+    "BabyRoom": true,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "41.0791702",
+    "Longitude": "28.9493602"
+   }
+  },
+  {
+   "id": 151,
+   "code": "M7",
+   "name": "Çırçır Mahallesi",
+   "line": "M7",
+   "order": 10,
+   "lat": 41.07985,
+   "lng": 28.93762,
+   "info": {
+    "Escolator": 14,
+    "Lift": 9,
+    "BabyRoom": true,
+    "WC": true,
+    "Masjid": true,
+    "Latitude": "41.07985",
+    "Longitude": "28.93762"
+   }
+  },
+  {
+   "id": 152,
+   "code": "M7",
+   "name": "Veysel Karani-Akşemsettin",
+   "line": "M7",
+   "order": 11,
+   "lat": 41.0796898,
+   "lng": 28.9295594,
+   "info": {
+    "Escolator": 16,
+    "Lift": 11,
+    "BabyRoom": true,
+    "WC": true,
+    "Masjid": true,
+    "Latitude": "41.0796898",
+    "Longitude": "28.9295594"
+   }
+  },
+  {
+   "id": 153,
+   "code": "M7",
+   "name": "Yeşilpınar",
+   "line": "M7",
+   "order": 12,
+   "lat": 41.0799901,
+   "lng": 28.9352699,
+   "info": {
+    "Escolator": 10,
+    "Lift": 4,
+    "BabyRoom": true,
+    "WC": true,
+    "Masjid": true,
+    "Latitude": "41.0799901",
+    "Longitude": "28.9352699"
+   }
+  },
+  {
+   "id": 154,
+   "code": "M7",
+   "name": "Kazım Karabekir",
+   "line": "M7",
+   "order": 13,
+   "lat": 41.0854599,
+   "lng": 28.9085497,
+   "info": {
+    "Escolator": 16,
+    "Lift": 5,
+    "BabyRoom": true,
+    "WC": true,
+    "Masjid": true,
+    "Latitude": "41.0854599",
+    "Longitude": "28.9085497"
+   }
+  },
+  {
+   "id": 155,
+   "code": "M7",
+   "name": "Yenimahalle",
+   "line": "M7",
+   "order": 14,
+   "lat": 41.0837182,
+   "lng": 28.8931096,
+   "info": {
+    "Escolator": 10,
+    "Lift": 3,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": true,
+    "Latitude": "41.0837182",
+    "Longitude": "28.8931096"
+   }
+  },
+  {
+   "id": 156,
+   "code": "M7",
+   "name": "Karadeniz Mahallesi",
+   "line": "M7",
+   "order": 15,
+   "lat": 41.0815994,
+   "lng": 28.8754204,
+   "info": {
+    "Escolator": 26,
+    "Lift": 14,
+    "BabyRoom": true,
+    "WC": true,
+    "Masjid": true,
+    "Latitude": "41.0815994",
+    "Longitude": "28.8754204"
+   }
+  },
+  {
+   "id": 157,
+   "code": "M7",
+   "name": "Giyimkent-Tekstilkent",
+   "line": "M7",
+   "order": 16,
+   "lat": 41.0712997,
+   "lng": 28.8668802,
+   "info": {
+    "Escolator": 15,
+    "Lift": 3,
+    "BabyRoom": true,
+    "WC": true,
+    "Masjid": true,
+    "Latitude": "41.0712997",
+    "Longitude": "28.8668802"
+   }
+  },
+  {
+   "id": 158,
+   "code": "M7",
+   "name": "Oruç Reis",
+   "line": "M7",
+   "order": 17,
+   "lat": 41.0633806,
+   "lng": 28.8554406,
+   "info": {
+    "Escolator": 10,
+    "Lift": 8,
+    "BabyRoom": true,
+    "WC": true,
+    "Masjid": true,
+    "Latitude": "41.0633806",
+    "Longitude": "28.8554406"
+   }
+  },
+  {
+   "id": 159,
+   "code": "M7",
+   "name": "Göztepe Mahallesi",
+   "line": "M7",
+   "order": 18,
+   "lat": 41.0563991,
+   "lng": 28.8499689,
+   "info": {
+    "Escolator": 14,
+    "Lift": 4,
+    "BabyRoom": true,
+    "WC": true,
+    "Masjid": true,
+    "Latitude": "41.0563991",
+    "Longitude": "28.8499689"
+   }
+  },
+  {
+   "id": 160,
+   "code": "M7",
+   "name": "Mahmutbey",
+   "line": "M7",
+   "order": 19,
+   "lat": 41.054312,
+   "lng": 28.830612,
+   "info": {
+    "Escolator": 19,
+    "Lift": 2,
+    "BabyRoom": true,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "41.054312",
+    "Longitude": "28.830612"
+   }
+  },
+  {
+   "id": 161,
+   "code": "M8",
+   "name": "Bostancı",
+   "line": "M8",
+   "order": 1,
+   "lat": 40.95128998347687,
+   "lng": 29.097243057130374,
+   "info": {
+    "Escolator": 12,
+    "Lift": 6,
+    "BabyRoom": true,
+    "WC": true,
+    "Masjid": true,
+    "Latitude": "40.95128998347687",
+    "Longitude": "29.097243057130374"
+   }
+  },
+  {
+   "id": 162,
+   "code": "M8",
+   "name": "Emin Ali Paşa",
+   "line": "M8",
+   "order": 2,
+   "lat": 40.96054884646437,
+   "lng": 29.09385026231631,
+   "info": {
+    "Escolator": 8,
+    "Lift": 2,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "40.96054884646437",
+    "Longitude": "29.09385026231631"
+   }
+  },
+  {
+   "id": 163,
+   "code": "M8",
+   "name": "Ayşekadın",
+   "line": "M8",
+   "order": 3,
+   "lat": 40.966729619003274,
+   "lng": 29.0868577820603,
+   "info": {
+    "Escolator": 8,
+    "Lift": 2,
+    "BabyRoom": true,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "40.966729619003274",
+    "Longitude": "29.0868577820603"
+   }
+  },
+  {
+   "id": 164,
+   "code": "M8",
+   "name": "Kozyatağı",
+   "line": "M8",
+   "order": 4,
+   "lat": 40.97524724462983,
+   "lng": 29.098809408749805,
+   "info": {
+    "Escolator": 18,
+    "Lift": 3,
+    "BabyRoom": true,
+    "WC": true,
+    "Masjid": true,
+    "Latitude": "40.97524724462983",
+    "Longitude": "29.098809408749805"
+   }
+  },
+  {
+   "id": 165,
+   "code": "M8",
+   "name": "Küçükbakkalköy",
+   "line": "M8",
+   "order": 5,
+   "lat": 40.97913311692388,
+   "lng": 29.111999801732374,
+   "info": {
+    "Escolator": 12,
+    "Lift": 3,
+    "BabyRoom": true,
+    "WC": true,
+    "Masjid": true,
+    "Latitude": "40.97913311692388",
+    "Longitude": "29.111999801732374"
+   }
+  },
+  {
+   "id": 166,
+   "code": "M8",
+   "name": "İçerenköy",
+   "line": "M8",
+   "order": 6,
+   "lat": 40.979123476347006,
+   "lng": 29.126665087038585,
+   "info": {
+    "Escolator": 12,
+    "Lift": 2,
+    "BabyRoom": true,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "40.979123476347006",
+    "Longitude": "29.126665087038585"
+   }
+  },
+  {
+   "id": 167,
+   "code": "M8",
+   "name": "Kayışdağı",
+   "line": "M8",
+   "order": 7,
+   "lat": 40.98552090314198,
+   "lng": 29.137286259239595,
+   "info": {
+    "Escolator": 12,
+    "Lift": 4,
+    "BabyRoom": true,
+    "WC": true,
+    "Masjid": true,
+    "Latitude": "40.98552090314198",
+    "Longitude": "29.137286259239595"
+   }
+  },
+  {
+   "id": 168,
+   "code": "M8",
+   "name": "Mevlana",
+   "line": "M8",
+   "order": 8,
+   "lat": 40.99236746200459,
+   "lng": 29.153558958239127,
+   "info": {
+    "Escolator": 24,
+    "Lift": 5,
+    "BabyRoom": true,
+    "WC": true,
+    "Masjid": true,
+    "Latitude": "40.99236746200459",
+    "Longitude": "29.153558958239127"
+   }
+  },
+  {
+   "id": 169,
+   "code": "M8",
+   "name": "İMES",
+   "line": "M8",
+   "order": 9,
+   "lat": 40.99995161943781,
+   "lng": 29.156059357475755,
+   "info": {
+    "Escolator": 8,
+    "Lift": 2,
+    "BabyRoom": true,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "40.99995161943781",
+    "Longitude": "29.156059357475755"
+   }
+  },
+  {
+   "id": 170,
+   "code": "M8",
+   "name": "MODOKO-KEYAP",
+   "line": "M8",
+   "order": 10,
+   "lat": 41.00761665286443,
+   "lng": 29.162182913381205,
+   "info": {
+    "Escolator": 8,
+    "Lift": 2,
+    "BabyRoom": true,
+    "WC": true,
+    "Masjid": true,
+    "Latitude": "41.00761665286443",
+    "Longitude": "29.162182913381205"
+   }
+  },
+  {
+   "id": 171,
+   "code": "M8",
+   "name": "Dudullu",
+   "line": "M8",
+   "order": 11,
+   "lat": 41.01556997960766,
+   "lng": 29.162499998040506,
+   "info": {
+    "Escolator": 6,
+    "Lift": 2,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "41.01556997960766",
+    "Longitude": "29.162499998040506"
+   }
+  },
+  {
+   "id": 172,
+   "code": "M8",
+   "name": "Huzur",
+   "line": "M8",
+   "order": 12,
+   "lat": 41.022498790602256,
+   "lng": 29.15945298159044,
+   "info": {
+    "Escolator": 10,
+    "Lift": 3,
+    "BabyRoom": true,
+    "WC": true,
+    "Masjid": true,
+    "Latitude": "41.022498790602256",
+    "Longitude": "29.15945298159044"
+   }
+  },
+  {
+   "id": 227,
+   "code": "M8",
+   "name": "Parseller",
+   "line": "M8",
+   "order": 13,
+   "lat": 41.03187863452558,
+   "lng": 29.152689072367757,
+   "info": {
+    "Escolator": 10,
+    "Lift": 3,
+    "BabyRoom": true,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "41.03187863452558",
+    "Longitude": "29.152689072367757"
+   }
+  },
+  {
+   "id": 203,
+   "code": "M1A",
+   "name": "Otogar",
+   "line": "M1A",
+   "order": 8,
+   "lat": 41.0401441651,
+   "lng": 28.8945600984,
+   "info": {
+    "Escolator": 4,
+    "Lift": 2,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0401441651",
+    "Longitude": "28.8945600984"
+   }
+  },
+  {
+   "id": 105,
+   "code": "M1A",
+   "name": "Atatürk Havalimanı",
+   "line": "M1A",
+   "order": 18,
+   "lat": 40.9795429431,
+   "lng": 28.8211244027,
+   "info": {
+    "Escolator": 2,
+    "Lift": 2,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "40.9795429431",
+    "Longitude": "28.8211244027"
+   }
+  },
+  {
+   "id": 106,
+   "code": "M1A",
+   "name": "DTM-İstanbul Fuar Merkezi",
+   "line": "M1A",
+   "order": 17,
+   "lat": 40.9866455145,
+   "lng": 28.8285503243,
+   "info": {
+    "Escolator": 0,
+    "Lift": 1,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "40.9866455145",
+    "Longitude": "28.8285503243"
+   }
+  },
+  {
+   "id": 107,
+   "code": "M1A",
+   "name": "Yenibosna",
+   "line": "M1A",
+   "order": 16,
+   "lat": 40.9893149835,
+   "lng": 28.8367043004,
+   "info": {
+    "Escolator": 2,
+    "Lift": 1,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "40.9893149835",
+    "Longitude": "28.8367043004"
+   }
+  },
+  {
+   "id": 108,
+   "code": "M1A",
+   "name": "Ataköy-Şirinevler",
+   "line": "M1A",
+   "order": 15,
+   "lat": 40.9913500997,
+   "lng": 28.846082309,
+   "info": {
+    "Escolator": 4,
+    "Lift": 4,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "40.9913500997",
+    "Longitude": "28.846082309"
+   }
+  },
+  {
+   "id": 109,
+   "code": "M1A",
+   "name": "Bahçelievler",
+   "line": "M1A",
+   "order": 14,
+   "lat": 40.9953532384,
+   "lng": 28.8630661969,
+   "info": {
+    "Escolator": 7,
+    "Lift": 2,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "40.9953532384",
+    "Longitude": "28.8630661969"
+   }
+  },
+  {
+   "id": 110,
+   "code": "M1A",
+   "name": "Bakırköy-İncirli",
+   "line": "M1A",
+   "order": 13,
+   "lat": 40.9966121333,
+   "lng": 28.8753997556,
+   "info": {
+    "Escolator": 6,
+    "Lift": 3,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "40.9966121333",
+    "Longitude": "28.8753997556"
+   }
+  },
+  {
+   "id": 111,
+   "code": "M1A",
+   "name": "Zeytinburnu",
+   "line": "M1A",
+   "order": 12,
+   "lat": 41.0017008338,
+   "lng": 28.8896520683,
+   "info": {
+    "Escolator": 3,
+    "Lift": 5,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0017008338",
+    "Longitude": "28.8896520683"
+   }
+  },
+  {
+   "id": 112,
+   "code": "M1A",
+   "name": "Merter",
+   "line": "M1A",
+   "order": 11,
+   "lat": 41.0076458753,
+   "lng": 28.8961771147,
+   "info": {
+    "Escolator": 4,
+    "Lift": 2,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0076458753",
+    "Longitude": "28.8961771147"
+   }
+  },
+  {
+   "id": 113,
+   "code": "M1A",
+   "name": "Davutpaşa-YTÜ",
+   "line": "M1A",
+   "order": 10,
+   "lat": 41.0206387059,
+   "lng": 28.9001417888,
+   "info": {
+    "Escolator": 2,
+    "Lift": 2,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0206387059",
+    "Longitude": "28.9001417888"
+   }
+  },
+  {
+   "id": 114,
+   "code": "M1A",
+   "name": "Terazidere",
+   "line": "M1A",
+   "order": 9,
+   "lat": 41.0303317032,
+   "lng": 28.8979522419,
+   "info": {
+    "Escolator": 4,
+    "Lift": 4,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0303317032",
+    "Longitude": "28.8979522419"
+   }
+  },
+  {
+   "id": 115,
+   "code": "M1A",
+   "name": "Kocatepe",
+   "line": "M1A",
+   "order": 7,
+   "lat": 41.0484928183,
+   "lng": 28.8953862076,
+   "info": {
+    "Escolator": 2,
+    "Lift": 1,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0484928183",
+    "Longitude": "28.8953862076"
+   }
+  },
+  {
+   "id": 116,
+   "code": "M1A",
+   "name": "Sağmalcılar",
+   "line": "M1A",
+   "order": 6,
+   "lat": 41.0408544497,
+   "lng": 28.9072352877,
+   "info": {
+    "Escolator": 1,
+    "Lift": 2,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0408544497",
+    "Longitude": "28.9072352877"
+   }
+  },
+  {
+   "id": 117,
+   "code": "M1A",
+   "name": "Bayrampaşa-Maltepe",
+   "line": "M1A",
+   "order": 5,
+   "lat": 41.0340978572,
+   "lng": 28.920238689,
+   "info": {
+    "Escolator": 1,
+    "Lift": 2,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0340978572",
+    "Longitude": "28.920238689"
+   }
+  },
+  {
+   "id": 118,
+   "code": "M1A",
+   "name": "Topkapı-Ulubatlı",
+   "line": "M1A",
+   "order": 4,
+   "lat": 41.0240250582,
+   "lng": 28.9305034257,
+   "info": {
+    "Escolator": 2,
+    "Lift": 4,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0240250582",
+    "Longitude": "28.9305034257"
+   }
+  },
+  {
+   "id": 119,
+   "code": "M1A",
+   "name": "Emniyet-Fatih",
+   "line": "M1A",
+   "order": 3,
+   "lat": 41.0176115439,
+   "lng": 28.9395963977,
+   "info": {
+    "Escolator": 2,
+    "Lift": 4,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0176115439",
+    "Longitude": "28.9395963977"
+   }
+  },
+  {
+   "id": 120,
+   "code": "M1A",
+   "name": "Aksaray",
+   "line": "M1A",
+   "order": 2,
+   "lat": 41.0120281897,
+   "lng": 28.9480625565,
+   "info": {
+    "Escolator": 4,
+    "Lift": 1,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0120281897",
+    "Longitude": "28.9480625565"
+   }
+  },
+  {
+   "id": 121,
+   "code": "M1A",
+   "name": "Yenikapı",
+   "line": "M1A",
+   "order": 1,
+   "lat": 41.004755,
+   "lng": 28.952549,
+   "info": {
+    "Escolator": 8,
+    "Lift": 2,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.004755",
+    "Longitude": "28.952549"
+   }
+  },
+  {
+   "id": 47,
+   "code": "M1B",
+   "name": "Kirazlı-Bağcılar",
+   "line": "M1B",
+   "order": 13,
+   "lat": 41.0322960516,
+   "lng": 28.8427689525,
+   "info": {
+    "Escolator": 10,
+    "Lift": 2,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": true,
+    "Latitude": "41.0322960516",
+    "Longitude": "28.8427689525"
+   }
+  },
+  {
+   "id": 48,
+   "code": "M1B",
+   "name": "Bağcılar Meydan",
+   "line": "M1B",
+   "order": 12,
+   "lat": 41.0345164689,
+   "lng": 28.8561714937,
+   "info": {
+    "Escolator": 14,
+    "Lift": 9,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0345164689",
+    "Longitude": "28.8561714937"
+   }
+  },
+  {
+   "id": 49,
+   "code": "M1B",
+   "name": "Üçyüzlü",
+   "line": "M1B",
+   "order": 11,
+   "lat": 41.036721597,
+   "lng": 28.8706340581,
+   "info": {
+    "Escolator": 18,
+    "Lift": 2,
+    "BabyRoom": true,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.036721597",
+    "Longitude": "28.8706340581"
+   }
+  },
+  {
+   "id": 50,
+   "code": "M1B",
+   "name": "Menderes",
+   "line": "M1B",
+   "order": 10,
+   "lat": 41.0427591002,
+   "lng": 28.8784878297,
+   "info": {
+    "Escolator": 18,
+    "Lift": 4,
+    "BabyRoom": true,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0427591002",
+    "Longitude": "28.8784878297"
+   }
+  },
+  {
+   "id": 51,
+   "code": "M1B",
+   "name": "Esenler",
+   "line": "M1B",
+   "order": 9,
+   "lat": 41.037682433,
+   "lng": 28.8884222852,
+   "info": {
+    "Escolator": 4,
+    "Lift": 3,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.037682433",
+    "Longitude": "28.8884222852"
+   }
+  },
+  {
+   "id": 204,
+   "code": "M1B",
+   "name": "Kocatepe",
+   "line": "M1B",
+   "order": 7,
+   "lat": 41.0484928183,
+   "lng": 28.8953862076,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0484928183",
+    "Longitude": "28.8953862076"
+   }
+  },
+  {
+   "id": 205,
+   "code": "M1B",
+   "name": "Sağmalcılar",
+   "line": "M1B",
+   "order": 6,
+   "lat": 41.0408544497,
+   "lng": 28.9072352877,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0408544497",
+    "Longitude": "28.9072352877"
+   }
+  },
+  {
+   "id": 206,
+   "code": "M1B",
+   "name": "Bayrampaşa-Maltepe",
+   "line": "M1B",
+   "order": 5,
+   "lat": 41.0340978572,
+   "lng": 28.920238689,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0340978572",
+    "Longitude": "28.920238689"
+   }
+  },
+  {
+   "id": 207,
+   "code": "M1B",
+   "name": "Topkapı-Ulubatlı",
+   "line": "M1B",
+   "order": 4,
+   "lat": 41.0240250582,
+   "lng": 28.9305034257,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0240250582",
+    "Longitude": "28.9305034257"
+   }
+  },
+  {
+   "id": 208,
+   "code": "M1B",
+   "name": "Emniyet-Fatih",
+   "line": "M1B",
+   "order": 3,
+   "lat": 41.0176115439,
+   "lng": 28.9395963977,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0176115439",
+    "Longitude": "28.9395963977"
+   }
+  },
+  {
+   "id": 209,
+   "code": "M1B",
+   "name": "Aksaray",
+   "line": "M1B",
+   "order": 2,
+   "lat": 41.0120281897,
+   "lng": 28.9480625565,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0120281897",
+    "Longitude": "28.9480625565"
+   }
+  },
+  {
+   "id": 210,
+   "code": "M1B",
+   "name": "Yenikapı",
+   "line": "M1B",
+   "order": 1,
+   "lat": 41.004755,
+   "lng": 28.952549,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.004755",
+    "Longitude": "28.952549"
+   }
+  },
+  {
+   "id": 211,
+   "code": "M1B",
+   "name": "Otogar",
+   "line": "M1B",
+   "order": 8,
+   "lat": 41.0401441651,
+   "lng": 28.8945600984,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0401441651",
+    "Longitude": "28.8945600984"
+   }
+  },
+  {
+   "id": 52,
+   "code": "T1",
+   "name": "Bağcılar",
+   "line": "T1",
+   "order": 31,
+   "lat": 41.0330863118,
+   "lng": 28.860647218,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0330863118",
+    "Longitude": "28.860647218"
+   }
+  },
+  {
+   "id": 53,
+   "code": "T1",
+   "name": "Güneştepe",
+   "line": "T1",
+   "order": 30,
+   "lat": 41.0289950489,
+   "lng": 28.860949736,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0289950489",
+    "Longitude": "28.860949736"
+   }
+  },
+  {
+   "id": 54,
+   "code": "T1",
+   "name": "Yavuzselim",
+   "line": "T1",
+   "order": 29,
+   "lat": 41.0238219843,
+   "lng": 28.863651758,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0238219843",
+    "Longitude": "28.863651758"
+   }
+  },
+  {
+   "id": 55,
+   "code": "T1",
+   "name": "Soğanlı",
+   "line": "T1",
+   "order": 28,
+   "lat": 41.0209689646,
+   "lng": 28.8670797269,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0209689646",
+    "Longitude": "28.8670797269"
+   }
+  },
+  {
+   "id": 56,
+   "code": "T1",
+   "name": "Akıncılar",
+   "line": "T1",
+   "order": 27,
+   "lat": 41.0173366346,
+   "lng": 28.8710305731,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0173366346",
+    "Longitude": "28.8710305731"
+   }
+  },
+  {
+   "id": 57,
+   "code": "T1",
+   "name": "Güngören",
+   "line": "T1",
+   "order": 26,
+   "lat": 41.0152104262,
+   "lng": 28.8775090458,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0152104262",
+    "Longitude": "28.8775090458"
+   }
+  },
+  {
+   "id": 58,
+   "code": "T1",
+   "name": "Merter Tekstil Merkezi",
+   "line": "T1",
+   "order": 25,
+   "lat": 41.0115593225,
+   "lng": 28.8807549715,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0115593225",
+    "Longitude": "28.8807549715"
+   }
+  },
+  {
+   "id": 59,
+   "code": "T1",
+   "name": "Mehmet Akif",
+   "line": "T1",
+   "order": 24,
+   "lat": 41.00580192,
+   "lng": 28.8816767755,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.00580192",
+    "Longitude": "28.8816767755"
+   }
+  },
+  {
+   "id": 60,
+   "code": "T1",
+   "name": "Zeytinburnu",
+   "line": "T1",
+   "order": 23,
+   "lat": 41.0014853458,
+   "lng": 28.8902920022,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0014853458",
+    "Longitude": "28.8902920022"
+   }
+  },
+  {
+   "id": 61,
+   "code": "T1",
+   "name": "Mithatpaşa",
+   "line": "T1",
+   "order": 22,
+   "lat": 41.003492938,
+   "lng": 28.9014562172,
+   "info": {
+    "Escolator": 0,
+    "Lift": 2,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.003492938",
+    "Longitude": "28.9014562172"
+   }
+  },
+  {
+   "id": 62,
+   "code": "T1",
+   "name": "Seyitnizam-Akşemsettin",
+   "line": "T1",
+   "order": 21,
+   "lat": 41.0042150705,
+   "lng": 28.9075130061,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0042150705",
+    "Longitude": "28.9075130061"
+   }
+  },
+  {
+   "id": 63,
+   "code": "T1",
+   "name": "Merkezefendi",
+   "line": "T1",
+   "order": 20,
+   "lat": 41.0103922551,
+   "lng": 28.9095014291,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0103922551",
+    "Longitude": "28.9095014291"
+   }
+  },
+  {
+   "id": 64,
+   "code": "T1",
+   "name": "Cevizlibağ-AÖY",
+   "line": "T1",
+   "order": 19,
+   "lat": 41.0159557944,
+   "lng": 28.9115738934,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0159557944",
+    "Longitude": "28.9115738934"
+   }
+  },
+  {
+   "id": 65,
+   "code": "T1",
+   "name": "Topkapı",
+   "line": "T1",
+   "order": 18,
+   "lat": 41.0192295429,
+   "lng": 28.9194470285,
+   "info": {
+    "Escolator": 0,
+    "Lift": 1,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0192295429",
+    "Longitude": "28.9194470285"
+   }
+  },
+  {
+   "id": 66,
+   "code": "T1",
+   "name": "Pazartekke",
+   "line": "T1",
+   "order": 17,
+   "lat": 41.0182661997,
+   "lng": 28.9271526286,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0182661997",
+    "Longitude": "28.9271526286"
+   }
+  },
+  {
+   "id": 67,
+   "code": "T1",
+   "name": "Çapa-Şehremini",
+   "line": "T1",
+   "order": 16,
+   "lat": 41.0158833289,
+   "lng": 28.9320271861,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0158833289",
+    "Longitude": "28.9320271861"
+   }
+  },
+  {
+   "id": 68,
+   "code": "T1",
+   "name": "Fındıkzade",
+   "line": "T1",
+   "order": 15,
+   "lat": 41.0117062059472,
+   "lng": 28.940655673320745,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0117062059472",
+    "Longitude": "28.940655673320745"
+   }
+  },
+  {
+   "id": 69,
+   "code": "T1",
+   "name": "Haseki",
+   "line": "T1",
+   "order": 14,
+   "lat": 41.0107098606,
+   "lng": 28.9442927851,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0107098606",
+    "Longitude": "28.9442927851"
+   }
+  },
+  {
+   "id": 70,
+   "code": "T1",
+   "name": "Yusufpaşa",
+   "line": "T1",
+   "order": 13,
+   "lat": 41.0099988102,
+   "lng": 28.9471169908,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0099988102",
+    "Longitude": "28.9471169908"
+   }
+  },
+  {
+   "id": 71,
+   "code": "T1",
+   "name": "Aksaray",
+   "line": "T1",
+   "order": 12,
+   "lat": 41.0095939384,
+   "lng": 28.9538598842,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0095939384",
+    "Longitude": "28.9538598842"
+   }
+  },
+  {
+   "id": 72,
+   "code": "T1",
+   "name": "Laleli-İstanbul Ü.",
+   "line": "T1",
+   "order": 11,
+   "lat": 41.0095870715,
+   "lng": 28.9597865368,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0095870715",
+    "Longitude": "28.9597865368"
+   }
+  },
+  {
+   "id": 73,
+   "code": "T1",
+   "name": "Beyazıt-Kapalıçarşı",
+   "line": "T1",
+   "order": 10,
+   "lat": 41.0090689647,
+   "lng": 28.9666944396,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0090689647",
+    "Longitude": "28.9666944396"
+   }
+  },
+  {
+   "id": 74,
+   "code": "T1",
+   "name": "Çemberlitaş",
+   "line": "T1",
+   "order": 9,
+   "lat": 41.0084369787,
+   "lng": 28.9711260369,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0084369787",
+    "Longitude": "28.9711260369"
+   }
+  },
+  {
+   "id": 75,
+   "code": "T1",
+   "name": "Sultanahmet",
+   "line": "T1",
+   "order": 8,
+   "lat": 41.0080890263,
+   "lng": 28.9755834871,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0080890263",
+    "Longitude": "28.9755834871"
+   }
+  },
+  {
+   "id": 76,
+   "code": "T1",
+   "name": "Gülhane",
+   "line": "T1",
+   "order": 7,
+   "lat": 41.0121648083,
+   "lng": 28.978420569,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0121648083",
+    "Longitude": "28.978420569"
+   }
+  },
+  {
+   "id": 77,
+   "code": "T1",
+   "name": "Sirkeci",
+   "line": "T1",
+   "order": 6,
+   "lat": 41.0151806347,
+   "lng": 28.9758901555,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0151806347",
+    "Longitude": "28.9758901555"
+   }
+  },
+  {
+   "id": 78,
+   "code": "T1",
+   "name": "Eminönü",
+   "line": "T1",
+   "order": 5,
+   "lat": 41.0174770208,
+   "lng": 28.9732097738,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0174770208",
+    "Longitude": "28.9732097738"
+   }
+  },
+  {
+   "id": 79,
+   "code": "T1",
+   "name": "Karaköy",
+   "line": "T1",
+   "order": 4,
+   "lat": 41.0221165813,
+   "lng": 28.9746840227,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0221165813",
+    "Longitude": "28.9746840227"
+   }
+  },
+  {
+   "id": 80,
+   "code": "T1",
+   "name": "Tophane",
+   "line": "T1",
+   "order": 3,
+   "lat": 41.026992487,
+   "lng": 28.9808626704,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.026992487",
+    "Longitude": "28.9808626704"
+   }
+  },
+  {
+   "id": 81,
+   "code": "T1",
+   "name": "Fındıklı-Mimar Sinan Ü.",
+   "line": "T1",
+   "order": 2,
+   "lat": 41.0314551495,
+   "lng": 28.9894378694,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0314551495",
+    "Longitude": "28.9894378694"
+   }
+  },
+  {
+   "id": 82,
+   "code": "T1",
+   "name": "Kabataş",
+   "line": "T1",
+   "order": 1,
+   "lat": 41.034195,
+   "lng": 28.992712,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.034195",
+    "Longitude": "28.992712"
+   }
+  },
+  {
+   "id": 189,
+   "code": "T3",
+   "name": "Kadıköy İDO",
+   "line": "T3",
+   "order": 1,
+   "lat": 40.989941,
+   "lng": 29.022135,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "40.989941",
+    "Longitude": "29.022135"
+   }
+  },
+  {
+   "id": 190,
+   "code": "T3",
+   "name": "Mühürdar",
+   "line": "T3",
+   "order": 10,
+   "lat": 40.991075,
+   "lng": 29.025428,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "40.991075",
+    "Longitude": "29.025428"
+   }
+  },
+  {
+   "id": 191,
+   "code": "T3",
+   "name": "Rızapaşa",
+   "line": "T3",
+   "order": 9,
+   "lat": 40.99003,
+   "lng": 29.029066,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "40.99003",
+    "Longitude": "29.029066"
+   }
+  },
+  {
+   "id": 192,
+   "code": "T3",
+   "name": "Moda",
+   "line": "T3",
+   "order": 8,
+   "lat": 40.987932,
+   "lng": 29.028593,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "40.987932",
+    "Longitude": "29.028593"
+   }
+  },
+  {
+   "id": 193,
+   "code": "T3",
+   "name": "Moda İlkokulu",
+   "line": "T3",
+   "order": 7,
+   "lat": 40.986078,
+   "lng": 29.027885,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "40.986078",
+    "Longitude": "29.027885"
+   }
+  },
+  {
+   "id": 194,
+   "code": "T3",
+   "name": "Kilise",
+   "line": "T3",
+   "order": 6,
+   "lat": 40.98411,
+   "lng": 29.026652,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "40.98411",
+    "Longitude": "29.026652"
+   }
+  },
+  {
+   "id": 195,
+   "code": "T3",
+   "name": "Bahariye",
+   "line": "T3",
+   "order": 5,
+   "lat": 40.983932,
+   "lng": 29.024892,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "40.983932",
+    "Longitude": "29.024892"
+   }
+  },
+  {
+   "id": 196,
+   "code": "T3",
+   "name": "Çarşı",
+   "line": "T3",
+   "order": 3,
+   "lat": 40.985098,
+   "lng": 29.021598,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "40.985098",
+    "Longitude": "29.021598"
+   }
+  },
+  {
+   "id": 197,
+   "code": "T3",
+   "name": "İskele Camii",
+   "line": "T3",
+   "order": 2,
+   "lat": 40.987945,
+   "lng": 29.021009,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "40.987945",
+    "Longitude": "29.021009"
+   }
+  },
+  {
+   "id": 198,
+   "code": "T3",
+   "name": "Damga Sokak",
+   "line": "T3",
+   "order": 11,
+   "lat": 40.989273,
+   "lng": 29.020977,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "40.989273",
+    "Longitude": "29.020977"
+   }
+  },
+  {
+   "id": 218,
+   "code": "T3",
+   "name": "Altıyol",
+   "line": "T3",
+   "order": 4,
+   "lat": 40.984465405285626,
+   "lng": 29.023221050093916,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "40.984465405285626",
+    "Longitude": "29.023221050093916"
+   }
+  },
+  {
+   "id": 83,
+   "code": "T4",
+   "name": "Mescid-i Selam",
+   "line": "T4",
+   "order": 22,
+   "lat": 41.116218,
+   "lng": 28.851229,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.116218",
+    "Longitude": "28.851229"
+   }
+  },
+  {
+   "id": 84,
+   "code": "T4",
+   "name": "Cebeci",
+   "line": "T4",
+   "order": 21,
+   "lat": 41.1119217418,
+   "lng": 28.8578071487,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.1119217418",
+    "Longitude": "28.8578071487"
+   }
+  },
+  {
+   "id": 85,
+   "code": "T4",
+   "name": "Sultançiftliği",
+   "line": "T4",
+   "order": 20,
+   "lat": 41.1061320011,
+   "lng": 28.8606445832,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.1061320011",
+    "Longitude": "28.8606445832"
+   }
+  },
+  {
+   "id": 86,
+   "code": "T4",
+   "name": "Yenimahalle",
+   "line": "T4",
+   "order": 19,
+   "lat": 41.0998289018,
+   "lng": 28.8629734333,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0998289018",
+    "Longitude": "28.8629734333"
+   }
+  },
+  {
+   "id": 87,
+   "code": "T4",
+   "name": "Hacı Şükrü",
+   "line": "T4",
+   "order": 18,
+   "lat": 41.0929087651,
+   "lng": 28.8640033599,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0929087651",
+    "Longitude": "28.8640033599"
+   }
+  },
+  {
+   "id": 88,
+   "code": "T4",
+   "name": "50.Yıl-Baştabya",
+   "line": "T4",
+   "order": 17,
+   "lat": 41.08781,
+   "lng": 28.866925,
+   "info": {
+    "Escolator": 0,
+    "Lift": 3,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.08781",
+    "Longitude": "28.866925"
+   }
+  },
+  {
+   "id": 89,
+   "code": "T4",
+   "name": "Cumhuriyet Mahallesi",
+   "line": "T4",
+   "order": 16,
+   "lat": 41.0837494209,
+   "lng": 28.8723589675,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0837494209",
+    "Longitude": "28.8723589675"
+   }
+  },
+  {
+   "id": 90,
+   "code": "T4",
+   "name": "Kiptaş-Venezia",
+   "line": "T4",
+   "order": 15,
+   "lat": 41.07985707357942,
+   "lng": 28.875993057122308,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.07985707357942",
+    "Longitude": "28.875993057122308"
+   }
+  },
+  {
+   "id": 91,
+   "code": "T4",
+   "name": "Karadeniz",
+   "line": "T4",
+   "order": 14,
+   "lat": 41.0752992311,
+   "lng": 28.8822357296,
+   "info": {
+    "Escolator": 2,
+    "Lift": 1,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0752992311",
+    "Longitude": "28.8822357296"
+   }
+  },
+  {
+   "id": 92,
+   "code": "T4",
+   "name": "Taşköprü",
+   "line": "T4",
+   "order": 13,
+   "lat": 41.0726579715,
+   "lng": 28.8876475166,
+   "info": {
+    "Escolator": 2,
+    "Lift": 1,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0726579715",
+    "Longitude": "28.8876475166"
+   }
+  },
+  {
+   "id": 93,
+   "code": "T4",
+   "name": "Ali Fuat Başgil",
+   "line": "T4",
+   "order": 12,
+   "lat": 41.068493,
+   "lng": 28.895601,
+   "info": {
+    "Escolator": 2,
+    "Lift": 1,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.068493",
+    "Longitude": "28.895601"
+   }
+  },
+  {
+   "id": 94,
+   "code": "T4",
+   "name": "Bosna Çukurçeşme",
+   "line": "T4",
+   "order": 11,
+   "lat": 41.061832,
+   "lng": 28.902093,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.061832",
+    "Longitude": "28.902093"
+   }
+  },
+  {
+   "id": 95,
+   "code": "T4",
+   "name": "Sağmalcılar",
+   "line": "T4",
+   "order": 10,
+   "lat": 41.0572818121,
+   "lng": 28.9069357644,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0572818121",
+    "Longitude": "28.9069357644"
+   }
+  },
+  {
+   "id": 96,
+   "code": "T4",
+   "name": "Uluyol Bereç",
+   "line": "T4",
+   "order": 9,
+   "lat": 41.0541381814,
+   "lng": 28.9102461379,
+   "info": {
+    "Escolator": 2,
+    "Lift": 1,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0541381814",
+    "Longitude": "28.9102461379"
+   }
+  },
+  {
+   "id": 97,
+   "code": "T4",
+   "name": "Rami",
+   "line": "T4",
+   "order": 8,
+   "lat": 41.046518,
+   "lng": 28.915598,
+   "info": {
+    "Escolator": 2,
+    "Lift": 1,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.046518",
+    "Longitude": "28.915598"
+   }
+  },
+  {
+   "id": 98,
+   "code": "T4",
+   "name": "Topçular",
+   "line": "T4",
+   "order": 7,
+   "lat": 41.041546,
+   "lng": 28.919608,
+   "info": {
+    "Escolator": 2,
+    "Lift": 1,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.041546",
+    "Longitude": "28.919608"
+   }
+  },
+  {
+   "id": 99,
+   "code": "T4",
+   "name": "Demirkapı",
+   "line": "T4",
+   "order": 6,
+   "lat": 41.0369881849,
+   "lng": 28.923366509,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0369881849",
+    "Longitude": "28.923366509"
+   }
+  },
+  {
+   "id": 100,
+   "code": "T4",
+   "name": "Şehitlik",
+   "line": "T4",
+   "order": 5,
+   "lat": 41.0341823475,
+   "lng": 28.9282530221,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0341823475",
+    "Longitude": "28.9282530221"
+   }
+  },
+  {
+   "id": 101,
+   "code": "T4",
+   "name": "Edirnekapı",
+   "line": "T4",
+   "order": 4,
+   "lat": 41.0314409253,
+   "lng": 28.9339710061,
+   "info": {
+    "Escolator": 4,
+    "Lift": 4,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0314409253",
+    "Longitude": "28.9339710061"
+   }
+  },
+  {
+   "id": 102,
+   "code": "T4",
+   "name": "Vatan",
+   "line": "T4",
+   "order": 3,
+   "lat": 41.0256946675,
+   "lng": 28.9293559649,
+   "info": {
+    "Escolator": 4,
+    "Lift": 2,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0256946675",
+    "Longitude": "28.9293559649"
+   }
+  },
+  {
+   "id": 103,
+   "code": "T4",
+   "name": "Fetihkapı",
+   "line": "T4",
+   "order": 2,
+   "lat": 41.021825006,
+   "lng": 28.9253344699,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.021825006",
+    "Longitude": "28.9253344699"
+   }
+  },
+  {
+   "id": 104,
+   "code": "T4",
+   "name": "Topkapı",
+   "line": "T4",
+   "order": 1,
+   "lat": 41.0192295429,
+   "lng": 28.9194470285,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0192295429",
+    "Longitude": "28.9194470285"
+   }
+  },
+  {
+   "id": 173,
+   "code": "T5",
+   "name": "Eminönü",
+   "line": "T5",
+   "order": 1,
+   "lat": 41.01833251289325,
+   "lng": 28.970220633282402,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.01833251289325",
+    "Longitude": "28.970220633282402"
+   }
+  },
+  {
+   "id": 174,
+   "code": "T5",
+   "name": "Küçükpazar",
+   "line": "T5",
+   "order": 2,
+   "lat": 41.0211067072648,
+   "lng": 28.96307565267346,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0211067072648",
+    "Longitude": "28.96307565267346"
+   }
+  },
+  {
+   "id": 175,
+   "code": "T5",
+   "name": "Cibali",
+   "line": "T5",
+   "order": 3,
+   "lat": 41.024336,
+   "lng": 28.960265,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.024336",
+    "Longitude": "28.960265"
+   }
+  },
+  {
+   "id": 176,
+   "code": "T5",
+   "name": "Fener",
+   "line": "T5",
+   "order": 4,
+   "lat": 41.028663,
+   "lng": 28.954462,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.028663",
+    "Longitude": "28.954462"
+   }
+  },
+  {
+   "id": 177,
+   "code": "T5",
+   "name": "Balat",
+   "line": "T5",
+   "order": 5,
+   "lat": 41.034098,
+   "lng": 28.948012,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.034098",
+    "Longitude": "28.948012"
+   }
+  },
+  {
+   "id": 178,
+   "code": "T5",
+   "name": "Ayvansaray",
+   "line": "T5",
+   "order": 6,
+   "lat": 41.039607,
+   "lng": 28.943916,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.039607",
+    "Longitude": "28.943916"
+   }
+  },
+  {
+   "id": 179,
+   "code": "T5",
+   "name": "Feshane",
+   "line": "T5",
+   "order": 7,
+   "lat": 41.045456,
+   "lng": 28.937978,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.045456",
+    "Longitude": "28.937978"
+   }
+  },
+  {
+   "id": 180,
+   "code": "T5",
+   "name": "Eyüpsultan Teleferik",
+   "line": "T5",
+   "order": 8,
+   "lat": 41.050482,
+   "lng": 28.935202,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.050482",
+    "Longitude": "28.935202"
+   }
+  },
+  {
+   "id": 181,
+   "code": "T5",
+   "name": "Eyüpsultan Devlet Hastanesi",
+   "line": "T5",
+   "order": 9,
+   "lat": 41.056765,
+   "lng": 28.941212,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.056765",
+    "Longitude": "28.941212"
+   }
+  },
+  {
+   "id": 182,
+   "code": "T5",
+   "name": "Silahtarağa Mahallesi",
+   "line": "T5",
+   "order": 10,
+   "lat": 41.064775,
+   "lng": 28.942874,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.064775",
+    "Longitude": "28.942874"
+   }
+  },
+  {
+   "id": 183,
+   "code": "T5",
+   "name": "Üniversite",
+   "line": "T5",
+   "order": 11,
+   "lat": 41.069833,
+   "lng": 28.942865,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.069833",
+    "Longitude": "28.942865"
+   }
+  },
+  {
+   "id": 184,
+   "code": "T5",
+   "name": "Alibeyköy Merkez",
+   "line": "T5",
+   "order": 12,
+   "lat": 41.07381,
+   "lng": 28.946063,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.073810",
+    "Longitude": "28.946063"
+   }
+  },
+  {
+   "id": 185,
+   "code": "T5",
+   "name": "Alibeyköy Metro",
+   "line": "T5",
+   "order": 13,
+   "lat": 41.07848,
+   "lng": 28.949459,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.078480",
+    "Longitude": "28.949459"
+   }
+  },
+  {
+   "id": 186,
+   "code": "T5",
+   "name": "Alibeyköy Cep Otogarı",
+   "line": "T5",
+   "order": 14,
+   "lat": 41.086915,
+   "lng": 28.943988,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.086915",
+    "Longitude": "28.943988"
+   }
+  },
+  {
+   "id": 199,
+   "code": "TF1",
+   "name": "Maçka",
+   "line": "TF1",
+   "order": 1,
+   "lat": 41.0446506053,
+   "lng": 28.9936254852,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0446506053",
+    "Longitude": "28.9936254852"
+   }
+  },
+  {
+   "id": 200,
+   "code": "TF1",
+   "name": "Taşkışla",
+   "line": "TF1",
+   "order": 2,
+   "lat": 41.04367845791161,
+   "lng": 28.99034291338203,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "41.04367845791161",
+    "Longitude": "28.99034291338203"
+   }
+  },
+  {
+   "id": 201,
+   "code": "TF2",
+   "name": "Eyüp",
+   "line": "TF2",
+   "order": 1,
+   "lat": 41.0505432043,
+   "lng": 28.9339131846,
+   "info": {
+    "Escolator": 0,
+    "Lift": 1,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.0505432043",
+    "Longitude": "28.9339131846"
+   }
+  },
+  {
+   "id": 202,
+   "code": "TF2",
+   "name": "Piyer Loti",
+   "line": "TF2",
+   "order": 2,
+   "lat": 41.054193241,
+   "lng": 28.9327417801,
+   "info": {
+    "Escolator": 2,
+    "Lift": 2,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.054193241",
+    "Longitude": "28.9327417801"
+   }
+  },
+  {
+   "id": 212,
+   "code": "M9",
+   "name": "Olimpiyat",
+   "line": "M9",
+   "order": 14,
+   "lat": 41.07978582261958,
+   "lng": 28.768494442218014,
+   "info": {
+    "Escolator": 9,
+    "Lift": 2,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": true,
+    "Latitude": "41.07978582261958",
+    "Longitude": "28.768494442218014"
+   }
+  },
+  {
+   "id": 213,
+   "code": "M9",
+   "name": "Ziya Gökalp Mahallesi",
+   "line": "M9",
+   "order": 13,
+   "lat": 41.07468683895818,
+   "lng": 28.786425453865895,
+   "info": {
+    "Escolator": 10,
+    "Lift": 3,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "41.07468683895818",
+    "Longitude": "28.786425453865895"
+   }
+  },
+  {
+   "id": 214,
+   "code": "M9",
+   "name": "İkitelli Sanayi",
+   "line": "M9",
+   "order": 12,
+   "lat": 41.071592188454204,
+   "lng": 28.80359489619547,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.071592188454204",
+    "Longitude": "28.80359489619547"
+   }
+  },
+  {
+   "id": 215,
+   "code": "M9",
+   "name": "MASKO",
+   "line": "M9",
+   "order": 11,
+   "lat": 41.064346478553354,
+   "lng": 28.804145099888043,
+   "info": {
+    "Escolator": 10,
+    "Lift": 3,
+    "BabyRoom": true,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "41.064346478553354",
+    "Longitude": "28.804145099888043"
+   }
+  },
+  {
+   "id": 216,
+   "code": "M9",
+   "name": "Bahariye",
+   "line": "M9",
+   "order": 10,
+   "lat": 41.058692228126105,
+   "lng": 28.79921854037114,
+   "info": {
+    "Escolator": 6,
+    "Lift": 2,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "41.058692228126105",
+    "Longitude": "28.79921854037114"
+   }
+  },
+  {
+   "id": 228,
+   "code": "M9",
+   "name": "Atatürk Mahallesi",
+   "line": "M9",
+   "order": 9,
+   "lat": 41.05288544691126,
+   "lng": 28.79864644035015,
+   "info": {
+    "Escolator": 11,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.05288544691126",
+    "Longitude": "28.79864644035015"
+   }
+  },
+  {
+   "id": 229,
+   "code": "M9",
+   "name": "Halkalı Caddesi",
+   "line": "M9",
+   "order": 8,
+   "lat": 41.04552704030184,
+   "lng": 28.80633957331045,
+   "info": {
+    "Escolator": 20,
+    "Lift": 6,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.04552704030184",
+    "Longitude": "28.80633957331045"
+   }
+  },
+  {
+   "id": 230,
+   "code": "M9",
+   "name": "15 Temmuz",
+   "line": "M9",
+   "order": 7,
+   "lat": 41.036864,
+   "lng": 28.814156,
+   "info": {
+    "Escolator": 6,
+    "Lift": 3,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.036864",
+    "Longitude": "28.814156"
+   }
+  },
+  {
+   "id": 231,
+   "code": "M9",
+   "name": "Mimar Sinan",
+   "line": "M9",
+   "order": 6,
+   "lat": 41.025085,
+   "lng": 28.816549,
+   "info": {
+    "Escolator": 14,
+    "Lift": 3,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.025085",
+    "Longitude": "28.816549"
+   }
+  },
+  {
+   "id": 232,
+   "code": "M9",
+   "name": "Doğu Sanayi",
+   "line": "M9",
+   "order": 5,
+   "lat": 41.014893,
+   "lng": 28.817986,
+   "info": {
+    "Escolator": 6,
+    "Lift": 3,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.014893",
+    "Longitude": "28.817986"
+   }
+  },
+  {
+   "id": 233,
+   "code": "M9",
+   "name": "29 Ekim Cumhuriyet",
+   "line": "M9",
+   "order": 4,
+   "lat": 41.006215,
+   "lng": 28.818603,
+   "info": {
+    "Escolator": 6,
+    "Lift": 4,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.006215",
+    "Longitude": "28.818603"
+   }
+  },
+  {
+   "id": 234,
+   "code": "M9",
+   "name": "Çobançeşme",
+   "line": "M9",
+   "order": 3,
+   "lat": 40.999713,
+   "lng": 28.822589,
+   "info": {
+    "Escolator": 6,
+    "Lift": 3,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "40.999713",
+    "Longitude": "28.822589"
+   }
+  },
+  {
+   "id": 235,
+   "code": "M9",
+   "name": "Yenibosna",
+   "line": "M9",
+   "order": 2,
+   "lat": 40.989473,
+   "lng": 28.837963,
+   "info": {
+    "Escolator": 10,
+    "Lift": 4,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "40.989473",
+    "Longitude": "28.837963"
+   }
+  },
+  {
+   "id": 236,
+   "code": "M9",
+   "name": "Ataköy",
+   "line": "M9",
+   "order": 1,
+   "lat": 40.979916,
+   "lng": 28.856218,
+   "info": {
+    "Escolator": 10,
+    "Lift": 3,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "40.979916",
+    "Longitude": "28.856218"
+   }
+  },
+  {
+   "id": 225,
+   "code": "F4",
+   "name": "Aşiyan",
+   "line": "F4",
+   "order": 2,
+   "lat": 41.0815736348652,
+   "lng": 29.05422416736053,
+   "info": {
+    "Escolator": 0,
+    "Lift": 4,
+    "BabyRoom": false,
+    "WC": true,
+    "Masjid": false,
+    "Latitude": "41.0815736348652",
+    "Longitude": "29.05422416736053"
+   }
+  },
+  {
+   "id": 226,
+   "code": "F4",
+   "name": "Boğaziçi Ü./Hisarüstü",
+   "line": "F4",
+   "order": 1,
+   "lat": 41.08486726284434,
+   "lng": 29.051021003065568,
+   "info": {
+    "Escolator": 0,
+    "Lift": 0,
+    "BabyRoom": false,
+    "WC": false,
+    "Masjid": false,
+    "Latitude": "41.08486726284434",
+    "Longitude": "29.051021003065568"
+   }
+  }
+ ]
+}

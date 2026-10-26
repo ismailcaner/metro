@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="İstanbul Ulaşım">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#35d0a5"/>
+      <stop offset=".6" stop-color="#2b7bd6"/>
+      <stop offset="1" stop-color="#a45cf1"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="#0b0f14"/>
+  <rect x="24" y="24" width="464" height="464" rx="96" fill="url(#g)" opacity=".16"/>
+  <!-- metro sembolü -->
+  <path fill="url(#g)" d="M256 84c-74 0-134 22-134 22v206c0 30 24 54 54 54h26l-34 44h44l34-44h20l34 44h44l-34-44h26c30 0 54-24 54-54V106s-60-22-134-22Zm-96 72h192v96H160v-96Zm38 168a24 24 0 1 1 0-48 24 24 0 0 1 0 48Zm116 0a24 24 0 1 1 0-48 24 24 0 0 1 0 48Z"/>
+</svg>

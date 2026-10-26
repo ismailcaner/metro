@@ -1,0 +1,168 @@
+{
+ "generatedAt": "2026-10-19T16:43:11.873Z",
+ "source": "https://api.ibb.gov.tr/MetroIstanbul/api/MetroMobile/V2/GetLines",
+ "lines": [
+  {
+   "id": 4,
+   "code": "F1",
+   "name": "Taksim-Kabataş Füniküler Hattı",
+   "short": "F1 ISLETME",
+   "color": "rgb(124,115,88)",
+   "first": "06:00",
+   "last": "00:00"
+  },
+  {
+   "id": 20,
+   "code": "F4",
+   "name": "Boğaziçi Üniversitesi | Hisarüstü-Aşiyan Füniküler Hattı",
+   "short": "F4 ISLETME",
+   "color": "rgb(124,115,88)",
+   "first": "06:00",
+   "last": "00:00"
+  },
+  {
+   "id": 9,
+   "code": "M1A",
+   "name": "Yenikapı-Atatürk Havalimanı Metro Hattı",
+   "short": "M1A ISLETME",
+   "color": "rgb(238,49,36)",
+   "first": "05:50",
+   "last": "00:00"
+  },
+  {
+   "id": 10,
+   "code": "M1B",
+   "name": "Yenikapı-Kirazlı Metro Hattı",
+   "short": "M1B ISLETME",
+   "color": "rgb(238,49,36)",
+   "first": "06:00",
+   "last": "00:03"
+  },
+  {
+   "id": 1,
+   "code": "M2",
+   "name": "Yenikapı-Seyrantepe-Hacıosman Metro Hattı",
+   "short": "M2 ISLETME",
+   "color": "rgb(0,153,68)",
+   "first": "05:57",
+   "last": "00:00"
+  },
+  {
+   "id": 2,
+   "code": "M3",
+   "name": "Bakırköy-Kayaşehir Metro Hattı",
+   "short": "M3 ISLETME",
+   "color": "rgb(0,168,225)",
+   "first": "06:00",
+   "last": "00:00"
+  },
+  {
+   "id": 3,
+   "code": "M4",
+   "name": "Kadıköy-Sabiha Gökçen Havalimanı Metro Hattı",
+   "short": "M4 ISLETME",
+   "color": "rgb(233,30,118)",
+   "first": "06:00",
+   "last": "23:59"
+  },
+  {
+   "id": 5,
+   "code": "M5",
+   "name": "Üsküdar-Sultanbeyli Metro Hattı",
+   "short": "M5 ISLETME",
+   "color": "rgb(104,48,100)",
+   "first": "06:00",
+   "last": "00:02"
+  },
+  {
+   "id": 6,
+   "code": "M6",
+   "name": "Levent-Boğaziçi Ü. | Hisarüstü Metro Hattı",
+   "short": "M6 ISLETME",
+   "color": "rgb(202,169,119)",
+   "first": "06:00",
+   "last": "00:00"
+  },
+  {
+   "id": 7,
+   "code": "M7",
+   "name": "Yıldız-Mahmutbey Metro Hattı",
+   "short": "M7 ISLETME",
+   "color": "rgb(248,154,186)",
+   "first": "06:00",
+   "last": "00:25"
+  },
+  {
+   "id": 8,
+   "code": "M8",
+   "name": "Bostancı-Parseller Metro Hattı",
+   "short": "M8 ISLETME",
+   "color": "rgb(68,122,190)",
+   "first": "06:00",
+   "last": "00:00"
+  },
+  {
+   "id": 17,
+   "code": "M9",
+   "name": "Ataköy-Olimpiyat Metro Hattı",
+   "short": "M9 ISLETME",
+   "color": "rgb(240,229,20)",
+   "first": "06:00",
+   "last": "00:00"
+  },
+  {
+   "id": 11,
+   "code": "T1",
+   "name": "Kabataş-Bağcılar Tramvay Hattı",
+   "short": "T1 ISLETME",
+   "color": "rgb(0,79,125)",
+   "first": "06:00",
+   "last": "23:36"
+  },
+  {
+   "id": 12,
+   "code": "T3",
+   "name": "Kadıköy-Moda Tramvay Hattı",
+   "short": "T3 ISLETME",
+   "color": "rgb(168,101,40)",
+   "first": "07:10",
+   "last": "21:00"
+  },
+  {
+   "id": 13,
+   "code": "T4",
+   "name": "Topkapı-Mescid-i Selam Tramvay Hattı",
+   "short": "T4 ISLETME",
+   "color": "rgb(244,126,70)",
+   "first": "06:00",
+   "last": "00:00"
+  },
+  {
+   "id": 14,
+   "code": "T5",
+   "name": "Eminönü-Alibeyköy Tramvay Hattı",
+   "short": "T5 ISLETME",
+   "color": "rgb(124,114,179)",
+   "first": "06:00",
+   "last": "00:00"
+  },
+  {
+   "id": 15,
+   "code": "TF1",
+   "name": "Maçka-Taşkışla Teleferik Hattı",
+   "short": "TF1 ISLETME",
+   "color": "rgb(104,188,176)",
+   "first": "08:00",
+   "last": "20:00"
+  },
+  {
+   "id": 16,
+   "code": "TF2",
+   "name": "Eyüp-Piyer Loti Teleferik Hattı",
+   "short": "TF2 ISLETME",
+   "color": "rgb(104,188,176)",
+   "first": "08:00",
+   "last": "22:00"
+  }
+ ]
+}

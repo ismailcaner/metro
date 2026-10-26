@@ -1,0 +1,49 @@
+{
+  "name": "İstanbul Ulaşım",
+  "short_name": "İstanbul Ulaşım",
+  "description": "İstanbul metro, tramvay, metrobüs ve otobüs hatlarında sıradaki sefer kaç dakika sonra?",
+  "lang": "tr",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0b0f14",
+  "theme_color": "#0b0f14",
+  "categories": ["travel", "navigation", "utilities"],
+  "shortcuts": [
+    {
+      "name": "Otobüs",
+      "short_name": "Otobüs",
+      "description": "İETT hatları ve canlı durak varışları",
+      "url": "./#/otobus",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Metrobüs",
+      "short_name": "Metrobüs",
+      "description": "İETT metrobüs hatları ve canlı duraklar",
+      "url": "./#/metrobus",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Ayarlar",
+      "short_name": "Ayarlar",
+      "description": "Konum, tema ve uygulama bilgileri",
+      "url": "./#/ayarlar",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Bilgi",
+      "short_name": "Bilgi",
+      "description": "Uygulama, veri kaynakları ve gizlilik hakkında",
+      "url": "./#/bilgi",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ],
+  "icons": [
+    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

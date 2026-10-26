@@ -1,0 +1,9 @@
+node_modules
+tools
+server.mjs
+README.md
+.vercel
+.DS_Store
+react-ui-backup
+dist
+data/osm/*.osm.pbf

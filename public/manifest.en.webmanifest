@@ -1,0 +1,49 @@
+{
+  "name": "Istanbul Transit",
+  "short_name": "Istanbul Transit",
+  "description": "Next departures for Istanbul metro, tram, metrobus and bus lines.",
+  "lang": "en",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0b0f14",
+  "theme_color": "#0b0f14",
+  "categories": ["travel", "navigation", "utilities"],
+  "shortcuts": [
+    {
+      "name": "Bus",
+      "short_name": "Bus",
+      "description": "İETT lines and live stop arrivals",
+      "url": "./#/otobus",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Metrobus",
+      "short_name": "Metrobus",
+      "description": "İETT metrobus lines and live stops",
+      "url": "./#/metrobus",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Settings",
+      "short_name": "Settings",
+      "description": "Location, theme and app information",
+      "url": "./#/ayarlar",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "About",
+      "short_name": "About",
+      "description": "About the app, data sources and privacy",
+      "url": "./#/bilgi",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ],
+  "icons": [
+    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

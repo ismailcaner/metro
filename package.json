@@ -1,0 +1,38 @@
+{
+  "name": "siradaki-metro",
+  "version": "1.1.0",
+  "private": true,
+  "description": "İstanbul metro, tramvay, metrobüs ve otobüs için sıradaki sefer kaç dakika? — kurulabilir, çevrimdışı PWA",
+  "type": "module",
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  },
+  "scripts": {
+    "dev": "concurrently -k -n api,web -c yellow,cyan \"node --env-file-if-exists=.env server.mjs\" \"vite\"",
+    "dev:lan": "concurrently -k -n api,web -c yellow,cyan \"node --env-file-if-exists=.env server.mjs\" \"vite --host 0.0.0.0\"",
+    "build": "vite build",
+    "start": "node --env-file-if-exists=.env server.mjs",
+    "preview": "vite preview",
+    "scrape": "node tools/scrape.mjs",
+    "scrape:bus": "node tools/scrape-bus.mjs",
+    "icons": "node tools/make-icons.mjs",
+    "osm:index": "node tools/build-osm-place-index.mjs",
+    "scrape:bus:schedules": "node tools/scrape-bus-schedules.mjs"
+  },
+  "keywords": [
+    "istanbul",
+    "metro",
+    "otobüs",
+    "iett",
+    "pwa",
+    "ulasim",
+    "sefer"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^10.0.6",
+    "playwright": "^1.64.1",
+    "vite": "^8.3.5",
+    "vite-plugin-static-copy": "^4.1.1"
+  }
+}

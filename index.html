@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <title>İstanbul Ulaşım — Metro, metrobüs & otobüs</title>
+  <meta name="description" content="İstanbul metro, tramvay, metrobüs ve otobüs hatlarında sıradaki sefer kaç dakika sonra? Resmî tarifeler, canlı hat durumu ve İETT durak varışları." />
+  <meta name="theme-color" id="themeColor" content="#0d1117" />
+  <script>
+    try {
+      const pref = localStorage.getItem("sm.theme") || "device";
+      const dark = pref === "dark" || (pref === "device" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+      document.documentElement.dataset.theme = dark ? "dark" : "light";
+
+      const en = localStorage.getItem("sm.lang") === "en";
+      document.documentElement.lang = en ? "en" : "tr";
+      document.title = en
+        ? "Istanbul Transit — Metro, metrobus & bus"
+        : "İstanbul Ulaşım — Metro, metrobüs & otobüs";
+      const desc = document.querySelector('meta[name="description"]');
+      if (desc) {
+        desc.setAttribute(
+          "content",
+          en
+            ? "Next departures for Istanbul metro, tram, metrobus and bus lines. Official timetables, live line status and IETT stop arrivals."
+            : "İstanbul metro, tramvay, metrobüs ve otobüs hatlarında sıradaki sefer kaç dakika sonra? Resmî tarifeler, canlı hat durumu ve İETT durak varışları."
+        );
+      }
+      const manifest = document.querySelector('link[rel="manifest"]');
+      if (manifest) manifest.href = en ? "/manifest.en.webmanifest" : "/manifest.webmanifest";
+    } catch {}
+  </script>
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="icon" href="/icons/icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <button id="backBtn" class="icon-btn" hidden aria-label="Geri">←</button>
+    <div class="brand">
+      <div>
+        <h1 id="brandTitle">Metro</h1>
+        <p id="brandSub">İstanbul metro, metrobüs & otobüs</p>
+      </div>
+    </div>
+    <button id="journeyBtn" class="topbar-action" aria-label="Yolculuğa çık" title="Yolculuğa çık">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="6" cy="18" r="2"></circle>
+        <circle cx="18" cy="6" r="2"></circle>
+        <path d="M8 18h4a4 4 0 0 0 0-8h-1a4 4 0 0 1 0-8h5"></path>
+      </svg>
+      <span>Yolculuğa çık</span>
+    </button>
+    <button id="settingsBtn" class="icon-btn" aria-label="Ayarlar" title="Ayarlar">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="3"></circle>
+        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+      </svg>
+    </button>
+  </header>
+
+  <main id="view" aria-live="polite"></main>
+
+  <nav class="tabbar">
+    <button data-nav="bus">
+      <svg viewBox="0 0 24 24"><path d="M6 2h12a3 3 0 0 1 3 3v11a3 3 0 0 1-3 3v2h-2v-2H8v2H6v-2a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3m0 2a1 1 0 0 0-1 1v6h14V5a1 1 0 0 0-1-1zM6 18h12a1 1 0 0 0 1-1v-5H5v5a1 1 0 0 0 1 1m1-4.5A1.5 1.5 0 1 1 5.5 15 1.5 1.5 0 0 1 7 13.5m10 0A1.5 1.5 0 1 1 15.5 15 1.5 1.5 0 0 1 17 13.5M8 5h8v3H8z"/></svg><span>Otobüs</span>
+    </button>
+    <button data-nav="home" class="active">
+      <svg viewBox="0 0 24 24"><path d="M7 2h10a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3l1.3 2.5h-2.2L15 18H9l-1.1 2.5H5.7L7 18a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3m0 2a1 1 0 0 0-1 1v3h12V5a1 1 0 0 0-1-1zM6 10v5a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-5zm2 1.5A1.5 1.5 0 1 1 6.5 13 1.5 1.5 0 0 1 8 11.5m8 0A1.5 1.5 0 1 1 14.5 13 1.5 1.5 0 0 1 16 11.5"/></svg><span>Metro</span>
+    </button>
+    <button data-nav="metrobus">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><text x="12" y="15.6" text-anchor="middle" font-size="8" font-weight="800" fill="currentColor">34</text></svg><span>Metrobüs</span>
+    </button>
+  </nav>
+
+  <div id="toast" class="toast" hidden></div>
+  <div id="swipeBack" class="swipe-back" aria-hidden="true">←</div>
+
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
