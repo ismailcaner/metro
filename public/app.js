@@ -1,4 +1,5 @@
 /* İstanbul Ulaşım — uygulama mantığı (çerçevesiz, modüler vanilla JS) */
+import { findLocalRoutes } from "./route-engine.js";
 
 const FAV_KEY = "sm.favorites";
 const BUS_FAV_KEY = "sm.busFavs";
@@ -2459,7 +2460,7 @@ function renderJourneyTimeline(route) {
           ${transfer}
           <div class="journey-step-top">
             <div class="journey-step-title">${journeyLineBadge(leg)}<strong>${esc(journeyLegTitle(leg))}</strong></div>
-            <span class="journey-step-time">${journeyClock(leg.departureTime)} → ${journeyClock(leg.arrivalTime)}</span>
+            <span class="journey-step-time">${leg.estimated ? journeyDurationText(leg.durationMin) : `${journeyClock(leg.departureTime)} → ${journeyClock(leg.arrivalTime)}`}</span>
           </div>
           <div class="journey-step-meta">${esc(detail)}</div>
           <div class="journey-board">
@@ -2553,7 +2554,7 @@ function renderJourneyResults() {
               const tags = journeyRouteTags(item);
               return `<button class="journey-option ${index === selected ? "active" : ""}" type="button" data-journey-option="${index}" aria-pressed="${index === selected}">
                 <span class="journey-option-duration">${journeyRouteDuration(item) ? `${journeyRouteDuration(item)} ${t("dk", "min")}` : "—"}</span>
-                <span class="journey-option-time">${journeyClock(item.departureTime)} → ${journeyClock(item.arrivalTime)}</span>
+                <span class="journey-option-time">${item.estimated ? t("Tahmini", "Estimated") : `${journeyClock(item.departureTime)} → ${journeyClock(item.arrivalTime)}`}</span>
                 <span class="journey-option-meta">${journeyTransfersText(item.transfers)}${tags.length ? ` · ${tags.map((tag) => `<span class="journey-option-tag">${esc(tag)}</span>`).join(" ")}` : ""}</span>
               </button>`;
             })
@@ -2566,8 +2567,8 @@ function renderJourneyResults() {
     <div class="card journey-result-card">
       <div class="journey-result-head">
         <div class="grow">
-          <span class="journey-plan-tag">${t("Planlanan tarife", "Scheduled timetable")}</span>
-          <h2>${journeyClock(route.departureTime)} → ${journeyClock(route.arrivalTime)}</h2>
+          <span class="journey-plan-tag">${route.source === "local-json" ? t("Yerel rota motoru · tahmini", "Local route engine · estimated") : t("Planlanan tarife", "Scheduled timetable")}</span>
+          <h2>${route.source === "local-json" ? String(duration) + " " + t("dk tahmini", "min estimated") : `${journeyClock(route.departureTime)} → ${journeyClock(route.arrivalTime)}`}</h2>
           <p class="muted">${esc(j.origin.name)} → ${esc(j.destination.name)}</p>
           ${routeTags.length ? `<div class="journey-result-tags">${routeTags.map((tag) => `<span>${esc(tag)}</span>`).join("")}</div>` : ""}
         </div>
@@ -2629,25 +2630,27 @@ async function planJourney({ force = false } = {}) {
   renderJourneyResults();
 
   try {
-    const params = {
-      type: "journey",
-      from: journeyPointParam(j.origin),
-      to: journeyPointParam(j.destination),
-    };
-    const planned = journeyPlannedFor();
-    if (planned) {
-      params.date = planned.date;
-      params.time = planned.time;
-    }
-    const data = await fetchBusApi(params, { timeout: 14000 });
+    // Prefer the local graph built from existing JSON network and station coordinates.
+    const local = findLocalRoutes({ network: state.railNetwork, stations: state.stations, origin: j.origin, destination: j.destination, mode: j.mode });
     if (seq !== j.planSeq) return;
-    j.routes = (Array.isArray(data.routes) ? data.routes : []).filter((route) => journeyRouteMatchesMode(route));
-    if (j.mode === "fastest") j.routes.sort((a, b) => journeyRouteDuration(a) - journeyRouteDuration(b));
-    j.routesMeta = data;
+    if (local.routes.length) {
+      j.routes = local.routes.filter((route) => journeyRouteMatchesMode(route));
+      j.routesMeta = { engine: "local-json", disclaimer: local.disclaimer, generatedAt: local.generatedAt };
+    } else {
+      // Fall back to IETT when the local graph cannot connect the selected points.
+      const params = { type: "journey", from: journeyPointParam(j.origin), to: journeyPointParam(j.destination) };
+      const planned = journeyPlannedFor();
+      if (planned) { params.date = planned.date; params.time = planned.time; }
+      const data = await fetchBusApi(params, { timeout: 14000 });
+      if (seq !== j.planSeq) return;
+      j.routes = (Array.isArray(data.routes) ? data.routes : []).filter((route) => journeyRouteMatchesMode(route));
+      if (j.mode === "fastest") j.routes.sort((a, b) => journeyRouteDuration(a) - journeyRouteDuration(b));
+      j.routesMeta = { ...data, engine: "iett-fallback" };
+    }
   } catch {
     if (seq !== j.planSeq) return;
     j.routes = [];
-    j.routesError = t("İETT yolculuk servisi yanıt vermedi. Tarife dosyası yüklenemedi. Bağlantıyı kontrol edip tekrar deneyin.", "The İETT trip service did not respond. The timetable file could not be loaded. Check your connection and try again.");
+    j.routesError = t("Yerel rota hesaplanamadı ve İETT yedek servisi yanıt vermedi. Bağlantıyı kontrol edip tekrar deneyin.", "The local route could not be calculated and the İETT fallback did not respond. Check your connection and try again.");
   } finally {
     if (seq === j.planSeq) {
       j.routesLoading = false;
