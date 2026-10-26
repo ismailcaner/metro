@@ -8,7 +8,7 @@ Yolculuğa çık ekranında:
 
 - Konum izni varsa başlangıç otomatik olarak mevcut konumunuz olur; yoksa **Başlangıç** alanına nereden yola çıkacağınızı yazarsınız.
 - Başlangıç ve varış alanlarında duraklar yerel katalogda; İstanbul’daki semt, adres ve mekânlar projedeki yerel OpenStreetMap arama indeksinde aranır (ör. **Kadıköy**, **Taksim Meydanı**, **Nişantaşı kahve**). Mekân aramak için semt ile mekân türünü birlikte yazabilirsiniz.
-- İki nokta seçildiğinde İETT **Nasıl Giderim** planlayıcısından gelen seçenekler; binilecek hatlar, iniş/aktarma noktaları, yürüyüşler, planlanan kalkış–varış saatleri ve aktarma sayısıyla gösterilir.
+- İki nokta seçildiğinde rota seçenekleri Google Maps Platform **Routes API** üzerinden alınır; toplu taşıma ve yürüyüş adımları, süreler ve mesafeler Google'ın döndürdüğü alternatiflerden gösterilir. Google API anahtarı sunucu tarafındaki `/api/google-routes` uç noktasında tutulur.
 - Duraklar ve mekânlar yerel veriden aranır; yer araması internet servisine çıkmaz.
 - Bu ekrandaki saatler **planlanan tarifeye** dayanır; canlı araç konumu veya gerçek zamanlı varış tahmini değildir.
 
@@ -183,3 +183,10 @@ Metro özellikleri ve otobüs hat/durak araması çalışır; ancak **hat durakl
 - İETT canlı durak panosu ve duyuru listesi resmî olarak belgelenmiş bir JSON API değildir; HTML yapısı değişirse `lib/iett.mjs` içindeki ayrıştırıcılar güncellenmelidir.
 - `GetHatOtoKonum_json` da resmî olarak belgelenmiş bir JSON sözleşmesi değildir; alan adları değişebilir. Normal otobüs hat sayfasındaki canlı araç işaretleri için kullanılır; durak sayfasında gösterilmez. “Şu an” olarak gösterilen durak, aracın son ölçülen **en yakın durağıdır**; kesin GPS konumu değildir.
 - Metrobüs ile otobüs ayrımı İETT hat kataloğundaki `METROBÜS` tarifesine göre yapılır. Metrobüs aramasında yalnızca metrobüs hatlarının durak verisinde (`data/bus-line-stops.json`) geçen gerçek platform durakları listelenir; adında veya yönünde “metrobüs” geçen normal otobüs durakları listelenmez.
+
+
+## Google Maps rota entegrasyonu
+
+Yolculuk planlayıcısı özel yerel rota motorunu ve İETT rota planlayıcısını kullanmaz; rota isteğini sunucu tarafındaki `/api/google-routes` üzerinden Google Maps Routes API'ye gönderir.
+
+Vercel projesinde `GOOGLE_MAPS_API_KEY` ortam değişkenini tanımlayın. Google Cloud projesinde **Routes API** etkin olmalı; anahtar yalnızca gerekli API ile sınırlandırılmalıdır. Anahtarı `VITE_...` gibi istemciye açılabilecek bir değişkende tanımlamayın. Yer arama alanları şu an mevcut yerel OSM indeksini kullanmaya devam eder; bu değişiklik Google'ı rota hesaplamasında kullanır, yer aramasını henüz Google Places'e taşımaz.
