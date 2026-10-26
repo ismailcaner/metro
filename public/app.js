@@ -2508,7 +2508,7 @@ function renderJourneyResults() {
   }
   if (j.routesLoading) {
     box.innerHTML = `<div class="card journey-loading">
-      <div class="live-head"><div><strong>${t("Yolculuk planlanıyor", "Planning your trip")}</strong><p class="muted">${t("İETT’nin planlanan tarifesinden rota aranıyor…", "Searching routes in İETT's scheduled timetable…")}</p></div><span class="pulse"></span></div>
+      <div class="live-head"><div><strong>${t("Yolculuk planlanıyor", "Planning your trip")}</strong><p class="muted">${t("Yerel ulaşım ağında rota aranıyor…", "Searching the local transit network…")}</p></div><span class="pulse"></span></div>
       <div class="skeleton" style="height:50px;margin-top:14px"></div>
       <div class="skeleton" style="height:80px;margin-top:8px"></div>
     </div>`;
