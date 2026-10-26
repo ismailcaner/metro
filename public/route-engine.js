@@ -34,17 +34,21 @@ function buildGraph(network, stations) {
     if (!adjacency.has(from) || !adjacency.has(to)) return;
     adjacency.get(from).push({ to, ...edge });
   };
-  const coords = new Map();
+  // Coordinate catalog entries carry networkId, which is the stable station ID
+  // from rail-network.json. Never depend on display-name spelling for graph joins.
+  const coordsByStationId = new Map();
   for (const station of stations || []) {
-    if (Number.isFinite(Number(station.lat)) && Number.isFinite(Number(station.lng))) {
-      const key = `${station.code}:${norm(station.name)}`;
-      if (!coords.has(key)) coords.set(key, { lat: Number(station.lat), lng: Number(station.lng), info: station.info || null });
+    const stationId = station.networkId || station.stationId;
+    if (stationId && Number.isFinite(Number(station.lat)) && Number.isFinite(Number(station.lng))) {
+      if (!coordsByStationId.has(stationId)) {
+        coordsByStationId.set(stationId, { lat: Number(station.lat), lng: Number(station.lng), info: station.info || null });
+      }
     }
   }
   for (const line of network?.lines || []) {
     const lineStations = [...(line.stations || [])].sort((a, b) => Number(a.order) - Number(b.order));
     for (const station of lineStations) {
-      const point = coords.get(`${line.id}:${norm(station.name)}`) || null;
+      const point = coordsByStationId.get(station.id) || null;
       addNode({
         id: station.id, name: station.name, lineId: line.id,
         lineName: line.name, mode: line.mode || "metro",
