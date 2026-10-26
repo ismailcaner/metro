@@ -2500,6 +2500,47 @@ function journeyRouteDisruptions(route) {
   });
 }
 
+function journeyRailFacilities(route) {
+  const stations = [];
+  const seen = new Set();
+  for (const leg of route?.legs || []) {
+    if (leg?.kind !== "transit") continue;
+    const code = String(leg.lineId || leg.line?.id || leg.routeId || "").toLocaleUpperCase("tr");
+    if (!state.lines.has(code)) continue;
+    const mode = journeyModeKey(leg.mode || state.lines.get(code)?.mode || "");
+    const lineMode = String(state.lines.get(code)?.mode || "").toLocaleLowerCase("tr");
+    if (!/metro|tram|rail|train|subway|funicular|marmaray|light.?rail/.test(`${mode} ${lineMode} ${code}`)) continue;
+    for (const endpoint of [leg.from, leg.to]) {
+      const name = String(endpoint?.name || "").trim();
+      if (!name) continue;
+      const key = `${code}:${norm(name)}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      const station = state.stations.find((item) => item.code === code && norm(item.name) === norm(name))
+        || state.stations.find((item) => item.code === code && (norm(item.name).includes(norm(name)) || norm(name).includes(norm(item.name))));
+      if (station?.info) stations.push({ code, name: station.name, info: station.info });
+    }
+  }
+  return stations;
+}
+
+function journeyRailFacilitiesCard(route) {
+  const stations = journeyRailFacilities(route);
+  if (!stations.length) return "";
+  const items = stations.map(({ code, name, info }) => {
+    const facilities = [];
+    if (info.Lift != null && Number.isFinite(Number(info.Lift))) facilities.push(`${t("Asansör", "Elevators")}: ${Number(info.Lift)}`);
+    const escalators = info.Escolator ?? info.Escalator;
+    if (escalators != null && Number.isFinite(Number(escalators))) facilities.push(`${t("Yürüyen merdiven", "Escalators")}: ${Number(escalators)}`);
+    if (typeof info.WC === "boolean") facilities.push(`${t("WC", "Restroom")}: ${info.WC ? t("var", "available") : t("yok", "not listed")}`);
+    return { badge: code, color: lineColor(code), title: name, body: facilities.join(" · ") || t("Tesis bilgisi sınırlı.", "Facility details are limited.") };
+  });
+  return announcementCard(t("Güzergâhtaki istasyon bilgileri", "Facilities at stations on your route"), items, {
+    className: "journey-facilities",
+    footer: t("Bu bilgiler istasyon veri kaydındaki tesis sayılarını gösterir; asansör/yürüyen merdivenlerin anlık çalışır durumda olduğunu belirtmez. Canlı metro işletme uyarıları ayrı gösterilir.", "These are facility counts from the station dataset; they do not indicate whether lifts or escalators are currently working. Live metro service alerts are shown separately.")
+  });
+}
+
 function renderJourneyResults() {
   const box = $("#journeyResults");
   if (!box) return;
@@ -2605,7 +2646,7 @@ function renderJourneyResults() {
         title: shortText(item.desc, 150),
         body: item.desc,
       })), { className: "journey-alert" }) : ""}
-      <ol class="journey-timeline">${renderJourneyTimeline(route)}</ol>
+      ${journeyRailFacilitiesCard(route)}\n      <ol class="journey-timeline">${renderJourneyTimeline(route)}</ol>
       <p class="journey-note">${route.source === "local-json" ? t("Yerel JSON ağından hesaplandı. Süreler tahminidir; yürüme mesafesi düz çizgi yaklaşımıdır ve gerçek yürüme rotası ya da aktarma erişilebilirliği garanti edilmez.", "Calculated from the local JSON network. Durations are estimates; walking distance is a straight-line approximation and actual walking paths or transfer accessibility are not guaranteed.") : t("Saatler İETT Nasıl Giderim’in planlanan tarifesine dayanır; canlı araç konumu değildir. Trafik, sefer ve işletme değişiklikleriyle farklılık gösterebilir.", "Times are based on the IETT Nasıl Giderim scheduled timetable; they are not live vehicle positions and may vary.")}${
         planned.time ? ` ${t("Sorgu saati", "Query time")}: ${esc(planned.time)}${planned.date ? ` · ${esc(planned.date)}` : ""}.` : ""
       }${meta.stale ? ` ${t("Son önbellek gösteriliyor.", "Showing the last cached result.")}` : ""}</p>
