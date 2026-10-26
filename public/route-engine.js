@@ -83,6 +83,7 @@ function shortest(graph, starts, ends, strategy = "balanced") {
     queue.push({ id: start.id, cost: 0 });
   }
   const weight = (edge) => {
+    if (strategy === "direct" && edge.kind === "transfer") return Infinity;
     if (strategy === "fewest-transfers") return edge.kind === "transfer" ? 16 : 1;
     if (strategy === "fewest-stops") return edge.kind === "transfer" ? 5 : 1;
     return edge.minutes + (edge.kind === "transfer" ? 4 : 0);
@@ -195,7 +196,7 @@ export function findLocalRoutes({ network, stations, origin, destination, mode =
   const ends = nearestNodes(graph, toPoint);
   if (!starts.length || !ends.length) return { routes: [], reason: "no-nearby-station" };
   const strategies = mode === "direct"
-    ? ["fewest-stops"]
+    ? ["direct"]
     : mode === "fastest"
       ? ["balanced", "fewest-stops", "fewest-transfers"]
       : ["balanced", "fewest-transfers", "fewest-stops"];
