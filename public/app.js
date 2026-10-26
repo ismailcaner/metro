@@ -73,6 +73,9 @@ const state = {
     origin: null,
     destination: null,
     mode: "mixed",
+    allowedModes: ["BUS", "SUBWAY", "TRAIN", "LIGHT_RAIL", "RAIL", "OTHER"],
+    routeSort: "fewest-transfers",
+    wheelchairAccessibleOnly: false,
     timeMode: "now",
     departTime: "",
     originQuery: "",
@@ -2016,12 +2019,21 @@ function renderJourney() {
         </div>
       </div>
       ${journeyPlaceAttribution([j.origin, j.destination])}
-      <div class="journey-mode-picker">
-        <div class="setting-title">${t("Rota tercihi?", "Route preference")}</div>
-        <div class="journey-mode-options" role="group" aria-label="${t("Rota tercihi", "Route preference")}">
-          ${JOURNEY_MODE_OPTIONS.map(([value, trLabel, enLabel]) => `<button type="button" class="journey-mode-option ${j.mode === value ? "active" : ""}" data-journey-mode="${value}" aria-pressed="${j.mode === value}">${t(trLabel, enLabel)}</button>`).join("")}
+      <details class="journey-route-settings">
+        <summary>${t("Rota seçenekleri", "Route options")}</summary>
+        <div class="journey-route-settings-grid">
+          <fieldset>
+            <legend>${t("Tercih", "Preferences")}</legend>
+            ${[["BUS","Otobüs","Bus"],["SUBWAY","Metro","Metro"],["TRAIN","Tren","Train"],["LIGHT_RAIL","Tramvay ve hafif raylı sistem","Tram and light rail"]].map(([value,trLabel,enLabel]) => `<label class="journey-filter-option"><input type="checkbox" data-journey-vehicle="${value}" ${j.allowedModes.includes(value) ? "checked" : ""}> <span>${t(trLabel,enLabel)}</span></label>`).join("")}
+            <label class="journey-filter-option journey-filter-disabled"><input type="checkbox" disabled> <span>${t("Tekerlekli sandalyeye uygun","Wheelchair accessible")}</span></label>
+            <p class="journey-filter-note">${t("Google Routes API bu istekte durakların asansör veya tekerlekli sandalye erişilebilirliği bilgisini sağlamıyor; bu filtre şimdilik kullanılamıyor.","Google Routes API does not provide elevator or wheelchair-accessibility data in this response, so this filter is not available yet.")}</p>
+          </fieldset>
+          <fieldset>
+            <legend>${t("Rotalar", "Routes")}</legend>
+            ${[["fastest","En iyi rota","Best route"],["fewest-transfers","Daha az aktarma","Fewer transfers"],["least-walking","Daha az yürüme","Less walking"]].map(([value,trLabel,enLabel]) => `<label class="journey-filter-option"><input type="radio" name="journey-route-sort" data-journey-sort="${value}" ${j.routeSort === value ? "checked" : ""}> <span>${t(trLabel,enLabel)}</span></label>`).join("")}
+          </fieldset>
         </div>
-      </div>
+      </details>
       <div class="journey-mode-picker">
         <div class="setting-title">${t("Kalkış zamanı", "Departure time")}</div>
         <div class="journey-mode-options" role="group" aria-label="${t("Kalkış zamanı", "Departure time")}">
@@ -2048,6 +2060,23 @@ function renderJourney() {
       const mode = button.dataset.journeyMode;
       if (mode === state.journey.mode) return;
       state.journey.mode = mode;
+      resetJourneyRoutes();
+      renderJourney();
+    })
+  );
+  view.querySelectorAll("[data-journey-vehicle]").forEach((input) =>
+    input.addEventListener("change", () => {
+      const value = input.dataset.journeyVehicle;
+      const selected = new Set(state.journey.allowedModes);
+      if (input.checked) selected.add(value); else selected.delete(value);
+      state.journey.allowedModes = [...selected];
+      resetJourneyRoutes();
+      renderJourney();
+    })
+  );
+  view.querySelectorAll("[data-journey-sort]").forEach((input) =>
+    input.addEventListener("change", () => {
+      state.journey.routeSort = input.dataset.journeySort;
       resetJourneyRoutes();
       renderJourney();
     })
@@ -2654,9 +2683,9 @@ async function planJourney({ force = false } = {}) {
         destination: { lat: destinationPoint.lat, lng: destinationPoint.lng },
         departureTime,
         routingPreference:
-          j.mode === "least-walking"
+          j.routeSort === "least-walking"
             ? "LESS_WALKING"
-            : j.mode === "direct"
+            : j.routeSort === "fewest-transfers"
               ? "FEWER_TRANSFERS"
               : undefined,
       }),
@@ -2667,12 +2696,28 @@ async function planJourney({ force = false } = {}) {
       throw new Error(`${detail}${apiData.status ? ` (${apiData.status})` : ""}`);
     }
     if (seq !== j.planSeq) return;
+    const allowedModes = new Set(j.allowedModes);
+    const modeMap = (mode) => {
+      const key = String(mode || "").toUpperCase();
+      if (["BUS", "BUS_RAPID_TRANSIT"].includes(key)) return "BUS";
+      if (["SUBWAY", "METRO_RAIL"].includes(key)) return "SUBWAY";
+      if (["TRAIN", "HEAVY_RAIL", "COMMUTER_TRAIN"].includes(key)) return "TRAIN";
+      if (["LIGHT_RAIL", "TRAM", "MONORAIL"].includes(key)) return "LIGHT_RAIL";
+      if (["FERRY", "CABLE_CAR", "GONDOLA", "FUNICULAR", "OTHER"].includes(key)) return "OTHER";
+      return "OTHER";
+    };
     j.routes = (Array.isArray(apiData.routes) ? apiData.routes : [])
-      .filter((route) => journeyRouteMatchesMode(route));
-    if (j.mode === "fastest") j.routes.sort((a, b) => journeyRouteDuration(a) - journeyRouteDuration(b));
-    if (j.mode === "least-walking") j.routes.sort((a, b) =>
+      .filter((route) => journeyRouteMatchesMode(route))
+      .filter((route) => (route.legs || []).filter((leg) => leg.kind === "transit")
+        .every((leg) => allowedModes.has(modeMap(leg.mode))));
+    if (j.routeSort === "fastest") j.routes.sort((a, b) => journeyRouteDuration(a) - journeyRouteDuration(b));
+    if (j.routeSort === "least-walking") j.routes.sort((a, b) =>
       (Number(a.walkDistance) || 0) - (Number(b.walkDistance) || 0)
       || (Number(a.transfers) || 0) - (Number(b.transfers) || 0)
+      || journeyRouteDuration(a) - journeyRouteDuration(b)
+    );
+    if (j.routeSort === "fewest-transfers") j.routes.sort((a, b) =>
+      (Number(a.transfers) || 0) - (Number(b.transfers) || 0)
       || journeyRouteDuration(a) - journeyRouteDuration(b)
     );
     j.routes = j.routes.slice(0, 5);
