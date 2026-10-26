@@ -2682,6 +2682,7 @@ async function planJourney({ force = false } = {}) {
         origin: { lat: originPoint.lat, lng: originPoint.lng },
         destination: { lat: destinationPoint.lat, lng: destinationPoint.lng },
         departureTime,
+        allowedTravelModes: j.allowedModes,
         routingPreference:
           j.routeSort === "least-walking"
             ? "LESS_WALKING"
