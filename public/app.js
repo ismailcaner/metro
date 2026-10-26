@@ -2028,10 +2028,7 @@ function renderJourney() {
             <label class="journey-filter-option journey-filter-disabled"><input type="checkbox" disabled> <span>${t("Tekerlekli sandalyeye uygun","Wheelchair accessible")}</span></label>
             <p class="journey-filter-note">${t("İETT planlayıcısında bu uygulama içi erişilebilirlik filtresi desteklenmiyor.","This in-app accessibility filter is not supported by the IETT planner.")}</p>
           </fieldset>
-          <fieldset>
-            <legend>${t("Rotalar", "Routes")}</legend>
-            ${[["fastest","En iyi rota","Best route"],["fewest-transfers","Daha az aktarma","Fewer transfers"],["least-walking","Daha az yürüme","Less walking"]].map(([value,trLabel,enLabel]) => `<label class="journey-filter-option"><input type="radio" name="journey-route-sort" data-journey-sort="${value}" ${j.routeSort === value ? "checked" : ""}> <span>${t(trLabel,enLabel)}</span></label>`).join("")}
-          </fieldset>
+          <p class="journey-filter-note">${t("Rota seçenekleri ve güzergâh ayrıntıları İBB haritasının kendi TUBS panelinde sunulur.", "Route preferences and directions are provided by the map's built-in TUBS panel.")}</p>
         </div>
       </details>
       <div class="journey-mode-picker">
