@@ -89,7 +89,8 @@ function shortest(graph, starts, ends, strategy = "balanced") {
   // Include access/egress walking in route selection, not just in the final display.
   // A route with a slightly longer ride should win when it avoids a long walk.
   for (const start of starts) {
-    const accessCost = (Number(start.accessMeters) || 0) / 75;
+    const accessMeters = Number(start.accessMeters) || 0;
+    const accessCost = strategy === "least-walking" ? accessMeters : accessMeters / 75;
     if (accessCost < (distance.get(start.id) ?? Infinity)) {
       distance.set(start.id, accessCost);
       queue.push({ id: start.id, cost: accessCost, startId: start.id });
@@ -99,7 +100,10 @@ function shortest(graph, starts, ends, strategy = "balanced") {
     if (strategy === "direct" && edge.kind === "transfer") return Infinity;
     if (strategy === "fewest-transfers") return edge.kind === "transfer" ? 16 : 1;
     if (strategy === "fewest-stops") return edge.kind === "transfer" ? 5 : 1;
-    if (strategy === "least-walking") return edge.kind === "transfer" ? 6 : 1;
+    // Minimize actual access/egress walking first. Since transfer walking paths
+    // are not in the dataset, use a modest fixed walking-equivalent penalty per
+    // interchange; riding time/stops do not dominate this strategy.
+    if (strategy === "least-walking") return edge.kind === "transfer" ? 100 : 0;
     return edge.minutes + (edge.kind === "transfer" ? 4 : 0);
   };
   let best = null;
@@ -110,7 +114,8 @@ function shortest(graph, starts, ends, strategy = "balanced") {
     if (best && current.cost >= best.cost) break;
     const endNode = endById.get(current.id);
     if (endNode) {
-      const finalCost = current.cost + (Number(endNode.accessMeters) || 0) / 75;
+      const egressCost = Number(endNode.accessMeters) || 0;
+      const finalCost = current.cost + (strategy === "least-walking" ? egressCost : egressCost / 75);
       if (!best || finalCost < best.cost) {
         const edges = [];
         let cursor = current.id;
@@ -223,9 +228,11 @@ export function findLocalRoutes({ network, stations, origin, destination, mode =
   if (!starts.length || !ends.length) return { routes: [], reason: "no-nearby-station" };
   const strategies = mode === "direct"
     ? ["direct"]
-    : mode === "fastest"
-      ? ["balanced", "fewest-stops", "fewest-transfers"]
-      : ["balanced", "fewest-transfers", "fewest-stops"];
+    : mode === "least-walking"
+      ? ["least-walking", "fewest-transfers", "balanced"]
+      : mode === "fastest"
+        ? ["balanced", "fewest-stops", "fewest-transfers"]
+        : ["balanced", "fewest-transfers", "fewest-stops"];
   const routes = [];
   const seen = new Set();
   for (const strategy of strategies) {
@@ -240,15 +247,17 @@ export function findLocalRoutes({ network, stations, origin, destination, mode =
   }
   // Fastest mode prioritizes estimated total duration. Walking is a secondary
   // tie-breaker only; direct and mixed modes retain their own preferences.
-  routes.sort((a, b) => mode === "fastest"
-    ? a.durationMin - b.durationMin || a.walkDistance - b.walkDistance || a.transfers - b.transfers
-    : mode === "direct"
+  routes.sort((a, b) => mode === "least-walking"
+    ? a.walkDistance - b.walkDistance || a.transfers - b.transfers || a.durationMin - b.durationMin
+    : mode === "fastest"
+      ? a.durationMin - b.durationMin || a.walkDistance - b.walkDistance || a.transfers - b.transfers
+      : mode === "direct"
       ? a.transfers - b.transfers || a.durationMin - b.durationMin
       : a.durationMin + a.transfers * 4 - (b.durationMin + b.transfers * 4));
   return {
     routes: routes.slice(0, 3),
     engine: "local-json",
     generatedAt: network.generatedAt || null,
-    disclaimer: "Süreler tahminidir; aktarma adaylarının bir kısmı doğrulanmamıştır.",
+    disclaimer: "Süreler tahminidir; yalnızca official_map_transfer_candidate aktarmaları kullanılır. Aktarma yürüme mesafeleri ayrıca doğrulanmamıştır.",
   };
 }
