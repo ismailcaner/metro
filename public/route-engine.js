@@ -230,11 +230,14 @@ export function findLocalRoutes({ network, stations, origin, destination, mode =
     if (mode === "direct" && route.transfers > 0) continue;
     routes.push(route);
   }
-  routes.sort((a, b) => mode === "fastest"
-    ? a.walkDistance - b.walkDistance || a.durationMin - b.durationMin || a.transfers - b.transfers
-    : mode === "direct"
-      ? a.transfers - b.transfers || a.durationMin - b.durationMin
-      : a.durationMin + a.transfers * 4 - (b.durationMin + b.transfers * 4));
+  // Primary objective is the least walking; use the selected preference as a tie-breaker.
+  routes.sort((a, b) => a.walkDistance - b.walkDistance || (
+    mode === "fastest"
+      ? a.durationMin - b.durationMin || a.transfers - b.transfers
+      : mode === "direct"
+        ? a.transfers - b.transfers || a.durationMin - b.durationMin
+        : a.durationMin + a.transfers * 4 - (b.durationMin + b.transfers * 4)
+  ));
   return {
     routes: routes.slice(0, 3),
     engine: "local-json",
