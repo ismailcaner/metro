@@ -13,7 +13,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { origin, destination, departureTime, routingPreference } = req.body || {};
+    const { origin, destination, departureTime, routingPreference, allowedTravelModes } = req.body || {};
     const valid = (point) =>
       point &&
       Number.isFinite(Number(point.lat)) &&
@@ -36,8 +36,18 @@ export default async function handler(req, res) {
       languageCode: "tr",
       regionCode: "TR",
       ...(departureTime ? { departureTime } : {}),
-      ...(supportedPreferences.has(routingPreference)
-        ? { transitPreferences: { routingPreference } }
+      ...((supportedPreferences.has(routingPreference) ||
+        (Array.isArray(allowedTravelModes) && allowedTravelModes.length))
+        ? {
+            transitPreferences: {
+              ...(supportedPreferences.has(routingPreference) ? { routingPreference } : {}),
+              ...(Array.isArray(allowedTravelModes)
+                ? { allowedTravelModes: allowedTravelModes.filter((mode) =>
+                    ["BUS", "SUBWAY", "TRAIN", "LIGHT_RAIL", "RAIL", "OTHER"].includes(mode)
+                  ) }
+                : {}),
+            },
+          }
         : {}),
     };
 
