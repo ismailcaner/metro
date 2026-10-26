@@ -8,7 +8,7 @@ Yolculuğa çık ekranında:
 
 - Konum izni varsa başlangıç otomatik olarak mevcut konumunuz olur; yoksa **Başlangıç** alanına nereden yola çıkacağınızı yazarsınız.
 - Başlangıç ve varış alanlarında duraklar yerel katalogda; İstanbul’daki semt, adres ve mekânlar projedeki yerel OpenStreetMap arama indeksinde aranır (ör. **Kadıköy**, **Taksim Meydanı**, **Nişantaşı kahve**). Mekân aramak için semt ile mekân türünü birlikte yazabilirsiniz.
-- İki nokta seçildiğinde rota seçenekleri Google Maps Platform **Routes API** üzerinden alınır; toplu taşıma ve yürüyüş adımları, süreler ve mesafeler Google'ın döndürdüğü alternatiflerden gösterilir. Google API anahtarı sunucu tarafındaki `/api/google-routes` uç noktasında tutulur.
+- İki nokta seçildiğinde rota, İBB Şehir Haritası API'sindeki **TUBS (Toplu Ulaşım Bilgi Sistemi)** ile harita üzerinde oluşturulur. API anahtarı Vercel'deki `IBB_MAP_API_KEY` ortam değişkeninden `/api/ibb-map-config` üzerinden alınır. TUBS rota çizimini harita bileşeninde gösterir; rota adımlarını JSON olarak uygulamaya döndürmez.
 - Duraklar ve mekânlar yerel veriden aranır; yer araması internet servisine çıkmaz.
 - Bu ekrandaki saatler **planlanan tarifeye** dayanır; canlı araç konumu veya gerçek zamanlı varış tahmini değildir.
 
