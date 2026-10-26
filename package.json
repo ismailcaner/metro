@@ -17,7 +17,8 @@
     "scrape:bus": "node tools/scrape-bus.mjs",
     "icons": "node tools/make-icons.mjs",
     "osm:index": "node tools/build-osm-place-index.mjs",
-    "scrape:bus:schedules": "node tools/scrape-bus-schedules.mjs"
+    "scrape:bus:schedules": "node tools/scrape-bus-schedules.mjs",
+    "test": "node --test"
   },
   "keywords": [
     "istanbul",
