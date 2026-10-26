@@ -216,8 +216,8 @@ export function findLocalRoutes({ network, stations, origin, destination, mode =
   const strategies = mode === "direct"
     ? ["direct"]
     : mode === "fastest"
-      ? ["least-walking", "balanced", "fewest-stops", "fewest-transfers"]
-      : ["least-walking", "balanced", "fewest-transfers", "fewest-stops"];
+      ? ["balanced", "fewest-stops", "fewest-transfers"]
+      : ["balanced", "fewest-transfers", "fewest-stops"];
   const routes = [];
   const seen = new Set();
   for (const strategy of strategies) {
@@ -230,14 +230,13 @@ export function findLocalRoutes({ network, stations, origin, destination, mode =
     if (mode === "direct" && route.transfers > 0) continue;
     routes.push(route);
   }
-  // Primary objective is the least walking; use the selected preference as a tie-breaker.
-  routes.sort((a, b) => a.walkDistance - b.walkDistance || (
-    mode === "fastest"
-      ? a.durationMin - b.durationMin || a.transfers - b.transfers
-      : mode === "direct"
-        ? a.transfers - b.transfers || a.durationMin - b.durationMin
-        : a.durationMin + a.transfers * 4 - (b.durationMin + b.transfers * 4)
-  ));
+  // Fastest mode prioritizes estimated total duration. Walking is a secondary
+  // tie-breaker only; direct and mixed modes retain their own preferences.
+  routes.sort((a, b) => mode === "fastest"
+    ? a.durationMin - b.durationMin || a.walkDistance - b.walkDistance || a.transfers - b.transfers
+    : mode === "direct"
+      ? a.transfers - b.transfers || a.durationMin - b.durationMin
+      : a.durationMin + a.transfers * 4 - (b.durationMin + b.transfers * 4));
   return {
     routes: routes.slice(0, 3),
     engine: "local-json",
