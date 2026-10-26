@@ -76,32 +76,50 @@ function buildGraph(network, stations) {
 }
 
 function shortest(graph, starts, ends, strategy = "balanced") {
-  const endSet = new Set(ends.map((x) => x.id));
+  const endById = new Map(ends.map((node) => [node.id, node]));
   const distance = new Map(), previous = new Map(), queue = [];
+  // Include access/egress walking in route selection, not just in the final display.
+  // A route with a slightly longer ride should win when it avoids a long walk.
   for (const start of starts) {
-    distance.set(start.id, 0);
-    queue.push({ id: start.id, cost: 0 });
+    const accessCost = (Number(start.accessMeters) || 0) / 75;
+    if (accessCost < (distance.get(start.id) ?? Infinity)) {
+      distance.set(start.id, accessCost);
+      queue.push({ id: start.id, cost: accessCost, startId: start.id });
+    }
   }
   const weight = (edge) => {
     if (strategy === "direct" && edge.kind === "transfer") return Infinity;
     if (strategy === "fewest-transfers") return edge.kind === "transfer" ? 16 : 1;
     if (strategy === "fewest-stops") return edge.kind === "transfer" ? 5 : 1;
+    if (strategy === "least-walking") return edge.kind === "transfer" ? 6 : 1;
     return edge.minutes + (edge.kind === "transfer" ? 4 : 0);
   };
+  let best = null;
   while (queue.length) {
     queue.sort((a, b) => a.cost - b.cost);
     const current = queue.shift();
     if (current.cost !== distance.get(current.id)) continue;
-    if (endSet.has(current.id)) {
-      const edges = [];
-      let cursor = current.id;
-      while (previous.has(cursor)) {
-        const step = previous.get(cursor);
-        edges.push({ from: graph.nodes.get(step.from), to: graph.nodes.get(cursor), edge: step.edge });
-        cursor = step.from;
+    if (best && current.cost >= best.cost) break;
+    const endNode = endById.get(current.id);
+    if (endNode) {
+      const finalCost = current.cost + (Number(endNode.accessMeters) || 0) / 75;
+      if (!best || finalCost < best.cost) {
+        const edges = [];
+        let cursor = current.id;
+        while (previous.has(cursor)) {
+          const step = previous.get(cursor);
+          edges.push({ from: graph.nodes.get(step.from), to: graph.nodes.get(cursor), edge: step.edge });
+          cursor = step.from;
+        }
+        edges.reverse();
+        best = {
+          edges,
+          start: starts.find((node) => node.id === cursor) || graph.nodes.get(cursor),
+          end: endNode,
+          cost: finalCost,
+        };
       }
-      edges.reverse();
-      return { edges, start: starts.find((node) => node.id === cursor) || graph.nodes.get(cursor), end: ends.find((node) => node.id === current.id) || graph.nodes.get(current.id), cost: current.cost };
+      continue;
     }
     for (const edge of graph.adjacency.get(current.id) || []) {
       const nextCost = current.cost + weight(edge);
@@ -112,7 +130,7 @@ function shortest(graph, starts, ends, strategy = "balanced") {
       }
     }
   }
-  return null;
+  return best;
 }
 
 function nearestNodes(graph, point, maxDistance = 1800) {
@@ -198,8 +216,8 @@ export function findLocalRoutes({ network, stations, origin, destination, mode =
   const strategies = mode === "direct"
     ? ["direct"]
     : mode === "fastest"
-      ? ["balanced", "fewest-stops", "fewest-transfers"]
-      : ["balanced", "fewest-transfers", "fewest-stops"];
+      ? ["least-walking", "balanced", "fewest-stops", "fewest-transfers"]
+      : ["least-walking", "balanced", "fewest-transfers", "fewest-stops"];
   const routes = [];
   const seen = new Set();
   for (const strategy of strategies) {
@@ -213,7 +231,7 @@ export function findLocalRoutes({ network, stations, origin, destination, mode =
     routes.push(route);
   }
   routes.sort((a, b) => mode === "fastest"
-    ? a.durationMin - b.durationMin || a.transfers - b.transfers
+    ? a.walkDistance - b.walkDistance || a.durationMin - b.durationMin || a.transfers - b.transfers
     : mode === "direct"
       ? a.transfers - b.transfers || a.durationMin - b.durationMin
       : a.durationMin + a.transfers * 4 - (b.durationMin + b.transfers * 4));
