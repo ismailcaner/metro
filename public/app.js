@@ -2026,7 +2026,7 @@ function renderJourney() {
             <legend>${t("Tercih", "Preferences")}</legend>
             ${[["BUS","Otobüs","Bus"],["SUBWAY","Metro","Metro"],["TRAIN","Tren","Train"],["LIGHT_RAIL","Tramvay ve hafif raylı sistem","Tram and light rail"]].map(([value,trLabel,enLabel]) => `<label class="journey-filter-option"><input type="checkbox" data-journey-vehicle="${value}" ${j.allowedModes.includes(value) ? "checked" : ""}> <span>${t(trLabel,enLabel)}</span></label>`).join("")}
             <label class="journey-filter-option journey-filter-disabled"><input type="checkbox" disabled> <span>${t("Tekerlekli sandalyeye uygun","Wheelchair accessible")}</span></label>
-            <p class="journey-filter-note">${t("Google Routes API bu istekte durakların asansör veya tekerlekli sandalye erişilebilirliği bilgisini sağlamıyor; bu filtre şimdilik kullanılamıyor.","Google Routes API does not provide elevator or wheelchair-accessibility data in this response, so this filter is not available yet.")}</p>
+            <p class="journey-filter-note">${t("İETT planlayıcısında bu uygulama içi erişilebilirlik filtresi desteklenmiyor.","This in-app accessibility filter is not supported by the IETT planner.")}</p>
           </fieldset>
           <fieldset>
             <legend>${t("Rotalar", "Routes")}</legend>
