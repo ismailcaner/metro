@@ -100,7 +100,7 @@ function shortest(graph, starts, ends, strategy = "balanced") {
         cursor = step.from;
       }
       edges.reverse();
-      return { edges, start: graph.nodes.get(cursor), end: graph.nodes.get(current.id), cost: current.cost };
+      return { edges, start: starts.find((node) => node.id === cursor) || graph.nodes.get(cursor), end: ends.find((node) => node.id === current.id) || graph.nodes.get(current.id), cost: current.cost };
     }
     for (const edge of graph.adjacency.get(current.id) || []) {
       const nextCost = current.cost + weight(edge);
@@ -207,7 +207,7 @@ export function findLocalRoutes({ network, stations, origin, destination, mode =
     const signature = path.edges.map((x) => x.from.id + ">" + x.to.id).join("|");
     if (seen.has(signature)) continue;
     seen.add(signature);
-    routes.push(makeRoute(path, origin, destination, routes.length));
+    const route = makeRoute(path, origin, destination, routes.length);\n    if (mode === "direct" && route.transfers > 0) continue;\n    routes.push(route);
   }
   routes.sort((a, b) => mode === "fastest"
     ? a.durationMin - b.durationMin || a.transfers - b.transfers
