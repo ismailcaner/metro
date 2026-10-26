@@ -112,7 +112,7 @@ export default async function handler(req, res) {
             durationMin: Math.max(0, Math.round(seconds / 60)),
             departureTime: departureMs,
             arrivalTime: arrivalMs,
-            estimated: true,
+            estimated: false,
           });
         }
       }
@@ -126,7 +126,7 @@ export default async function handler(req, res) {
         walkDistance,
         legs,
         source: "google-routes",
-        estimated: true,
+        estimated: false,
       };
     });
 
