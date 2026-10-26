@@ -2630,23 +2630,43 @@ async function planJourney({ force = false } = {}) {
   renderJourneyResults();
 
   try {
-    // Prefer the local graph built from existing JSON network and station coordinates.
+    // Combine local rail routes with IETT planner routes so buses are considered too.
     const local = findLocalRoutes({ network: state.railNetwork, stations: state.stations, origin: j.origin, destination: j.destination, mode: j.mode });
     if (seq !== j.planSeq) return;
-    if (local.routes.length) {
-      j.routes = local.routes.filter((route) => journeyRouteMatchesMode(route));
-      j.routesMeta = { engine: "local-json", disclaimer: local.disclaimer, generatedAt: local.generatedAt };
-    } else {
-      // Fall back to IETT when the local graph cannot connect the selected points.
-      const params = { type: "journey", from: journeyPointParam(j.origin), to: journeyPointParam(j.destination) };
-      const planned = journeyPlannedFor();
-      if (planned) { params.date = planned.date; params.time = planned.time; }
-      const data = await fetchBusApi(params, { timeout: 14000 });
+    const localRoutes = local.routes.filter((route) => journeyRouteMatchesMode(route));
+    const params = { type: "journey", from: journeyPointParam(j.origin), to: journeyPointParam(j.destination) };
+    const planned = journeyPlannedFor();
+    if (planned) { params.date = planned.date; params.time = planned.time; }
+
+    let apiRoutes = [];
+    let apiData = null;
+    try {
+      apiData = await fetchBusApi(params, { timeout: 14000 });
       if (seq !== j.planSeq) return;
-      j.routes = (Array.isArray(data.routes) ? data.routes : []).filter((route) => journeyRouteMatchesMode(route));
-      if (j.mode === "fastest") j.routes.sort((a, b) => journeyRouteDuration(a) - journeyRouteDuration(b));
-      j.routesMeta = { ...data, engine: "iett-fallback" };
+      apiRoutes = (Array.isArray(apiData.routes) ? apiData.routes : []).filter((route) => journeyRouteMatchesMode(route));
+    } catch (error) {
+      if (!localRoutes.length) throw error;
     }
+
+    const seen = new Set();
+    j.routes = [...localRoutes, ...apiRoutes].filter((route) => {
+      const signature = (route.legs || []).map((leg) => [
+        leg.kind || leg.type || "",
+        leg.lineId || leg.lineCode || leg.line || "",
+        leg.from?.name || leg.from || "",
+        leg.to?.name || leg.to || "",
+      ].join(":")).join("|") || route.id || JSON.stringify(route);
+      if (seen.has(signature)) return false;
+      seen.add(signature);
+      return true;
+    });
+    if (j.mode === "fastest") j.routes.sort((a, b) => journeyRouteDuration(a) - journeyRouteDuration(b));
+    j.routes = j.routes.slice(0, 5);
+    j.routesMeta = {
+      engine: apiRoutes.length ? "local-json+iett" : "local-json",
+      disclaimer: [local.disclaimer, apiData?.disclaimer].filter(Boolean).join(" "),
+      generatedAt: local.generatedAt || apiData?.generatedAt || null,
+    };
   } catch {
     if (seq !== j.planSeq) return;
     j.routes = [];
