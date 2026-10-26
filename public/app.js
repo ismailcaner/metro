@@ -2567,8 +2567,8 @@ function renderJourneyResults() {
     <div class="card journey-result-card">
       <div class="journey-result-head">
         <div class="grow">
-          <span class="journey-plan-tag">${route.source === "google-routes" ? t("Google Maps toplu taşıma rotası", "Google Maps transit route") : route.source === "local-json" ? t("Yerel rota motoru · tahmini", "Local route engine · estimated") : t("Planlanan tarife", "Scheduled timetable")}</span>
-          <h2>${route.source === "google-routes" && (!route.departureTime || !route.arrivalTime) ? `${duration} ${t("dk tahmini", "min estimated")}` : route.source === "local-json" ? String(duration) + " " + t("dk tahmini", "min estimated") : `${journeyClock(route.departureTime)} → ${journeyClock(route.arrivalTime)}`}</h2>
+          <span class="journey-plan-tag">${route.source === "local-json" ? t("Yerel rota motoru · tahmini", "Local route engine · estimated") : t("Planlanan tarife", "Scheduled timetable")}</span>
+          <h2>${route.source === "local-json" ? String(duration) + " " + t("dk tahmini", "min estimated") : `${journeyClock(route.departureTime)} → ${journeyClock(route.arrivalTime)}`}</h2>
           <p class="muted">${esc(j.origin.name)} → ${esc(j.destination.name)}</p>
           ${routeTags.length ? `<div class="journey-result-tags">${routeTags.map((tag) => `<span>${esc(tag)}</span>`).join("")}</div>` : ""}
         </div>
@@ -2587,7 +2587,7 @@ function renderJourneyResults() {
         body: item.desc,
       })), { className: "journey-alert" }) : ""}
       <ol class="journey-timeline">${renderJourneyTimeline(route)}</ol>
-      <p class="journey-note">${route.source === "google-routes" ? t("Rota Google Maps Routes API tarafından hesaplandı. Sefer saatleri API yanıtında mevcutsa gösterilir; gerçek zamanlı araç konumu veya asansör erişilebilirliği garantisi değildir.", "Route calculated by Google Maps Routes API. Departure times are shown when available in the API response; this is not live vehicle location or a guarantee of elevator accessibility.") : route.source === "local-json" ? t("Yerel JSON ağından hesaplandı. Süreler tahminidir; yürüme mesafesi düz çizgi yaklaşımıdır ve gerçek yürüme rotası ya da aktarma erişilebilirliği garanti edilmez.", "Calculated from the local JSON network. Durations are estimates; walking distance is a straight-line approximation and actual walking paths or transfer accessibility are not guaranteed.") : t("Saatler İETT Nasıl Giderim’in planlanan tarifesine dayanır; canlı araç konumu değildir. Trafik, sefer ve işletme değişiklikleriyle farklılık gösterebilir.", "Times are based on the IETT Nasıl Giderim scheduled timetable; they are not live vehicle positions and may vary.")}${
+      <p class="journey-note">${route.source === "local-json" ? t("Yerel JSON ağından hesaplandı. Süreler tahminidir; yürüme mesafesi düz çizgi yaklaşımıdır ve gerçek yürüme rotası ya da aktarma erişilebilirliği garanti edilmez.", "Calculated from the local JSON network. Durations are estimates; walking distance is a straight-line approximation and actual walking paths or transfer accessibility are not guaranteed.") : t("Saatler İETT Nasıl Giderim’in planlanan tarifesine dayanır; canlı araç konumu değildir. Trafik, sefer ve işletme değişiklikleriyle farklılık gösterebilir.", "Times are based on the IETT Nasıl Giderim scheduled timetable; they are not live vehicle positions and may vary.")}${
         planned.time ? ` ${t("Sorgu saati", "Query time")}: ${esc(planned.time)}${planned.date ? ` · ${esc(planned.date)}` : ""}.` : ""
       }${meta.stale ? ` ${t("Son önbellek gösteriliyor.", "Showing the last cached result.")}` : ""}</p>
     </div>
