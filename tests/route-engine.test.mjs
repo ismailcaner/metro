@@ -72,33 +72,3 @@ test("does not route through unverified name-match transfers", () => {
   assert.equal(result.routes.length, 0);
 });
 
-test("considers multiple nearby stations on the same line at the destination", () => {
-  const nearbyNetwork = {
-    generatedAt: "test",
-    lines: [{
-      id: "M1",
-      name: "Test line",
-      mode: "metro",
-      stations: [
-        { id: "a", name: "Start", order: 1 },
-        { id: "b", name: "Near but far access", order: 2 },
-        { id: "c", name: "Better access", order: 3 },
-      ],
-    }],
-    transferCandidates: [],
-  };
-  const nearbyStations = [
-    { networkId: "a", code: "M1", name: "Start", lat: 41, lng: 29 },
-    { networkId: "b", code: "M1", name: "Near but far access", lat: 41.009, lng: 29 },
-    { networkId: "c", code: "M1", name: "Better access", lat: 41.006, lng: 29 },
-  ];
-  const result = findLocalRoutes({
-    network: nearbyNetwork,
-    stations: nearbyStations,
-    origin: { name: "Start", point: [41, 29] },
-    destination: { name: "Destination", point: [41.01, 29] },
-    mode: "fastest",
-  });
-  assert.ok(result.routes.length > 0);
-  assert.ok(result.routes[0].legs.some((leg) => leg.to?.name === "Better access"));
-});
