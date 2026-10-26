@@ -64,6 +64,10 @@ function buildGraph(network, stations) {
     }
   }
   for (const group of network?.transferCandidates || []) {
+    // Unverified name matches are not safe to treat as real interchange edges:
+    // they can create implausible detours (e.g. M7→M11→M2 via Kağıthane/Gayrettepe).
+    // Route only through transfers explicitly marked as official-map candidates.
+    if (group.status !== "official_map_transfer_candidate") continue;
     const refs = (group.stationRefs || []).filter((ref) => nodes.has(ref.stationId));
     if (refs.length < 2) continue;
     for (let i = 0; i < refs.length; i++) {
