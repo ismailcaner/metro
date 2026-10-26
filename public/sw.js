@@ -1,5 +1,5 @@
 /* İstanbul Ulaşım — service worker: kabuk önbellek + akıllı veri stratejisi */
-const VERSION = "v40-static-rail-network";
+const VERSION = "v41-local-route-engine";
 const CACHE = `siradaki-metro-${VERSION}`;
 
 const scope = self.registration.scope;
@@ -8,6 +8,7 @@ const shell = [
   "index.html",
   "styles.css",
   "app.js",
+  "route-engine.js",
   "manifest.webmanifest",
   "manifest.en.webmanifest",
   "icons/icon.svg",
