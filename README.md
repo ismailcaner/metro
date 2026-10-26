@@ -109,6 +109,8 @@ Tarife; hafta içi, cumartesi ve pazar olmak üzere üç gün tipi için saklan�
 
 ### Yolculuk planlayıcı sınırı
 
+- Önce `public/route-engine.js`, `data/rail-network.json` ve `data/stations.json` ile yerel bir ulaşım grafiği kurup rota arar; yerel grafikten rota üretilemezse İETT Nasıl Giderim servisi yedek olarak kullanılır. `npm test` rota motorunun temel senaryolarını çalıştırır.
+- Yerel motorun istasyonlar arası süreleri tahminidir; resmî kalkış saati değildir. Koordinattan istasyona yürüme mesafesi kuş uçuşu yaklaşımıdır. Aktarma adaylarının bir kısmı yalnızca ad eşleşmesine dayanır; aktarma yolu, ücretli alan geçişi ve erişilebilirlik doğrulanmış sayılmaz.
 - Başlangıç/varış araması durakları ve yerleri yerel veriden listeler; POI araması internet servisine çıkmaz. Yolculuk rotaları İETT’nin **Nasıl Giderim** servisinden alınır; sonuçlarda metro, otobüs, vapur ve taksi dolmuş gibi İETT’nin döndürdüğü tüm ulaşım türleri gösterilebilir.
 - Yolculuk haritası OpenStreetMap altlıklarını internetten yükler; harita çevrimdışı görünmez. Harita üzerinde OpenStreetMap katkısı belirtilir.
 - Saatler ve aktarma noktaları **planlanan tarifeye** dayanır. Canlı araç konumu, anlık trafik veya gerçek zamanlı varış tahmini değildir; sefer iptalleri ve gecikmeler için durak sayfasındaki canlı varışlara bakın.
