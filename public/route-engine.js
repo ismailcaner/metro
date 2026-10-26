@@ -208,7 +208,9 @@ export function findLocalRoutes({ network, stations, origin, destination, mode =
     const signature = path.edges.map((x) => x.from.id + ">" + x.to.id).join("|");
     if (seen.has(signature)) continue;
     seen.add(signature);
-    const route = makeRoute(path, origin, destination, routes.length);\n    if (mode === "direct" && route.transfers > 0) continue;\n    routes.push(route);
+    const route = makeRoute(path, origin, destination, routes.length);
+    if (mode === "direct" && route.transfers > 0) continue;
+    routes.push(route);
   }
   routes.sort((a, b) => mode === "fastest"
     ? a.durationMin - b.durationMin || a.transfers - b.transfers
