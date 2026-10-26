@@ -1,5 +1,4 @@
 /* İstanbul Ulaşım — uygulama mantığı (çerçevesiz, modüler vanilla JS) */
-import { findLocalRoutes } from "./route-engine.js";
 
 const FAV_KEY = "sm.favorites";
 const BUS_FAV_KEY = "sm.busFavs";
@@ -2631,36 +2630,16 @@ async function planJourney({ force = false } = {}) {
   renderJourneyResults();
 
   try {
-    // Combine local rail routes with IETT planner routes so buses are considered too.
-    const local = findLocalRoutes({ network: state.railNetwork, stations: state.stations, origin: j.origin, destination: j.destination, mode: j.mode });
-    if (seq !== j.planSeq) return;
-    const localRoutes = local.routes.filter((route) => journeyRouteMatchesMode(route));
+    // Use the İETT journey planner as the sole route source. The custom local
+    // graph engine is intentionally disabled to avoid inferred transfer paths.
     const params = { type: "journey", from: journeyPointParam(j.origin), to: journeyPointParam(j.destination) };
     const planned = journeyPlannedFor();
     if (planned) { params.date = planned.date; params.time = planned.time; }
 
-    let apiRoutes = [];
-    let apiData = null;
-    try {
-      apiData = await fetchBusApi(params, { timeout: 14000 });
-      if (seq !== j.planSeq) return;
-      apiRoutes = (Array.isArray(apiData.routes) ? apiData.routes : []).filter((route) => journeyRouteMatchesMode(route));
-    } catch (error) {
-      if (!localRoutes.length) throw error;
-    }
-
-    const seen = new Set();
-    j.routes = [...localRoutes, ...apiRoutes].filter((route) => {
-      const signature = (route.legs || []).map((leg) => [
-        leg.kind || leg.type || "",
-        leg.lineId || leg.lineCode || leg.line || "",
-        leg.from?.name || leg.from || "",
-        leg.to?.name || leg.to || "",
-      ].join(":")).join("|") || route.id || JSON.stringify(route);
-      if (seen.has(signature)) return false;
-      seen.add(signature);
-      return true;
-    });
+    const apiData = await fetchBusApi(params, { timeout: 14000 });
+    if (seq !== j.planSeq) return;
+    j.routes = (Array.isArray(apiData.routes) ? apiData.routes : [])
+      .filter((route) => journeyRouteMatchesMode(route));
     if (j.mode === "fastest") j.routes.sort((a, b) => journeyRouteDuration(a) - journeyRouteDuration(b));
     if (j.mode === "least-walking") j.routes.sort((a, b) =>
       (Number(a.walkDistance) || 0) - (Number(b.walkDistance) || 0)
@@ -2669,14 +2648,14 @@ async function planJourney({ force = false } = {}) {
     );
     j.routes = j.routes.slice(0, 5);
     j.routesMeta = {
-      engine: apiRoutes.length ? "local-json+iett" : "local-json",
-      disclaimer: [local.disclaimer, apiData?.disclaimer].filter(Boolean).join(" "),
-      generatedAt: local.generatedAt || apiData?.generatedAt || null,
+      engine: "iett",
+      disclaimer: apiData?.disclaimer || "",
+      generatedAt: apiData?.generatedAt || null,
     };
   } catch {
     if (seq !== j.planSeq) return;
     j.routes = [];
-    j.routesError = t("Yerel rota hesaplanamadı ve İETT yedek servisi yanıt vermedi. Bağlantıyı kontrol edip tekrar deneyin.", "The local route could not be calculated and the İETT fallback did not respond. Check your connection and try again.");
+    j.routesError = t("İETT yolculuk servisi yanıt vermedi. Bağlantıyı kontrol edip tekrar deneyin.", "The İETT journey service did not respond. Check your connection and try again.");
   } finally {
     if (seq === j.planSeq) {
       j.routesLoading = false;
