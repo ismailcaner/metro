@@ -75,8 +75,8 @@ function buildGraph(network, stations) {
         const a = refs[i], b = refs[j];
         // Only candidates recorded in the repository are used. Their actual walking
         // paths/step-free status are unknown, so transfer edges carry that warning.
-        addEdge(a.stationId, b.stationId, { kind: "transfer", minutes: 6, lineId: b.lineId, lineName: nodes.get(b.stationId).lineName, mode: nodes.get(b.stationId).mode, unverified: group.status !== "official_map_transfer_candidate" });
-        addEdge(b.stationId, a.stationId, { kind: "transfer", minutes: 6, lineId: a.lineId, lineName: nodes.get(a.stationId).lineName, mode: nodes.get(a.stationId).mode, unverified: group.status !== "official_map_transfer_candidate" });
+        addEdge(a.stationId, b.stationId, { kind: "transfer", minutes: 6, lineId: b.lineId, lineName: nodes.get(b.stationId).lineName, mode: nodes.get(b.stationId).mode, transferStatus: group.status, unverified: false });
+        addEdge(b.stationId, a.stationId, { kind: "transfer", minutes: 6, lineId: a.lineId, lineName: nodes.get(a.stationId).lineName, mode: nodes.get(a.stationId).mode, transferStatus: group.status, unverified: false });
       }
     }
   }
