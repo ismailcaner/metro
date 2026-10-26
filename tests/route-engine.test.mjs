@@ -24,10 +24,10 @@ const network = {
   }],
 };
 const stations = [
-  { code: "M1", name: "Alpha", lat: 41, lng: 29 },
-  { code: "M1", name: "Central", lat: 41.03, lng: 29 },
-  { code: "M2", name: "Central", lat: 41.03, lng: 29 },
-  { code: "M2", name: "Bravo", lat: 41.06, lng: 29 },
+  { networkId: "m1-a", code: "M1", name: "Alpha (API label differs)", lat: 41, lng: 29 },
+  { networkId: "m1-x", code: "M1", name: "Central (API label differs)", lat: 41.03, lng: 29 },
+  { networkId: "m2-x", code: "M2", name: "Central (API label differs)", lat: 41.03, lng: 29 },
+  { networkId: "m2-b", code: "M2", name: "Bravo (API label differs)", lat: 41.06, lng: 29 },
 ];
 const origin = { name: "Alpha", point: [41, 29] };
 const destination = { name: "Bravo", point: [41.06, 29] };
