@@ -2584,19 +2584,19 @@ function renderJourneyResults() {
   box.innerHTML = `
     ${options}
     <div class="card journey-result-card">
-      <div class="journey-result-head">
-        <div class="grow">
-          <span class="journey-plan-tag">${route.source === "local-json" ? t("Yerel rota motoru · tahmini", "Local route engine · estimated") : t("Planlanan tarife", "Scheduled timetable")}</span>
-          <h2>${route.source === "local-json" ? String(duration) + " " + t("dk tahmini", "min estimated") : `${journeyClock(route.departureTime)} → ${journeyClock(route.arrivalTime)}`}</h2>
+      <div class="journey-result-overview">
+        <div class="journey-result-main">
+          <h2>${duration ? `${duration} ${t("dk", "min")}` : "—"}</h2>
+          <p class="journey-result-times">${journeyClock(route.departureTime)} → ${journeyClock(route.arrivalTime)}</p>
           <p class="muted">${esc(j.origin.name)} → ${esc(j.destination.name)}</p>
           ${routeTags.length ? `<div class="journey-result-tags">${routeTags.map((tag) => `<span>${esc(tag)}</span>`).join("")}</div>` : ""}
         </div>
+        <div class="journey-summary">
+          <div><span>${t("Yürüyüş", "Walk")}</span><strong>${walk}</strong></div>
+          <div><span>${t("Aktarma", "Transfers")}</span><strong>${journeyTransfersText(route.transfers)}</strong></div>
+          ${fare ? `<div><span>${t("Tahmini ücret", "Estimated fare")}</span><strong>${esc(fare)}</strong></div>` : ""}
+        </div>
         <button class="dirchip" id="journeyRefresh" type="button" aria-label="${t("Yolculuk planını yenile", "Refresh trip plan")}">↻</button>
-      </div>
-      <div class="journey-summary">
-        <div><span>${t("Yürüyüş", "Walk")}</span><strong>${walk}</strong></div>
-        <div><span>${t("Aktarma", "Transfers")}</span><strong>${journeyTransfersText(route.transfers)}</strong></div>
-        ${fare ? `<div><span>${t("Tahmini ücret", "Estimated fare")}</span><strong>${esc(fare)}</strong></div>` : ""}
       </div>
       ${disruptions.length ? announcementCard(t("Canlı hat uyarısı", "Live line alert"), disruptions.map((item) => ({
         badge: item.code,
