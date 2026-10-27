@@ -2587,24 +2587,14 @@ function renderJourneyResults() {
       <div class="journey-result-overview">
         <div class="journey-result-main">
           <h2>${duration ? `${duration} ${t("dk", "min")}` : "—"}</h2>
+          <p class="journey-result-times">${journeyClock(route.departureTime)} → ${journeyClock(route.arrivalTime)}</p>
           <p class="muted">${esc(j.origin.name)} → ${esc(j.destination.name)}</p>
+          ${routeTags.length ? `<div class="journey-result-tags">${routeTags.map((tag) => `<span>${esc(tag)}</span>`).join("")}</div>` : ""}
         </div>
         <div class="journey-summary">
-          <div class="journey-summary-item">
-            <span class="journey-summary-icon" aria-hidden="true">🚶</span>
-            <strong>${walk}</strong>
-            <span class="journey-summary-label">${t("yürüme", "walk")}</span>
-          </div>
-          <div class="journey-summary-item">
-            <span class="journey-summary-icon" aria-hidden="true">⇄</span>
-            <strong>${journeyTransfersText(route.transfers)}</strong>
-            <span class="journey-summary-label">${t("aktarma", "transfers")}</span>
-          </div>
-          ${fare ? `<div class="journey-summary-item">
-            <span class="journey-summary-icon journey-fare-icon" aria-hidden="true">▣</span>
-            <strong>${esc(fare)}</strong>
-            <span class="journey-summary-label">${t("tahmini", "estimated")}</span>
-          </div>` : ""}
+          <div><span>${t("Yürüyüş", "Walk")}</span><strong>${walk}</strong></div>
+          <div><span>${t("Aktarma", "Transfers")}</span><strong>${journeyTransfersText(route.transfers)}</strong></div>
+          ${fare ? `<div><span>${t("Tahmini ücret", "Estimated fare")}</span><strong>${esc(fare)}</strong></div>` : ""}
         </div>
         <button class="dirchip" id="journeyRefresh" type="button" aria-label="${t("Yolculuk planını yenile", "Refresh trip plan")}">↻</button>
       </div>
