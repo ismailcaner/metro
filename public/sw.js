@@ -1,5 +1,5 @@
 /* İstanbul Ulaşım — service worker: kabuk önbellek + akıllı veri stratejisi */
-const VERSION = "v47-restore-journey-summary";
+const VERSION = "v41-local-route-engine";
 const CACHE = `siradaki-metro-${VERSION}`;
 
 const scope = self.registration.scope;
@@ -16,6 +16,7 @@ const shell = [
   "icons/icon-512.png",
   "data/timetable.json",
   "data/lines.json",
+  "data/rail-network.json",
   "data/stations.json",
   "data/bus-lines.json",
   "data/bus-stops.json",
@@ -43,9 +44,6 @@ self.addEventListener("fetch", (e) => {
   if (req.method !== "GET") return;
   const url = new URL(req.url);
   const scopeOrigin = new URL(scope).origin;
-
-  // Resmî İBB Metro API artık kendi origin'imizdeki /api/metro üzerinden
-  // sunucu tarafında çağrılır; aşağıdaki /api/ kuralı devreye girer.
 
   if (url.origin !== scopeOrigin) return;
 
