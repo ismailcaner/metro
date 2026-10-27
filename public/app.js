@@ -2594,9 +2594,8 @@ function renderJourneyResults() {
         <button class="dirchip" id="journeyRefresh" type="button" aria-label="${t("Yolculuk planını yenile", "Refresh trip plan")}">↻</button>
       </div>
       <div class="journey-summary">
-        <div><span>${t("Süre", "Duration")}</span><strong>${duration ? `${duration} ${t("dk", "min")}` : "—"}</strong></div>
-        <div><span>${t("Aktarma", "Transfers")}</span><strong>${journeyTransfersText(route.transfers)}</strong></div>
         <div><span>${t("Yürüyüş", "Walk")}</span><strong>${walk}</strong></div>
+        <div><span>${t("Aktarma", "Transfers")}</span><strong>${journeyTransfersText(route.transfers)}</strong></div>
         ${fare ? `<div><span>${t("Tahmini ücret", "Estimated fare")}</span><strong>${esc(fare)}</strong></div>` : ""}
       </div>
       ${disruptions.length ? announcementCard(t("Canlı hat uyarısı", "Live line alert"), disruptions.map((item) => ({
