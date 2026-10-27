@@ -2596,6 +2596,7 @@ function renderJourneyResults() {
           <div><span>${t("Aktarma", "Transfers")}</span><strong>${journeyTransfersText(route.transfers)}</strong></div>
           ${fare ? `<div><span>${t("Tahmini ücret", "Estimated fare")}</span><strong>${esc(fare)}</strong></div>` : ""}
         </div>
+        <button class="dirchip" id="journeyRefresh" type="button" aria-label="${t("Yolculuk planını yenile", "Refresh trip plan")}">↻</button>
       </div>
       ${disruptions.length ? announcementCard(t("Canlı hat uyarısı", "Live line alert"), disruptions.map((item) => ({
         badge: item.code,
