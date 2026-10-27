@@ -460,7 +460,7 @@ main { padding: 14px; max-width: 720px; margin: 0 auto; }
 .journey-result-head p { margin-top: 3px; line-height: 1.35; }
 .journey-result-head .journey-plan-tag { margin-bottom: 0; }
 .journey-summary {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 7px; margin-top: 12px;
 }
 .journey-summary > div {
@@ -474,6 +474,11 @@ main { padding: 14px; max-width: 720px; margin: 0 auto; }
 .journey-summary strong {
   display: block; margin-top: 2px; font-size: 14px;
   font-variant-numeric: tabular-nums; line-height: 1.25;
+}
+@media (max-width: 420px) {
+  .journey-summary { gap: 5px; }
+  .journey-summary > div { padding: 7px 6px; }
+  .journey-summary strong { font-size: 12px; }
 }
 .journey-timeline { list-style: none; margin: 16px 0 0; padding: 0; }
 .journey-step { position: relative; display: flex; gap: 10px; padding-bottom: 14px; }
