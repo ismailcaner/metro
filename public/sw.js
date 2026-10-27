@@ -1,9 +1,5 @@
 /* İstanbul Ulaşım — service worker: kabuk önbellek + akıllı veri stratejisi */
-<<<<<<< HEAD
-const VERSION = "v41-local-route-engine";
-=======
-const VERSION = "v39-recents-journey-time";
->>>>>>> cc7754d (Update metro routing and service alerts)
+const VERSION = "v42-live-metro-api";
 const CACHE = `siradaki-metro-${VERSION}`;
 
 const scope = self.registration.scope;
