@@ -1948,12 +1948,6 @@ function renderJourney() {
           : t("Konum kapalıysa başlangıç noktanızı yazarak arayın.", "If location is off, search by typing your starting point.");
   view.innerHTML = `
     <div class="card journey-card">
-      <div class="journey-head">
-        <div class="grow">
-          <h2>${t("Yolculuğa çık", "Plan a trip")}</h2>
-          <p class="muted">${t("Nereden binip nerede aktarma yapacağınızı planlayın.", "Plan where you board and where you transfer.")}</p>
-        </div>
-      </div>
       <div class="journey-inputs">
         <div class="journey-field" data-journey-field="origin">
           <span class="journey-pin" aria-hidden="true">A</span>
