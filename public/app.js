@@ -1953,7 +1953,6 @@ function renderJourney() {
           <h2>${t("Yolculuğa çık", "Plan a trip")}</h2>
           <p class="muted">${t("Nereden binip nerede aktarma yapacağınızı planlayın.", "Plan where you board and where you transfer.")}</p>
         </div>
-        <span class="journey-plan-tag">${t("Planlanan tarife", "Scheduled timetable")}</span>
       </div>
       <div class="journey-inputs">
         <div class="journey-field" data-journey-field="origin">
