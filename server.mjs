@@ -13,6 +13,7 @@ import { readFile, stat } from "node:fs/promises";
 import { dirname, extname, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 import { handleBusRequest, warmLocalOsmPlaces } from "./lib/iett.mjs";
+import { handleMetroRequest } from "./lib/metro.mjs";
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
 const DIST = resolve(ROOT, "dist");
@@ -54,6 +55,25 @@ const server = createServer(async (req, res) => {
       send(res, out.status, { ...out.headers, "cache-control": "no-store" }, JSON.stringify(out.body));
     } catch (e) {
       console.error("API hatası:", e);
+      send(
+        res,
+        500,
+        { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" },
+        JSON.stringify({ error: "Sunucu hatası" })
+      );
+    }
+    return;
+  }
+
+  if (url.pathname.startsWith("/api/metro/")) {
+    if (req.method !== "GET" && req.method !== "HEAD") {
+      return send(res, 405, { "content-type": "application/json; charset=utf-8", allow: "GET, HEAD" }, JSON.stringify({ error: "Yöntem desteklenmiyor" }));
+    }
+    try {
+      const out = await handleMetroRequest(url);
+      send(res, out.status, { ...out.headers, "cache-control": "no-store" }, req.method === "HEAD" ? undefined : out.text);
+    } catch (e) {
+      console.error("Metro API hatası:", e);
       send(
         res,
         500,
