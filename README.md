@@ -71,9 +71,9 @@ Telefondan aynı ağ üzerinden denemek için: `npm run dev:lan` (Vite’ı `0.0
 
 | Veri | Kaynak | Canlı mı? |
 |---|---|---|
-| Metro hat listesi, renkler | `api.ibb.gov.tr/MetroIstanbul/api/MetroMobile/V2/GetLines` | ✅ tarayıcıdan doğrudan |
-| Metro istasyonları, koordinatlar, asansör/WC bilgisi | `…/V2/GetStations` | ✅ |
-| Metro hat durumu / arızalar | `…/V2/GetServiceStatuses` | ✅ (2 dakikada bir) |
+| Raylı sistem hatları ve istasyon sıraları | `data/rail-network.json` (Metro İstanbul ağ haritasından derlenen yerel katalog) | 📦 Statik dosya; metro API çağrısı yok |
+| Metro istasyon koordinatları ve erişilebilirlik bilgisi | `data/stations.json` yerel koordinat anlık görüntüsü; ağ kataloğuyla ad/hat kodu üzerinden eşleştirilir | 📦 Statik dosya; bazı yeni veya yeniden adlandırılmış istasyonlarda koordinat olmayabilir |
+| Metro hat durumu / arızalar | Bu projede kullanılmıyor | — |
 | Metro kalkış saatleri | Metro İstanbul “Sefer Tarifeleri” ekranının arka plan servisi | 📦 `data/timetable.json` paketi |
 | Otobüs hatları | İBB İETT SOAP: `HatDurakGuzergah.asmx` → `GetHat_json` | 📦 `data/bus-lines.json` paketi |
 | Otobüs durakları | İBB İETT SOAP: `HatDurakGuzergah.asmx` → `GetDurak_json` | 📦 `data/bus-stops.json` paketi |
@@ -83,14 +83,14 @@ Telefondan aynı ağ üzerinden denemek için: `npm run dev:lan` (Vite’ı `0.0
 | Otobüs canlı araç konumu / yakın durak (normal hatlar) | İBB İETT SOAP: `FiloDurum/SeferGerceklesme.asmx` → `GetHatOtoKonum_json` | ✅ `/api/bus?type=vehicles` (30 sn önbellek) |
 | İETT duyuruları (otobüs/metrobüs) | `iett.istanbul/tr/Announcement` | ✅ `/api/bus?type=announcements` (5 dk önbellek) |
 | İETT duyuru metni | `iett.istanbul/Announcement/Detail/…` | ✅ `/api/bus?type=announcement&id=…` (1 saat önbellek) |
-| Yolculuk araması | Duraklar yerel `data/bus-stops.json` ve Metro İstanbul istasyon listesinden; mekân/adresler `data/osm/turkey-places.json.gz` yerel indeksinden (`/api/bus?type=place`) | Yer araması çevrimdışı; API anahtarı gerekmez |
+| Yolculuk araması | Duraklar `data/bus-stops.json` ve `data/rail-network.json` ile yerel istasyon koordinatlarından; mekân/adresler `data/osm/turkey-places.json.gz` yerel indeksinden (`/api/bus?type=place`) | Yer araması çevrimdışı; API anahtarı gerekmez |
 
 Yerel mekân indeksini Türkiye PBF kaynağından yeniden oluşturmak için Osmium aracı kurulu olmalı ve `npm run osm:index` çalıştırılmalıdır. Hem PBF hem üretilen indeks Türkiye verisini içerir; arama ekranı sonuçları İstanbul coğrafi alanında sınırlar. Yer verileri OpenStreetMap’ten gelir; uygulamada [OpenStreetMap katkıcılarına atıf](https://www.openstreetmap.org/copyright) gösterilir.
 | Planlanan yolculuk rotası | `nasilgiderim.iett.gov.tr/router` | ✅ `/api/bus?type=journey&from=lat,lng&to=lat,lng` (60 sn önbellek) |
 
 ### Metro tarafındaki sınır
 
-İBB/Metro İstanbul, metro araçlarının canlı konumunu herkese açık bir API ile yayınlamıyor. Bu yüzden metro “kaç dk” bilgisi **resmî sefer tarifesine** dayanır (istasyon ekranlarındaki gerçek zamanlı sayaç değildir). Hat arızası/aksama bilgisi ise canlıdır ve istasyon ekranında uyarı olarak görünür.
+Metro hat kataloğu ve istasyon sıraları `data/rail-network.json` dosyasından okunur; İBB Metro API'si çağrılmaz. Bu ağ dosyası sefer saati, canlı araç konumu veya canlı arıza bilgisi içermez. Tarife bilgisi varsa `data/timetable.json` içindeki planlanan seferlere dayanır. Katalogda olup tarife dosyasında bulunmayan hatlarda yalnızca ağ haritası ve istasyon sırası gösterilir.
 
 Tarife; hafta içi, cumartesi ve pazar olmak üzere üç gün tipi için saklanır. Cuma–cumartesi gece metrosu seferleri cumartesi/pazar listelerinde yer alır.
 
@@ -133,11 +133,9 @@ public/app.js              aktif uygulama mantığı (vanilla JS)
 public/styles.css          aktif stiller
 public/                    manifest, service worker, ikonlar, aktif JS/CSS
 data/                      metro tarifesi + otobüs hat/durak paketleri
-server.mjs                 yerel üretim sunucusu + /api/bus ve /api/metro köprüleri
+server.mjs                 yerel üretim sunucusu + /api/bus köprüsü
 api/bus.mjs                İETT Vercel serverless fonksiyonu
-api/metro/[...path].mjs    İBB Metro Vercel proxy fonksiyonu
 lib/iett.mjs               İETT HTML/SOAP ayrıştırıcıları ve önbellek
-lib/metro.mjs              İBB Metro proxy'si, izin listesi ve önbellek
 tools/                     veri çekicileri ve ikon üretici
 react-ui-backup/           React/Vite arayüzünün yedeği
 vite.config.js             Vite, veri kopyalama, dev proxy
