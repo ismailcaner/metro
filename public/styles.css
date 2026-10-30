@@ -82,7 +82,7 @@ a, input { touch-action: manipulation; }
 .topbar-action:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 /* ---------- layout ---------- */
-main { padding: 14px; max-width: 720px; margin: 0 auto; }
+main { padding: 10px; max-width: 720px; margin: 0 auto; }
 .section-title { font-size: 12px; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin: 18px 4px 8px; }
 .section-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 18px 4px 8px; }
 .section-head .section-title { margin: 0; }
