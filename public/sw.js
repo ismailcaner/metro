@@ -1,5 +1,5 @@
 /* İstanbul Ulaşım — service worker: kabuk önbellek + akıllı veri stratejisi */
-const VERSION = "v41-local-route-engine";
+const VERSION = "v53-transit-maps-home";
 const CACHE = `siradaki-metro-${VERSION}`;
 
 const scope = self.registration.scope;

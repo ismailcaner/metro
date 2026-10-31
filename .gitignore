@@ -7,3 +7,4 @@ dist
 !.env.example
 data/osm/*.osm.pbf
 react-ui-backup/
+.env*

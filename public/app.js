@@ -5,7 +5,7 @@ const BUS_FAV_KEY = "sm.busFavs";
 const RECENTS_KEY = "sm.recents";
 const JOURNEY_RECENTS_KEY = "sm.journeyRecents";
 const JOURNEY_RECENTS_CLEARED_AT_KEY = "sm.journeyRecentsClearedAt";
-const RECENT_LIMIT = 8;
+const RECENT_LIMIT = 3;
 const QUICK_FAVORITE_LIMIT = 6;
 const BUS_API = "api/bus";
 const NEARBY_RADIUS_M = 500;
@@ -72,12 +72,9 @@ const state = {
   journey: {
     origin: null,
     destination: null,
-    mode: "mixed",
     allowedModes: ["BUS", "SUBWAY", "TRAIN", "LIGHT_RAIL", "RAIL", "OTHER"],
     routeSort: "fewest-transfers",
     wheelchairAccessibleOnly: false,
-    timeMode: "now",
-    departTime: "",
     originQuery: "",
     destinationQuery: "",
     originCleared: false,
@@ -183,18 +180,9 @@ function applyLanguage() {
   const brandSub = $("#brandSub");
   if (brandSub) brandSub.textContent = t("İstanbul metro, metrobüs & otobüs", "Istanbul metro, metrobus & bus");
   $("#backBtn")?.setAttribute("aria-label", t("Geri", "Back"));
-  const journeyBtn = $("#journeyBtn");
-  journeyBtn?.setAttribute("aria-label", t("Yolculuğa çık", "Plan a trip"));
-  journeyBtn?.setAttribute("title", t("Yolculuğa çık", "Plan a trip"));
-  const journeyLabel = journeyBtn?.querySelector("span");
-  if (journeyLabel) journeyLabel.textContent = t("Yolculuğa çık", "Plan a trip");
   const settingsBtn = $("#settingsBtn");
   settingsBtn?.setAttribute("aria-label", t("Ayarlar", "Settings"));
   settingsBtn?.setAttribute("title", t("Ayarlar", "Settings"));
-  const tabLabels = [t("Otobüs", "Bus"), "Metro", t("Metrobüs", "Metrobus")];
-  document.querySelectorAll(".tabbar button span").forEach((span, index) => {
-    if (tabLabels[index]) span.textContent = tabLabels[index];
-  });
 }
 
 function setLanguagePreference(lang) {
@@ -1216,6 +1204,7 @@ function renderHome() {
       <input id="q" type="search" placeholder="${t("İstasyon veya hat ara", "Search station or line")}" autocomplete="off" />
       <svg viewBox="0 0 24 24"><path d="M10 2a8 8 0 1 0 4.9 14.3l5.4 5.4 1.4-1.4-5.4-5.4A8 8 0 0 0 10 2m0 2a6 6 0 1 1 0 12a6 6 0 0 1 0-12"/></svg>
     </div>
+    <div id="homeRecents"></div>
     <div id="searchResults"></div>
 
     <div id="homeExtras">
@@ -1255,7 +1244,7 @@ function renderHome() {
     })
   );
   view.querySelectorAll(".fav-btn[data-key]").forEach((b) => b.addEventListener("click", () => toggleFav(b.dataset.key)));
-  renderHomeQuick($("#searchResults"));
+  renderHomeQuick($("#homeRecents"));
 }
 
 function statusDot(code) {
@@ -1340,12 +1329,12 @@ function journeyRecentPlaces() {
       seen.add(key);
       return true;
     })
-    .slice(0, 5);
+    .slice(0, RECENT_LIMIT);
 }
 
 function rememberJourneyPlace(place) {
   const entry = { ...place, at: Date.now() };
-  const next = [entry, ...journeyRecentPlaces().filter((item) => item.id !== entry.id)].slice(0, 5);
+  const next = [entry, ...journeyRecentPlaces().filter((item) => item.id !== entry.id)].slice(0, RECENT_LIMIT);
   try { localStorage.setItem(JOURNEY_RECENTS_KEY, JSON.stringify(next)); } catch {}
 }
 
@@ -1472,25 +1461,12 @@ function renderHomeQuick(box) {
 }
 
 function renderSearchQuick(box) {
-  const recents = recentItems();
   const favorites = quickFavoriteItems();
-  const sections = [];
-  if (recents.length) {
-    sections.push(`<div class="section-head">
-      <div class="section-title">${t("Son aramalar", "Recent searches")}</div>
-      <button type="button" class="dirchip" id="clearRecents">${t("Temizle", "Clear")}</button>
-    </div>
-    <div class="card">${recents.map((item, index) => quickRow(item, "recent", index)).join("")}</div>`);
-  }
-  if (favorites.length) {
-    sections.push(`<div class="section-title">${t("Hızlı erişim", "Quick access")}</div>
-      <div class="card">${favorites.map((item, index) => quickRow(item, "favorite", index)).join("")}</div>`);
-  }
-  if (!sections.length) {
-    sections.push(`<div class="empty">${t("İstasyon, hat veya durak arayın. Son aramalarınız burada görünecek.", "Search for a station, line or stop. Your recent searches will appear here.")}</div>`);
-  }
-  box.innerHTML = sections.join("");
-  bindQuickRows(box, recents, favorites, () => renderSearchQuick(box));
+  box.innerHTML = favorites.length
+    ? `<div class="section-title">${t("Hızlı erişim", "Quick access")}</div>
+      <div class="card">${favorites.map((item, index) => quickRow(item, "favorite", index)).join("")}</div>`
+    : `<div class="empty">${t("İstasyon, hat veya durak arayın. Son aramalarınız burada görünecek.", "Search for a station, line or stop. Your recent searches will appear here.")}</div>`;
+  bindQuickRows(box, [], favorites, () => renderSearchQuick(box));
 }
 
 function searchAll(q, { metroLimit = 15, lineLimit = 10, stopLimit = 15, scope = "all" } = {}) {
@@ -1555,7 +1531,7 @@ function onSearch(e) {
   $("#homeStatus")?.toggleAttribute("hidden", searching);
   $("#homeExtras")?.toggleAttribute("hidden", searching);
   if (!searching) {
-    renderHomeQuick(box);
+    box.innerHTML = "";
     return;
   }
   renderSearchSections(e.target.value, box, () => onSearch(e), undefined, "metro");
@@ -1576,8 +1552,10 @@ function renderSearchPage() {
       <input id="globalQ" type="search" placeholder="${t("İstasyon, hat veya durak ara…", "Search station, line or stop…")}" autocomplete="off" />
       <svg viewBox="0 0 24 24"><path d="M10 2a8 8 0 1 0 4.9 14.3l5.4 5.4 1.4-1.4-5.4-5.4A8 8 0 0 0 10 2m0 2a6 6 0 1 1 0 12a6 6 0 0 1 0-12"/></svg>
     </div>
+    <div id="recentResults"></div>
     <div id="globalResults"></div>`;
   $("#globalQ")?.addEventListener("input", onGlobalSearch);
+  renderHomeQuick($("#recentResults"));
   renderSearchQuick($("#globalResults"));
 }
 
@@ -1684,18 +1662,6 @@ function journeyModeKey(mode) {
   return ({ otobus: "bus", tramvay: "tram", mar: "marmaray", vapur: "ferry", turyol: "ferry", ido: "ferry", dentur: "ferry", sehirhatlari: "ferry", shatlari: "ferry", funikuler: "funicular", funi: "funicular", tele: "teleferik", dolmus: "minibus", taksidolmus: "minibus" })[key] || key;
 }
 
-const JOURNEY_MODE_OPTIONS = [
-  ["fastest", "En hızlı", "Fastest"],
-  ["least-walking", "Az yürüme", "Least walking"],
-  ["direct", "Aktarmasız", "Direct"],
-  ["mixed", "Karışık", "Mixed"],
-];
-
-function journeyRouteMatchesMode(route, mode = state.journey.mode) {
-  if (mode !== "direct") return true;
-  return Number(route?.transfers) === 0;
-}
-
 function journeyModeMeta(mode) {
   return JOURNEY_MODE_META[journeyModeKey(mode)] || JOURNEY_MODE_META.transit;
 }
@@ -1774,22 +1740,6 @@ function sortJourneyPlacesByDistance(places) {
       return a.distance - b.distance || a.index - b.index;
     })
     .map(({ place }) => place);
-}
-
-function journeyPlaceAttribution(places) {
-  const sources = [...new Map((places || [])
-    .filter((place) => place?.kind === "place" || place?.type === "poi")
-    .map((place) => [place.dataAttribution || "© OpenStreetMap contributors", place.dataAttributionUrl || "https://www.openstreetmap.org/copyright"])).entries()];
-  if (!sources.length) return "";
-  const sourceLinks = sources.map(([label, url]) => {
-    let safeUrl = "";
-    try {
-      const parsed = new URL(url);
-      if (parsed.protocol === "https:") safeUrl = parsed.href;
-    } catch {}
-    return safeUrl ? `<a href="${esc(safeUrl)}" target="_blank" rel="noreferrer">${esc(label)}</a>` : esc(label);
-  }).join(" · ");
-  return `<div class="journey-place-attribution" translate="no"><span>${sourceLinks}</span></div>`;
 }
 
 function journeyClock(value) {
@@ -1900,42 +1850,8 @@ function journeyPointParam(place) {
   return `${lat.toFixed(6)},${lng.toFixed(6)}`;
 }
 
-function journeyIstanbulParts(date = new Date()) {
-  const parts = {};
-  for (const part of new Intl.DateTimeFormat("en-GB", {
-    timeZone: "Europe/Istanbul",
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-    hourCycle: "h23",
-  }).formatToParts(date)) {
-    if (part.type !== "literal") parts[part.type] = part.value;
-  }
-  return {
-    date: `${parts.year}-${parts.month}-${parts.day}`,
-    time: `${parts.hour}:${parts.minute}`,
-  };
-}
-
-function journeyDepartureDate(time) {
-  const now = journeyIstanbulParts();
-  if (!time || time > now.time) return now.date;
-  const [year, month, day] = now.date.split("-").map(Number);
-  const next = new Date(Date.UTC(year, month - 1, day + 1));
-  return `${next.getUTCFullYear()}-${String(next.getUTCMonth() + 1).padStart(2, "0")}-${String(next.getUTCDate()).padStart(2, "0")}`;
-}
-
-function journeyPlannedFor() {
-  const j = state.journey;
-  if (j.timeMode !== "depart" || !j.departTime) return null;
-  return { date: journeyDepartureDate(j.departTime), time: j.departTime };
-}
-
 function journeyPairKey() {
-  const planned = journeyPlannedFor();
-  return `${journeyPointParam(state.journey.origin)}|${journeyPointParam(state.journey.destination)}|${state.journey.mode}|${planned ? `${planned.date}T${planned.time}` : "now"}`;
+  return `${journeyPointParam(state.journey.origin)}|${journeyPointParam(state.journey.destination)}`;
 }
 
 function resetJourneyRoutes() {
@@ -1958,19 +1874,6 @@ function setJourneyQuery(field, value) {
   else state.journey.destinationQuery = value;
 }
 
-function updateJourneyPlanButton() {
-  const button = $("#journeyPlanBtn");
-  if (!button) return;
-  const j = state.journey;
-  const ready = Boolean(j.origin && j.destination);
-  button.disabled = !ready || j.routesLoading;
-  button.textContent = j.routesLoading
-    ? t("Planlanıyor…", "Planning…")
-    : j.routes.length
-      ? t("Yolculuğu yenile", "Refresh trip")
-      : t("Yolculuğu planla", "Plan trip");
-}
-
 function updateJourneyInputAria() {
   const active = state.journey.activeField;
   $("#journeyOrigin")?.setAttribute("aria-expanded", String(active === "origin"));
@@ -1980,15 +1883,27 @@ function updateJourneyInputAria() {
 function renderJourney() {
   ensureJourneyOrigin();
   const j = state.journey;
-  const canPlan = Boolean(j.origin && j.destination);
-  const originHint =
-    j.origin?.kind === "location"
-      ? t("Başlangıç olarak mevcut konumunuz kullanılıyor.", "Your current location is used as the starting point.")
-      : j.origin
-        ? t("Başlangıç noktanız seçildi; değiştirmek için Nereden alanına dokunun.", "Your starting point is selected; tap the From field to change it.")
-        : state.location
-          ? t("Başlangıç noktanızı yazın veya mevcut konumunuzu kullanın.", "Type your starting point or use your current location.")
-          : t("Konum kapalıysa başlangıç noktanızı yazarak arayın.", "If location is off, search by typing your starting point.");
+  const hasPlannedJourney = !!(j.origin && j.destination);
+  const quickModes = hasPlannedJourney
+    ? ""
+    : `<div class="quick-mode-grid" role="group" aria-label="${t("Ulaşım türleri", "Transport modes")}">
+      <button type="button" class="quick-mode" data-quick-mode="bus">
+        <span class="quick-mode-icon" aria-hidden="true">🚌</span>
+        <span>${t("Otobüs", "Bus")}</span>
+      </button>
+      <button type="button" class="quick-mode" data-quick-mode="metro">
+        <span class="quick-mode-icon" aria-hidden="true">🚇</span>
+        <span>Metro</span>
+      </button>
+      <button type="button" class="quick-mode" data-quick-mode="metrobus">
+        <span class="quick-mode-icon" aria-hidden="true">🚍</span>
+        <span>${t("Metrobüs", "Metrobus")}</span>
+      </button>
+      <button type="button" class="quick-mode" data-quick-mode="maps">
+        <span class="quick-mode-icon" aria-hidden="true">🗺️</span>
+        <span>${t("Haritalar", "Maps")}</span>
+      </button>
+    </div>`;
   view.innerHTML = `
     <div class="card journey-card">
       <div class="journey-head">
@@ -2018,63 +1933,20 @@ function renderJourney() {
           </div>
         </div>
       </div>
-      ${journeyPlaceAttribution([j.origin, j.destination])}
-      <div class="journey-mode-picker">
-        <div class="setting-title">${t("Rota tercihi?", "Route preference")}</div>
-        <div class="journey-mode-options" role="group" aria-label="${t("Rota tercihi", "Route preference")}">
-          ${JOURNEY_MODE_OPTIONS.map(([value, trLabel, enLabel]) => `<button type="button" class="journey-mode-option ${j.mode === value ? "active" : ""}" data-journey-mode="${value}" aria-pressed="${j.mode === value}">${t(trLabel, enLabel)}</button>`).join("")}
-        </div>
-      </div>
-      <div class="journey-mode-picker">
-        <div class="setting-title">${t("Kalkış zamanı", "Departure time")}</div>
-        <div class="journey-mode-options" role="group" aria-label="${t("Kalkış zamanı", "Departure time")}">
-          <button type="button" class="journey-mode-option ${j.timeMode === "now" ? "active" : ""}" data-journey-time="now" aria-pressed="${j.timeMode === "now"}">${t("Şimdi", "Now")}</button>
-          <button type="button" class="journey-mode-option ${j.timeMode === "depart" ? "active" : ""}" data-journey-time="depart" aria-pressed="${j.timeMode === "depart"}">${t("Saat seç", "Choose time")}</button>
-        </div>
-        <input id="journeyTime" class="journey-time-input" type="time" value="${esc(j.departTime || journeyIstanbulParts(new Date(Date.now() + 15 * 60000)).time)}"
-          aria-label="${t("Kalkış saati", "Departure time")}" ${j.timeMode === "depart" ? "" : "hidden"} />
-      </div>
       <div id="journeySuggestions" class="journey-suggestions" hidden></div>
-      <div class="journey-actions">
-        <button id="journeyPlanBtn" class="journey-plan-btn" type="button" ${canPlan ? "" : "disabled"}>
-          ${j.routesLoading ? t("Planlanıyor…", "Planning…") : j.routes.length ? t("Yolculuğu yenile", "Refresh trip") : t("Yolculuğu planla", "Plan trip")}
-        </button>
-        <span class="journey-hint">${originHint}</span>
-      </div>
     </div>
+    ${quickModes}
     <div id="journeyResults"></div>
   `;
 
   bindJourneyInputs();
-  view.querySelectorAll("[data-journey-mode]").forEach((button) =>
-    button.addEventListener("click", () => {
-      const mode = button.dataset.journeyMode;
-      if (mode === state.journey.mode) return;
-      state.journey.mode = mode;
-      resetJourneyRoutes();
-      renderJourney();
-    })
-  );
-  view.querySelectorAll("[data-journey-time]").forEach((button) =>
-    button.addEventListener("click", () => {
-      const timeMode = button.dataset.journeyTime;
-      if (timeMode === state.journey.timeMode) return;
-      state.journey.timeMode = timeMode;
-      if (timeMode === "depart" && !state.journey.departTime) {
-        state.journey.departTime = journeyIstanbulParts(new Date(Date.now() + 15 * 60000)).time;
-      }
-      resetJourneyRoutes();
-      renderJourney();
-    })
-  );
-  $("#journeyTime")?.addEventListener("change", (event) => {
-    const value = event.target.value;
-    if (!/^\d{2}:\d{2}$/.test(value)) return;
-    state.journey.departTime = value;
-    resetJourneyRoutes();
-    renderJourney();
-  });
   renderJourneySuggestions();
+  view.querySelectorAll("[data-quick-mode]").forEach((button) =>
+    button.addEventListener("click", () => {
+      const target = { bus: "#/otobus", metro: "#/metro", metrobus: "#/metrobus", maps: "#/haritalar" }[button.dataset.quickMode];
+      if (target) go(target);
+    })
+  );
   if (j.origin && j.destination && !j.routesLoading && j.lastPlanKey !== journeyPairKey()) {
     planJourney();
   } else {
@@ -2103,7 +1975,6 @@ function bindJourneyInputs() {
       }
     });
   });
-  $("#journeyPlanBtn")?.addEventListener("click", () => planJourney({ force: true }));
 }
 
 function closeJourneySuggestions() {
@@ -2142,7 +2013,6 @@ function onJourneyInput(field, value) {
   }
   resetJourneyRoutes();
   scheduleJourneySearch(field, value.trim());
-  updateJourneyPlanButton();
   renderJourneyResults();
 }
 
@@ -2262,16 +2132,11 @@ function renderJourneySuggestions() {
   if (!box) return;
   const j = state.journey;
   updateJourneyInputAria();
-  if (!j.activeField) {
-    box.hidden = true;
-    box.innerHTML = "";
-    return;
-  }
-
-  const field = j.activeField;
-  const query = journeyQueryFor(field).trim();
+  const isDefault = !j.activeField;
+  const field = j.activeField || "destination";
+  const query = isDefault ? "" : journeyQueryFor(field).trim();
   const hasQuery = query.length >= JOURNEY_MIN_QUERY;
-  const isEmptyQuery = query.length === 0;
+  const isEmptyQuery = isDefault || query.length === 0;
   let body = "";
 
   if (field === "origin") {
@@ -2316,7 +2181,6 @@ function renderJourneySuggestions() {
     if (j.searchError) body += `<div class="journey-suggestion-note">${esc(j.searchError)}</div>`;
     else if (!j.searchLoading && !j.places.length) body += `<div class="journey-suggestion-note">${t(`“${esc(j.placesQuery || query)}” için sonuç bulunamadı.`, `No results for “${esc(j.placesQuery || query)}”.`)}</div>`;
     if (!journeyReferencePoint() && j.places.length) body += `<div class="journey-suggestion-note">${t("Yakınlık sıralaması için başlangıç alanından konumunuzu kullanın.", "Use your location in the origin field to sort by distance.")}</div>`;
-    body += journeyPlaceAttribution(j.places);
   }
 
   if (!body) {
@@ -2557,7 +2421,6 @@ function journeyRailFacilitiesCard(route) {
 function renderJourneyResults() {
   const box = $("#journeyResults");
   if (!box) return;
-  updateJourneyPlanButton();
   const j = state.journey;
   if (!j.origin || !j.destination) {
     box.innerHTML = "";
@@ -2597,12 +2460,9 @@ function renderJourneyResults() {
     return;
   }
   if (!j.routes.length) {
-    const noDirectRoute = j.mode === "direct";
     box.innerHTML = `<div class="card journey-error">
       <strong>${t("Bu saat için rota bulunamadı", "No route found for this time")}</strong>
-      <p class="muted">${noDirectRoute
-        ? t("Bu saat için aktarmasız rota bulunamadı. Alternatifleri görmek için Karışık seçeneğini deneyin.", "No direct route was found for this time. Choose Mixed to see alternatives.")
-        : t("İETT planlayıcısı bu başlangıç ve varış için bir yolculuk döndürmedi. Noktaları değiştirip tekrar deneyin.", "The İETT planner returned no trip for this origin and destination. Change the points and try again.")}</p>
+      <p class="muted">${t("İETT planlayıcısı bu başlangıç ve varış için bir yolculuk döndürmedi. Noktaları değiştirip tekrar deneyin.", "The İETT planner returned no trip for this origin and destination. Change the points and try again.")}</p>
       <button class="dirchip" id="journeyRetry" type="button">↻ ${t("Tekrar dene", "Try again")}</button>
     </div>`;
     $("#journeyRetry")?.addEventListener("click", () => planJourney({ force: true }));
@@ -2616,7 +2476,6 @@ function renderJourneyResults() {
   const walkMeters = Number(route.walkDistance) || 0;
   const walk = walkMeters > 0 ? distanceText(walkMeters) : "—";
   const meta = j.routesMeta || {};
-  const planned = meta.plannedFor || {};
   const disruptions = journeyRouteDisruptions(route);
   const routeTags = journeyRouteTags(route);
   const options =
@@ -2660,9 +2519,7 @@ function renderJourneyResults() {
         body: item.desc,
       })), { className: "journey-alert" }) : ""}
       ${journeyMetroAlertLink(route)}\n      ${journeyRailFacilitiesCard(route)}\n      <ol class="journey-timeline">${renderJourneyTimeline(route)}</ol>
-      <p class="journey-note">${route.source === "local-json" ? t("Yerel JSON ağından hesaplandı. Süreler tahminidir; yürüme mesafesi düz çizgi yaklaşımıdır ve gerçek yürüme rotası ya da aktarma erişilebilirliği garanti edilmez.", "Calculated from the local JSON network. Durations are estimates; walking distance is a straight-line approximation and actual walking paths or transfer accessibility are not guaranteed.") : t("Saatler İETT Nasıl Giderim’in planlanan tarifesine dayanır; canlı araç konumu değildir. Trafik, sefer ve işletme değişiklikleriyle farklılık gösterebilir.", "Times are based on the IETT Nasıl Giderim scheduled timetable; they are not live vehicle positions and may vary.")}${
-        planned.time ? ` ${t("Sorgu saati", "Query time")}: ${esc(planned.time)}${planned.date ? ` · ${esc(planned.date)}` : ""}.` : ""
-      }${meta.stale ? ` ${t("Son önbellek gösteriliyor.", "Showing the last cached result.")}` : ""}</p>
+      <p class="journey-note">${route.source === "local-json" ? t("Yerel JSON ağından hesaplandı. Süreler tahminidir; yürüme mesafesi düz çizgi yaklaşımıdır ve gerçek yürüme rotası ya da aktarma erişilebilirliği garanti edilmez.", "Calculated from the local JSON network. Durations are estimates; walking distance is a straight-line approximation and actual walking paths or transfer accessibility are not guaranteed.") : t("Saatler İETT Nasıl Giderim’in planlanan tarifesine dayanır; canlı araç konumu değildir. Trafik, sefer ve işletme değişiklikleriyle farklılık gösterebilir.", "Times are based on the IETT Nasıl Giderim scheduled timetable; they are not live vehicle positions and may vary.")}${meta.stale ? ` ${t("Son önbellek gösteriliyor.", "Showing the last cached result.")}` : ""}</p>
     </div>
   `;
 
@@ -2708,15 +2565,9 @@ async function planJourney({ force = false } = {}) {
       from: journeyPointParam(j.origin),
       to: journeyPointParam(j.destination),
     };
-    const planned = journeyPlannedFor();
-    if (planned) {
-      params.date = planned.date;
-      params.time = planned.time;
-    }
     const data = await fetchBusApi(params, { timeout: 14000 });
     if (seq !== j.planSeq) return;
-    j.routes = (Array.isArray(data.routes) ? data.routes : []).filter((route) => journeyRouteMatchesMode(route));
-    if (j.mode === "fastest") j.routes.sort((a, b) => journeyRouteDuration(a) - journeyRouteDuration(b));
+    j.routes = Array.isArray(data.routes) ? data.routes : [];
     j.routesMeta = data;
   } catch {
     if (seq !== j.planSeq) return;
@@ -4235,6 +4086,45 @@ function renderAbout() {
     </div>`;
 }
 
+function renderMaps() {
+  const maps = [
+    {
+      file: "maps/istanbul-rayli-sistemler.pdf",
+      title: t("İstanbul Raylı Sistemler Haritası", "Istanbul Rail Systems Map"),
+      desc: t("Metro, tramvay, füniküler ve teleferik hatlarının toplu görünümü.", "Overview of metro, tram, funicular and cable car lines."),
+    },
+    {
+      file: "maps/istanbul-metro-hatlari.pdf",
+      title: t("İstanbul Metro Hatları Haritası", "Istanbul Metro Lines Map"),
+      desc: t("Metro hatlarının durak ve aktarma noktalarıyla birlikte haritası.", "Metro lines with their stops and transfer points."),
+    },
+    {
+      file: "maps/istanbul-tramvay-hatlari.pdf",
+      title: t("İstanbul Tramvay Hatları Haritası", "Istanbul Tram Lines Map"),
+      desc: t("Tramvay hatlarının durak ve aktarma noktalarıyla birlikte haritası.", "Tram lines with their stops and transfer points."),
+    },
+  ];
+  view.innerHTML = `
+    <div class="card stack">
+      <h2>${t("İstanbul toplu taşıma haritaları", "Istanbul public transport maps")}</h2>
+      <p class="maps-intro">${t("Metro İstanbul’un resmî PDF haritaları. Haritayı uygulama içinde görüntüleyebilir veya yeni sekmede açabilirsiniz.", "Official Metro Istanbul PDF maps. View a map in the app or open it in a new tab.")}</p>
+    </div>
+    ${maps
+      .map(
+        (map) => `<div class="card map-card">
+      <div class="map-card-head">
+        <h2>${esc(map.title)}</h2>
+        <a class="map-open" href="${map.file}" target="_blank" rel="noopener">${t("PDF aç", "Open PDF")}</a>
+      </div>
+      <p class="maps-intro">${esc(map.desc)}</p>
+      <object class="map-preview" data="${map.file}" type="application/pdf" aria-label="${esc(map.title)}">
+        <p class="map-fallback">${t("Tarayıcınız PDF’i burada gösteremiyor.", "Your browser cannot display the PDF here.")} <a href="${map.file}" target="_blank" rel="noopener">${t("PDF’i aç", "Open the PDF")}</a></p>
+      </object>
+    </div>`
+      )
+      .join("")}`;
+}
+
 function renderNotFound() {
   view.innerHTML = `<div class="empty">${t("Aradığınız istasyon veya hat bulunamadı.", "The station or line you were looking for could not be found.")}<br><button class="dirchip" onclick="location.hash='#/ana'">${t("Ana sayfaya dön", "Back to home")}</button></div>`;
 }
@@ -4264,15 +4154,16 @@ function parseHash() {
     return { name: "metrobus" };
   }
   if (parts[0] === "ara") return { name: "search" };
-  if (parts[0] === "yolculuk") return { name: "journey" };
+  if (parts[0] === "metro") return { name: "home" };
+  if (parts[0] === "haritalar") return { name: "maps" };
   if (parts[0] === "ayarlar") return { name: "settings" };
   if (parts[0] === "bilgi") return { name: "about" };
-  return { name: "home" };
+  return { name: "journey" };
 }
 
 function parentHash(r = parseHash()) {
-  if (r.name === "station") return r.line ? `#/hat/${encodeURIComponent(r.line)}` : "#/ana";
-  if (r.name === "line") return "#/ana";
+  if (r.name === "station") return r.line ? `#/hat/${encodeURIComponent(r.line)}` : "#/metro";
+  if (r.name === "line") return "#/metro";
   if (r.name === "busStop") {
     if (r.line) {
       return `${r.mode === "metrobus" ? "#/metrobus" : "#/otobus"}/hat/${encodeURIComponent(r.line)}`;
@@ -4280,6 +4171,7 @@ function parentHash(r = parseHash()) {
     return r.mode === "metrobus" ? "#/metrobus" : "#/otobus";
   }
   if (r.name === "busLine") return r.mode === "metrobus" ? "#/metrobus" : "#/otobus";
+  if (r.name === "bus" || r.name === "metrobus" || r.name === "home" || r.name === "maps") return "#/ana";
   if (r.name === "journey") return state.journeyParent || "#/ana";
   if (r.name === "settings") return state.settingsParent || "#/ana";
   if (r.name === "about") return "#/ayarlar";
@@ -4326,7 +4218,7 @@ function render() {
     state.journey.placesQuery = "";
   }
   if (r.name !== "busStop") state.busStopFocus = null;
-  $("#backBtn").hidden = ["home", "bus", "metrobus"].includes(r.name);
+  $("#backBtn").hidden = r.name === "journey";
   const activeNav =
     r.mode === "metrobus" || r.name === "metrobus"
       ? "metrobus"
@@ -4343,13 +4235,9 @@ function render() {
       about: t("Bilgi", "About"),
       settings: t("Ayarlar", "Settings"),
       journey: t("Yolculuk", "Trip"),
+      maps: t("Haritalar", "Maps"),
     }[activeNav] || "Metro";
   $("#brandTitle").textContent = pageTitle;
-  document.querySelectorAll(".tabbar button").forEach((b) => b.classList.toggle("active", b.dataset.nav === activeNav));
-  const journeyBtn = $("#journeyBtn");
-  journeyBtn.classList.toggle("active", activeNav === "journey");
-  if (activeNav === "journey") journeyBtn.setAttribute("aria-current", "page");
-  else journeyBtn.removeAttribute("aria-current");
   const settingsBtn = $("#settingsBtn");
   settingsBtn.classList.toggle("active", activeNav === "settings");
   if (activeNav === "settings") settingsBtn.setAttribute("aria-current", "page");
@@ -4367,6 +4255,7 @@ function render() {
     setTimeout(() => $("#globalQ")?.focus(), 30);
   } else if (r.name === "settings") renderSettings();
   else if (r.name === "about") renderAbout();
+  else if (r.name === "maps") renderMaps();
   else renderHome();
 }
 
@@ -4473,12 +4362,6 @@ function endSwipe(event) {
 document.addEventListener("touchend", endSwipe);
 document.addEventListener("touchcancel", endSwipe);
 
-const NAV = { bus: "#/otobus", home: "#/ana", metrobus: "#/metrobus" };
-$("#journeyBtn").addEventListener("click", () => {
-  if (state.route.name !== "journey") state.journeyParent = location.hash || "#/ana";
-  if (state.route.name === "journey") window.scrollTo({ top: 0, behavior: "smooth" });
-  else go("#/yolculuk");
-});
 $("#settingsBtn").addEventListener("click", () => {
   if (state.route.name !== "settings") state.settingsParent = location.hash || "#/ana";
   go("#/ayarlar");
@@ -4489,10 +4372,6 @@ document.addEventListener("click", (event) => {
   if (target?.closest(".journey-card, .journey-suggestions")) return;
   closeJourneySuggestions();
 });
-document.querySelectorAll(".tabbar button").forEach((b) =>
-  b.addEventListener("click", () => go(NAV[b.dataset.nav] || "#/ana"))
-);
-
 const isViteDev = location.port === "5173" || location.port === "5174";
 if ("serviceWorker" in navigator) {
   if (isViteDev) {
